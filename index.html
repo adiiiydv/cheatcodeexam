@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS 2026 - Mega Mock Test</title>
+    <title>AS 2026 - Ultra Practice Hub</title>
     <style>
         :root { --bg: #0b0d11; --card: #161b22; --gold: #d4af37; --text: #f0f6fc; --success: #238636; --error: #da3633; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 10px; padding-bottom: 80px; }
         .header { text-align: center; padding: 15px; border-bottom: 2px solid var(--gold); position: sticky; top: 0; background: var(--bg); z-index: 100; }
         .score-board { background: var(--gold); color: #000; font-weight: bold; padding: 10px; border-radius: 5px; margin: 10px 0; display: flex; justify-content: space-around; font-size: 0.9rem; }
         .section-tag { background: #30363d; color: var(--gold); padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; border: 1px solid var(--gold); display: inline-block; margin-bottom: 10px; text-transform: uppercase; }
-        .quiz-card { background: var(--card); border: 1px solid #30363d; border-radius: 12px; padding: 20px; margin-bottom: 20px; transition: 0.3s; }
+        .quiz-card { background: var(--card); border: 1px solid #30363d; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
         .question { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; display: block; line-height: 1.4; }
         .option { background: #21262d; border: 1px solid #30363d; padding: 12px; margin: 8px 0; border-radius: 8px; cursor: pointer; transition: 0.2s; }
-        .option:hover { border-color: var(--gold); background: #262c36; }
-        .correct { background: var(--success) !important; border-color: #3fb950 !important; color: white; }
-        .wrong { background: var(--error) !important; border-color: #f85149 !important; color: white; }
-        .explanation { display: none; margin-top: 15px; font-size: 0.9rem; color: #4ade80; border-top: 1px solid #333; padding-top: 10px; font-weight: bold; }
+        .option:hover { border-color: var(--gold); }
+        .correct { background: var(--success) !important; border-color: #3fb950 !important; }
+        .wrong { background: var(--error) !important; border-color: #f85149 !important; }
+        .explanation { display: none; margin-top: 15px; font-size: 0.9rem; color: #4ade80; border-top: 1px solid #333; padding-top: 10px; }
         .active { display: block !important; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h2 style="margin:0; color:var(--gold); font-size: 1.3rem;">AGRICULTURE SUPERVISOR 2026</h2>
+    <h2 style="margin:0; color:var(--gold);">AS 2026 FINAL PUSH</h2>
     <div class="score-board">
         <div>Marks: <span id="score">0</span></div>
         <div>Accuracy: <span id="acc">0</span>%</div>
@@ -34,72 +34,102 @@
     
     <div class="quiz-card" id="q1">
         <div class="section-tag">Agronomy</div>
-        <span class="question">1. राजस्थान में सर्वाधिक सिंचाई किस साधन से होती है?</span>
-        <div class="option" onclick="check(this, 'correct', 'q1', 'कुएँ एवं नलकूप (Wells & Tube wells) - लगभग 70%')">A. कुएँ एवं नलकूप</div>
-        <div class="option" onclick="check(this, 'wrong', 'q1')">B. नहरें</div>
-        <div class="option" onclick="check(this, 'wrong', 'q1')">C. तालाब</div>
-        <div class="option" onclick="check(this, 'wrong', 'q1')">D. खड़ीन</div>
-        <div class="explanation" id="exp-q1"></div>
+        <span class="question">1. राजस्थान में 'शुष्क खेती' (Dry Farming) किन क्षेत्रों में की जाती है?</span>
+        <div class="option" onclick="check(this, 'correct', 'q1', 'जहाँ वर्षा 500mm से कम होती है (पश्चिमी राजस्थान)')">A. 500mm से कम वर्षा वाले क्षेत्र</div>
+        <div class="option" onclick="check(this, 'wrong', 'q1')">B. 1000mm से अधिक वर्षा</div>
+        <div class="option" onclick="check(this, 'wrong', 'q1')">C. नहरी क्षेत्र</div>
+        <div class="option" onclick="check(this, 'wrong', 'q1')">D. पूर्वी मैदान</div>
+        <div id="exp-q1" class="explanation"></div>
     </div>
 
     <div class="quiz-card" id="q2">
-        <div class="section-tag">Agronomy</div>
-        <span class="question">2. 'मक्का' (Maize) की कौन सी किस्म राजस्थान के लिए उपयुक्त है?</span>
-        <div class="option" onclick="check(this, 'wrong', 'q2')">A. माही कंचन</div>
-        <div class="option" onclick="check(this, 'wrong', 'q2')">B. माही धवल</div>
-        <div class="option" onclick="check(this, 'correct', 'q2', 'माही कंचन और माही धवल दोनों मक्का की प्रमुख किस्में हैं।')">C. A और B दोनों</div>
-        <div class="option" onclick="check(this, 'wrong', 'q2')">D. गंगा-1</div>
-        <div class="explanation" id="exp-q2"></div>
+        <div class="section-tag">Horticulture</div>
+        <span class="question">2. 'बेर' (Ber) की कटाई-छंटाई (Pruning) का सही समय क्या है?</span>
+        <div class="option" onclick="check(this, 'wrong', 'q2')">A. दिसम्बर-जनवरी</div>
+        <div class="option" onclick="check(this, 'correct', 'q2', 'अप्रैल-मई - शुष्क क्षेत्रों के लिए यह सबसे उपयुक्त है।')">B. अप्रैल-मई</div>
+        <div class="option" onclick="check(this, 'wrong', 'q2')">C. मानसून के समय</div>
+        <div class="option" onclick="check(this, 'wrong', 'q2')">D. कभी भी</div>
+        <div id="exp-q2" class="explanation"></div>
     </div>
 
     <div class="quiz-card" id="q3">
         <div class="section-tag">Animal Husbandry</div>
-        <span class="question">3. 'गीर' (Gir) गाय का मूल स्थान कहाँ माना जाता है?</span>
-        <div class="option" onclick="check(this, 'correct', 'q3', 'काठियावाड़ (गुजरात)। इसे राजस्थान में रेंडी या अजमेरी भी कहते हैं।')">A. काठियावाड़ (गुजरात)</div>
-        <div class="option" onclick="check(this, 'wrong', 'q3')">B. रोहतक (हरियाणा)</div>
-        <div class="option" onclick="check(this, 'wrong', 'q3')">C. माउंट आबू</div>
-        <div class="option" onclick="check(this, 'wrong', 'q3')">D. पंजाब</div>
-        <div class="explanation" id="exp-q3"></div>
+        <span class="question">3. 'पनीर' में वसा (Fat) की न्यूनतम मात्रा कितनी होनी चाहिए?</span>
+        <div class="option" onclick="check(this, 'wrong', 'q3')">A. 25%</div>
+        <div class="option" onclick="check(this, 'correct', 'q3', '50% (शुष्क आधार पर) - यह मानक परीक्षा में बार-बार आता है।')">B. 50%</div>
+        <div class="option" onclick="check(this, 'wrong', 'q3')">C. 10%</div>
+        <div class="option" onclick="check(this, 'wrong', 'q3')">D. 70%</div>
+        <div id="exp-q3" class="explanation"></div>
     </div>
 
     <div class="quiz-card" id="q4">
-        <div class="section-tag">Horticulture</div>
-        <span class="question">4. खजूर (Date Palm) का प्रवर्धन (Propagation) किसके द्वारा होता है?</span>
-        <div class="option" onclick="check(this, 'wrong', 'q4')">A. बीज</div>
-        <div class="option" onclick="check(this, 'correct', 'q4', 'ऑफ-शूट (Off-shoot) - खजूर के लिए यह सबसे उत्तम विधि है।')">B. ऑफ-शूट</div>
-        <div class="option" onclick="check(this, 'wrong', 'q4')">C. ग्राफ्टिंग</div>
-        <div class="option" onclick="check(this, 'wrong', 'q4')">D. कटिंग</div>
-        <div class="explanation" id="exp-q4"></div>
+        <div class="section-tag">Agronomy</div>
+        <span class="question">4. 'धान' (Rice) की नर्सरी तैयार करने की 'डेपोग विधि' कहाँ से आई?</span>
+        <div class="option" onclick="check(this, 'correct', 'q4', 'फिलीपींस - इसमें 11-14 दिन में पौध तैयार हो जाती है।')">A. फिलीपींस</div>
+        <div class="option" onclick="check(this, 'wrong', 'q4')">B. जापान</div>
+        <div class="option" onclick="check(this, 'wrong', 'q4')">C. भारत</div>
+        <div class="option" onclick="check(this, 'wrong', 'q4')">D. अमेरिका</div>
+        <div id="exp-q4" class="explanation"></div>
     </div>
 
     <div class="quiz-card" id="q5">
         <div class="section-tag">Rajasthan GK</div>
-        <span class="question">5. 'ऊँटों के देवता' के रूप में किसे पूजा जाता है?</span>
-        <div class="option" onclick="check(this, 'correct', 'q5', 'पाबूजी - ऊँट बीमार होने पर इनकी फड़ बांची जाती है।')">A. पाबूजी</div>
-        <div class="option" onclick="check(this, 'wrong', 'q5')">B. तेजाजी</div>
-        <div class="option" onclick="check(this, 'wrong', 'q5')">C. रामदेवजी</div>
-        <div class="option" onclick="check(this, 'wrong', 'q5')">D. गोगाजी</div>
-        <div class="explanation" id="exp-q5"></div>
+        <span class="question">5. राजस्थान में 'काजरी' (CAZRI) कहाँ स्थित है?</span>
+        <div class="option" onclick="check(this, 'correct', 'q5', 'जोधपुर - Central Arid Zone Research Institute (1959)')">A. जोधपुर</div>
+        <div class="option" onclick="check(this, 'wrong', 'q5')">B. बीकानेर</div>
+        <div class="option" onclick="check(this, 'wrong', 'q5')">C. अजमेर</div>
+        <div class="option" onclick="check(this, 'wrong', 'q5')">D. जयपुर</div>
+        <div id="exp-q5" class="explanation"></div>
     </div>
 
     <div class="quiz-card" id="q6">
-        <div class="section-tag">Hindi</div>
-        <span class="question">6. 'स्वागत' का सही संधि-विच्छेद क्या होगा?</span>
-        <div class="option" onclick="check(this, 'wrong', 'q6')">A. स्वा + गत</div>
-        <div class="option" onclick="check(this, 'correct', 'q6', 'सु + आगत = स्वागत (यण संधि)')">B. सु + आगत</div>
-        <div class="option" onclick="check(this, 'wrong', 'q6')">C. स्व + आगत</div>
-        <div class="option" onclick="check(this, 'wrong', 'q6')">D. सु + गत</div>
-        <div class="explanation" id="exp-q6"></div>
+        <div class="section-tag">Rajasthan GK</div>
+        <span class="question">6. 'ऊँट' को राज्य पशु कब घोषित किया गया?</span>
+        <div class="option" onclick="check(this, 'wrong', 'q6')">A. 2001</div>
+        <div class="option" onclick="check(this, 'correct', 'q6', '2014 - पालतू श्रेणी में राज्य पशु घोषित किया गया।')">B. 2014</div>
+        <div class="option" onclick="check(this, 'wrong', 'q6')">C. 1981</div>
+        <div class="option" onclick="check(this, 'wrong', 'q6')">D. 2010</div>
+        <div id="exp-q6" class="explanation"></div>
     </div>
 
     <div class="quiz-card" id="q7">
+        <div class="section-tag">Hindi</div>
+        <span class="question">7. 'पावक' शब्द का सही संधि विच्छेद है:</span>
+        <div class="option" onclick="check(this, 'wrong', 'q7')">A. पो + अक</div>
+        <div class="option" onclick="check(this, 'correct', 'q7', 'पौ + अक = पावक (अयादि संधि)')">B. पौ + अक</div>
+        <div class="option" onclick="check(this, 'wrong', 'q7')">C. पा + वक</div>
+        <div class="option" onclick="check(this, 'wrong', 'q7')">D. पाव + क</div>
+        <div id="exp-q7" class="explanation"></div>
+    </div>
+
+    <div class="quiz-card" id="q8">
+        <div class="section-tag">Hindi</div>
+        <span class="question">8. 'जंगल' का पर्यायवाची शब्द नहीं है:</span>
+        <div class="option" onclick="check(this, 'wrong', 'q8')">A. विपिन</div>
+        <div class="option" onclick="check(this, 'wrong', 'q8')">B. कानन</div>
+        <div class="option" onclick="check(this, 'correct', 'q8', 'उद्यान - उद्यान का अर्थ बगीचा होता है।')">C. उद्यान</div>
+        <div class="option" onclick="check(this, 'wrong', 'q8')">D. अरण्य</div>
+        <div id="exp-q8" class="explanation"></div>
+    </div>
+
+    <div class="quiz-card" id="q9">
         <div class="section-tag">Animal Husbandry</div>
-        <span class="question">7. दूध में मिठास का कारण क्या होता है?</span>
-        <div class="option" onclick="check(this, 'correct', 'q7', 'लैक्टोज (Lactose) के कारण दूध मीठा होता है।')">A. लैक्टोज</div>
-        <div class="option" onclick="check(this, 'wrong', 'q7')">B. कैसीन</div>
-        <div class="option" onclick="check(this, 'wrong', 'q7')">C. माल्टोज</div>
-        <div class="option" onclick="check(this, 'wrong', 'q7')">D. वसा</div>
-        <div class="explanation" id="exp-q7"></div>
+        <span class="question">9. भैंस की किस नस्ल के सींग 'दरांती' (Sickle) के आकार के होते हैं?</span>
+        <div class="option" onclick="check(this, 'wrong', 'q9')">A. मुर्रा</div>
+        <div class="option" onclick="check(this, 'correct', 'q9', 'सुरती (Surti) - यह इसकी सबसे बड़ी पहचान है।')">B. सुरती</div>
+        <div class="option" onclick="check(this, 'wrong', 'q9')">C. मेहसाना</div>
+        <div class="option" onclick="check(this, 'wrong', 'q9')">D. नीली रावी</div>
+        <div id="exp-q9" class="explanation"></div>
+    </div>
+
+    <div class="quiz-card" id="q10">
+        <div class="section-tag">Agronomy</div>
+        <span class="question">10. 'सुनहरी क्रांति' (Golden Revolution) का संबंध किससे है?</span>
+        <div class="option" onclick="check(this, 'correct', 'q10', 'फल उत्पादन / बागवानी - Horticulture development.')">A. फल उत्पादन</div>
+        <div class="option" onclick="check(this, 'wrong', 'q10')">B. अंडा उत्पादन</div>
+        <div class="option" onclick="check(this, 'wrong', 'q10')">C. तिलहन</div>
+        <div class="option" onclick="check(this, 'wrong', 'q10')">D. मछली</div>
+        <div id="exp-q10" class="explanation"></div>
     </div>
 
 </div>
