@@ -1,62 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agri Supervisor 2026 - Active Practice</title>
+    <title>Agri Supervisor 2026 - Master Revision</title>
     <style>
-        :root { --bg: #0b0d11; --card: #161b22; --gold: #d4af37; --white: #f0f6fc; }
-        body { font-family: sans-serif; background: var(--bg); color: var(--white); padding: 15px; }
-        .container { max-width: 600px; margin: 0 auto; }
-        h1 { color: var(--gold); text-align: center; border-bottom: 2px solid var(--gold); }
-        .quiz-card { background: var(--card); padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #333; }
-        .question { font-weight: bold; margin-bottom: 10px; display: block; }
-        .ans-btn { background: #30363d; color: var(--gold); border: 1px solid var(--gold); padding: 8px 15px; border-radius: 5px; cursor: pointer; width: 100%; text-align: left; }
-        .answer-text { display: none; margin-top: 10px; color: #4ade80; font-weight: bold; padding: 10px; background: #052111; border-radius: 5px; }
+        :root { --bg: #0d1117; --gold: #d4af37; --card: #161b22; --border: #30363d; --green: #238636; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #c9d1d9; margin: 0; padding: 10px; }
+        .header { text-align: center; border-bottom: 2px solid var(--gold); padding: 10px 0; margin-bottom: 20px; position: sticky; top: 0; background: var(--bg); z-index: 10; }
+        h1 { color: var(--gold); margin: 0; font-size: 1.5rem; }
+        .section-title { background: var(--gold); color: black; padding: 5px 15px; font-weight: bold; border-radius: 4px; margin: 20px 0 10px; display: inline-block; }
+        .quiz-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-bottom: 15px; }
+        .question { color: #f0f6fc; font-weight: bold; display: block; margin-bottom: 12px; font-size: 1.1rem; }
+        .options { display: grid; gap: 8px; }
+        .opt { background: #21262d; border: 1px solid var(--border); color: #c9d1d9; padding: 10px; border-radius: 6px; text-align: left; cursor: pointer; transition: 0.2s; }
+        .opt:hover { border-color: var(--gold); }
+        .ans-box { display: none; margin-top: 10px; padding: 10px; background: #052111; border-left: 4px solid var(--green); color: #4ade80; border-radius: 4px; font-weight: bold; }
+        .show-ans { background: none; border: 1px dashed var(--gold); color: var(--gold); padding: 5px 10px; margin-top: 10px; cursor: pointer; border-radius: 4px; font-size: 0.8rem; }
         .active { display: block !important; }
-        .check-item { cursor: pointer; padding: 5px; }
-        .check-item:active { background: #d4af3733; }
+        .footer { text-align: center; padding: 40px 0; color: #8b949e; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>AGRI SUPERVISOR 2026</h1>
-    
-    <div class="quiz-card">
-        <h3>🎯 QUICK PRACTICE (Core Topics)</h3>
-        
-        <div style="margin-bottom: 20px;">
-            <span class="question">1. Which soil is best for Agriculture in Rajasthan?</span>
-            <button class="ans-btn" onclick="showAns('a1')">Check Answer</button>
-            <div id="a1" class="answer-text">✅ Alluvial / Sandy Loam (Depending on region)</div>
-        </div>
+<div class="header">
+    <h1>RAJSUPERVISOR 2026 HUB</h1>
+    <div style="font-size: 0.8rem; color: #8b949e;">Target: 300 Marks | Negative: -1/3</div>
+</div>
 
-        <div style="margin-bottom: 20px;">
-            <span class="question">2. Best method for Irrigation in sandy soils?</span>
-            <button class="ans-btn" onclick="showAns('a2')">Check Answer</button>
-            <div id="a2" class="answer-text">✅ Drip Irrigation (Boond-Boond)</div>
-        </div>
+<div class="section-title">🌾 AGRICULTURE (High Yield)</div>
 
-        <div style="margin-bottom: 20px;">
-            <span class="question">3. Breed of Cow known for highest milk fat?</span>
-            <button class="ans-btn" onclick="showAns('a3')">Check Answer</button>
-            <div id="a3" class="answer-text">✅ Sahiwal / Gir (Focus on Sahiwal for yield)</div>
-        </div>
+<div class="quiz-card">
+    <span class="question">Q1. राजस्थान की मुख्य तिलहन फसल कौन सी है?</span>
+    <div class="options">
+        <div class="opt">A. मूंगफली</div><div class="opt">B. सरसों (Mustard)</div>
+        <div class="opt">C. सोयाबीन</div><div class="opt">D. तिल</div>
     </div>
+    <button class="show-ans" onclick="toggle('a1')">Check Answer</button>
+    <div id="a1" class="ans-box">Correct: B. सरसों (Mustard) - राजस्थान सरसों उत्पादन में प्रथम है।</div>
+</div>
 
-    <div class="quiz-card">
-        <h3>📋 SYLLABUS CHECKLIST</h3>
-        <div class="check-item" onclick="this.style.textDecoration='line-through'">⬜ Agronomy (NPK, Rotation)</div>
-        <div class="check-item" onclick="this.style.textDecoration='line-through'">⬜ Horticulture (Mango, Citrus)</div>
-        <div class="check-item" onclick="this.style.textDecoration='line-through'">⬜ Animal Husbandry (FMD, Breeds)</div>
-    </div>
+<div class="quiz-card">
+    <span class="question">Q2. 'आम' (Mango) की कौन सी किस्म 'सिंधु' और 'नीलम' का संकरण है?</span>
+    <button class="show-ans" onclick="toggle('a2')">Check Answer</button>
+    <div id="a2" class="ans-box">Correct: रत्ना (Ratna) | Note: सिंधु बीज रहित (Seedless) किस्म है।</div>
+</div>
+
+<div class="quiz-card">
+    <span class="question">Q3. पशुओं में 'खुरपका-मुँहपका' (FMD) रोग का कारण क्या है?</span>
+    <button class="show-ans" onclick="toggle('a3')">Check Answer</button>
+    <div id="a3" class="ans-box">Correct: विषाणु (Virus) - यह एक छूत की बीमारी है।</div>
+</div>
+
+<div class="section-title">🏰 RAJASTHAN GK (Culture & History)</div>
+
+<div class="quiz-card">
+    <span class="question">Q4. राजस्थान की 'पिंक सिटी' किसे कहा जाता है?</span>
+    <button class="show-ans" onclick="toggle('a4')">Check Answer</button>
+    <div id="a4" class="ans-box">Correct: जयपुर (Jaipur) - सवाई रामसिंह ने इसे गुलाबी रंगवाया था।</div>
+</div>
+
+<div class="quiz-card">
+    <span class="question">Q5. 'हल्दीघाटी' का युद्ध किस वर्ष लड़ा गया था?</span>
+    <button class="show-ans" onclick="toggle('a5')">Check Answer</button>
+    <div id="a5" class="ans-box">Correct: 1576 - महाराणा प्रताप और अकबर की सेना (मानसिंह) के बीच।</div>
+</div>
+
+<div class="section-title">🖋️ GENERAL HINDI</div>
+
+<div class="quiz-card">
+    <span class="question">Q6. 'पवन' शब्द का सही संधि विच्छेद क्या होगा?</span>
+    <button class="show-ans" onclick="toggle('a6')">Check Answer</button>
+    <div id="a6" class="ans-box">Correct: पो + अन (अयादि संधि)</div>
+</div>
+
+<div class="quiz-card">
+    <span class="question">Q7. 'कमल' का पर्यायवाची शब्द कौन सा है?</span>
+    <button class="show-ans" onclick="toggle('a7')">Check Answer</button>
+    <div id="a7" class="ans-box">Correct: सरोज, पंकज, नीरज, जलज।</div>
+</div>
+
+<div class="footer">
+    <p>© 2026 Final Revision Tool<br>Best of Luck for 18th April!</p>
 </div>
 
 <script>
-    function showAns(id) {
-        var x = document.getElementById(id);
-        x.classList.toggle("active");
+    function toggle(id) {
+        document.getElementById(id).classList.toggle('active');
     }
 </script>
 
