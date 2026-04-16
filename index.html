@@ -3,173 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS 2026 - Master Question Bank</title>
+    <title>AS 2026 - Final 100% Prep</title>
     <style>
         :root { --bg: #0b0d11; --card: #1c2128; --gold: #d4af37; --text: #f0f6fc; --success: #238636; --error: #da3633; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 10px; padding-bottom: 100px; }
-        .header { text-align: center; padding: 20px; border-bottom: 2px solid var(--gold); position: sticky; top: 0; background: var(--bg); z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-        .score-board { background: var(--gold); color: #000; font-weight: bold; padding: 12px; border-radius: 8px; margin: 10px 0; display: flex; justify-content: space-around; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .section-header { color: var(--gold); font-size: 1.2rem; font-weight: bold; margin: 25px 0 10px; border-left: 4px solid var(--gold); padding-left: 10px; }
+        .header { text-align: center; padding: 15px; border-bottom: 2px solid var(--gold); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+        .score-board { background: var(--gold); color: #000; font-weight: bold; padding: 10px; border-radius: 8px; margin: 10px 0; display: flex; justify-content: space-around; font-size: 0.9rem; }
         .quiz-card { background: var(--card); border: 1px solid #30363d; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-        .question { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; display: block; line-height: 1.4; }
-        .option { background: #2d333b; border: 1px solid #444c56; padding: 12px; margin: 8px 0; border-radius: 8px; cursor: pointer; transition: 0.2s; }
-        .option:hover { border-color: var(--gold); background: #353c45; }
-        .correct { background: var(--success) !important; border-color: #3fb950 !important; font-weight: bold; }
+        .section-label { color: var(--gold); font-size: 0.8rem; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; display: block; }
+        .question { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; display: block; }
+        .option { background: #2d333b; border: 1px solid #444c56; padding: 12px; margin: 8px 0; border-radius: 8px; cursor: pointer; }
+        .option:active { background: #353c45; }
+        .correct { background: var(--success) !important; border-color: #3fb950 !important; }
         .wrong { background: var(--error) !important; border-color: #f85149 !important; }
-        .explanation { display: none; margin-top: 15px; font-size: 0.95rem; color: #4ade80; border-top: 1px solid #444; padding-top: 10px; font-style: italic; }
+        .explanation { display: none; margin-top: 15px; font-size: 0.9rem; color: #4ade80; border-top: 1px solid #444; padding-top: 10px; }
         .active { display: block !important; }
-        .finish-btn { background: var(--gold); color: black; border: none; padding: 15px; width: 100%; font-weight: bold; font-size: 1.2rem; border-radius: 10px; cursor: pointer; margin-top: 20px; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1 style="margin:0; color:var(--gold); font-size: 1.4rem;">AGRICULTURE SUPERVISOR MEGA MOCK</h1>
+    <h1 style="margin:0; color:var(--gold); font-size: 1.2rem;">AGRICULTURE SUPERVISOR 2026</h1>
     <div class="score-board">
         <div>Score: <span id="score">0</span></div>
-        <div>Correct: <span id="correct-count">0</span></div>
-        <div>Wrong: <span id="wrong-count">0</span></div>
+        <div>Right: <span id="right">0</span></div>
+        <div>Wrong: <span id="wrong">0</span></div>
     </div>
 </div>
 
-<div id="quiz-container" style="max-width: 650px; margin: auto;">
+<div id="quiz-container" style="max-width: 600px; margin: auto;">
 
-    <div class="section-header">🌾 AGRONOMY (शस्य विज्ञान)</div>
-    
     <div class="quiz-card" id="q1">
-        <span class="question">1. 'गोल्डन राइस' (Golden Rice) में कौन सा विटामिन प्रचुर मात्रा में पाया जाता है?</span>
-        <div class="option" onclick="check(this, 'correct', 'q1', 'विटामिन-A - यह जेनेटिक इंजीनियरिंग से तैयार किया गया है।')">A. विटामिन-A</div>
-        <div class="option" onclick="check(this, 'wrong', 'q1')">B. विटामिन-B12</div>
-        <div class="option" onclick="check(this, 'wrong', 'q1')">C. विटामिन-C</div>
-        <div class="option" onclick="check(this, 'wrong', 'q1')">D. विटामिन-D</div>
+        <span class="section-label">Agronomy</span>
+        <span class="question">1. 'मृदा स्वास्थ्य कार्ड' (Soil Health Card) योजना की शुरुआत कब हुई?</span>
+        <div class="option" onclick="check(this, 'correct', 'q1', '19 Feb 2015 - सूरतगढ़ (राजस्थान) से हुई।')">A. 19 फरवरी 2015</div>
+        <div class="option" onclick="check(this, 'wrong', 'q1')">B. 15 अगस्त 2014</div>
+        <div class="option" onclick="check(this, 'wrong', 'q1')">C. 2 अक्टूबर 2015</div>
+        <div class="option" onclick="check(this, 'wrong', 'q1')">D. 1 जनवरी 2016</div>
         <div id="exp-q1" class="explanation"></div>
     </div>
 
     <div class="quiz-card" id="q2">
-        <span class="question">2. बरसीम (Berseem) के बीजों को उपचारित करने के लिए कौन सा कल्चर काम में लेते हैं?</span>
-        <div class="option" onclick="check(this, 'wrong', 'q2')">A. राइजोबियम जापोनिकम</div>
-        <div class="option" onclick="check(this, 'correct', 'q2', 'राइजोबियम ट्राइफोलाई (Rhizobium trifolii)')">B. राइजोबियम ट्राइफोलाई</div>
-        <div class="option" onclick="check(this, 'wrong', 'q2')">C. राइजोबियम मेलीलोटी</div>
-        <div class="option" onclick="check(this, 'wrong', 'q2')">D. एज़ोटोबैक्टर</div>
+        <span class="section-label">Animal Husbandry</span>
+        <span class="question">2. पशुओं में 'गलगोटू' (Hemorrhagic Septicemia) रोग का कारण है?</span>
+        <div class="option" onclick="check(this, 'correct', 'q2', 'पाश्चुरेला मल्टीसोडा (जीवाणु/Bacteria)')">A. जीवाणु (Bacteria)</div>
+        <div class="option" onclick="check(this, 'wrong', 'q2')">B. विषाणु (Virus)</div>
+        <div class="option" onclick="check(this, 'wrong', 'q2')">C. कवक</div>
+        <div class="option" onclick="check(this, 'wrong', 'q2')">D. प्रोटोजोआ</div>
         <div id="exp-q2" class="explanation"></div>
     </div>
 
     <div class="quiz-card" id="q3">
-        <span class="question">3. 'खैरा रोग' (Khaira Disease) किस तत्व की कमी से होता है?</span>
-        <div class="option" onclick="check(this, 'wrong', 'q3')">A. लोहा (Iron)</div>
-        <div class="option" onclick="check(this, 'correct', 'q3', 'जस्ता (Zinc) - धान की फसल में जिंक की कमी से होता है।')">B. जस्ता (Zinc)</div>
-        <div class="option" onclick="check(this, 'wrong', 'q3')">C. तांबा</div>
-        <div class="option" onclick="check(this, 'wrong', 'q3')">D. नाइट्रोजन</div>
+        <span class="section-label">Horticulture</span>
+        <span class="question">3. 'पपीते' में पीले रंग का कारण कौन सा पिगमेंट है?</span>
+        <div class="option" onclick="check(this, 'wrong', 'q3')">A. लाइकोपीन</div>
+        <div class="option" onclick="check(this, 'correct', 'q3', 'कैरिकाजैन्थिन (Caricaxanthin)')">B. कैरिकाजैन्थिन</div>
+        <div class="option" onclick="check(this, 'wrong', 'q3')">C. एंथोसायनिन</div>
+        <div class="option" onclick="check(this, 'wrong', 'q3')">D. कैरोटीन</div>
         <div id="exp-q3" class="explanation"></div>
     </div>
 
-    <div class="section-header">🍎 HORTICULTURE (उद्यानिकी)</div>
-
     <div class="quiz-card" id="q4">
-        <span class="question">4. 'फूलगोभी' में 'व्हिपटेल' (Whiptail) रोग किस तत्व की कमी से होता है?</span>
-        <div class="option" onclick="check(this, 'wrong', 'q4')">A. बोरान</div>
-        <div class="option" onclick="check(this, 'correct', 'q4', 'मोलिब्डेनम (Molybdenum) - यह अम्लीय मृदा में अधिक होता है।')">B. मोलिब्डेनम</div>
-        <div class="option" onclick="check(this, 'wrong', 'q4')">C. कैल्शियम</div>
-        <div class="option" onclick="check(this, 'wrong', 'q4')">D. पोटाश</div>
+        <span class="section-label">Agronomy</span>
+        <span class="question">4. 'बाजरा' का वानस्पतिक नाम (Botanical Name) क्या है?</span>
+        <div class="option" onclick="check(this, 'correct', 'q4', 'Pennisetum glaucum')">A. पेनिसिटम ग्लॉकम</div>
+        <div class="option" onclick="check(this, 'wrong', 'q4')">B. सोरघम बाइकोलर</div>
+        <div class="option" onclick="check(this, 'wrong', 'q4')">C. ट्रिटिकम एस्टिवम</div>
+        <div class="option" onclick="check(this, 'wrong', 'q4')">D. ज़िया मेज़</div>
         <div id="exp-q4" class="explanation"></div>
     </div>
 
     <div class="quiz-card" id="q5">
-        <span class="question">5. 'पूसा नन्हा' (Pusa Nanha) किसकी प्रसिद्ध किस्म है?</span>
-        <div class="option" onclick="check(this, 'wrong', 'q5')">A. आम</div>
-        <div class="option" onclick="check(this, 'correct', 'q5', 'पपीता (Papaya) - यह किचन गार्डनिंग के लिए उपयुक्त है।')">B. पपीता</div>
-        <div class="option" onclick="check(this, 'wrong', 'q5')">C. केला</div>
-        <div class="option" onclick="check(this, 'wrong', 'q5')">D. अनार</div>
+        <span class="section-label">Rajasthan GK</span>
+        <span class="question">5. 'कालीबंगा' सभ्यता किस जिले में स्थित है?</span>
+        <div class="option" onclick="check(this, 'wrong', 'q5')">A. बीकानेर</div>
+        <div class="option" onclick="check(this, 'correct', 'q5', 'हनुमानगढ़ - घग्गर नदी के किनारे।')">B. हनुमानगढ़</div>
+        <div class="option" onclick="check(this, 'wrong', 'q5')">C. गंगानगर</div>
+        <div class="option" onclick="check(this, 'wrong', 'q5')">D. सीकर</div>
         <div id="exp-q5" class="explanation"></div>
     </div>
 
-    <div class="section-header">🐄 ANIMAL HUSBANDRY (पशुपालन)</div>
-
     <div class="quiz-card" id="q6">
-        <span class="question">6. 'दूध' की शुद्धता किसके द्वारा मापी जाती है?</span>
-        <div class="option" onclick="check(this, 'correct', 'q6', 'लैक्टोमीटर (Lactometer)')">A. लैक्टोमीटर</div>
-        <div class="option" onclick="check(this, 'wrong', 'q6')">B. थर्मामीटर</div>
-        <div class="option" onclick="check(this, 'wrong', 'q6')">C. बैरोमीटर</div>
-        <div class="option" onclick="check(this, 'wrong', 'q6')">D. हाइड्रोमीटर</div>
+        <span class="section-label">Hindi</span>
+        <span class="question">6. 'प्रत्युपकार' शब्द में कौन सा उपसर्ग है?</span>
+        <div class="option" onclick="check(this, 'correct', 'q6', 'प्रति + उपकार = प्रत्युपकार')">A. प्रति</div>
+        <div class="option" onclick="check(this, 'wrong', 'q6')">B. प्र</div>
+        <div class="option" onclick="check(this, 'wrong', 'q6')">C. प्रत्यु</div>
+        <div class="option" onclick="check(this, 'wrong', 'q6')">D. उप</div>
         <div id="exp-q6" class="explanation"></div>
     </div>
 
-    <div class="quiz-card" id="q7">
-        <span class="question">7. किस पशु के दूध में विटामिन 'C' की मात्रा सर्वाधिक होती है?</span>
-        <div class="option" onclick="check(this, 'wrong', 'q7')">A. गाय</div>
-        <div class="option" onclick="check(this, 'wrong', 'q7')">B. भैंस</div>
-        <div class="option" onclick="check(this, 'correct', 'q7', 'ऊँटनी (Camel) के दूध में विटामिन C भरपूर होता है।')">C. ऊँटनी</div>
-        <div class="option" onclick="check(this, 'wrong', 'q7')">D. बकरी</div>
-        <div id="exp-q7" class="explanation"></div>
     </div>
-
-    <div class="section-header">🏰 RAJASTHAN GK</div>
-
-    <div class="quiz-card" id="q8">
-        <span class="question">8. 'खेजड़ी' का वैज्ञानिक नाम क्या है?</span>
-        <div class="option" onclick="check(this, 'correct', 'q8', 'Prosopis cineraria - राजस्थान का राज्य वृक्ष।')">A. प्रोसोपिस सिनेरेरिया</div>
-        <div class="option" onclick="check(this, 'wrong', 'q8')">B. टेकोमेला उण्डुलाटा</div>
-        <div class="option" onclick="check(this, 'wrong', 'q8')">C. अजाडिरेक्टा इण्डिका</div>
-        <div class="option" onclick="check(this, 'wrong', 'q8')">D. मेंगीफेरा इण्डिका</div>
-        <div id="exp-q8" class="explanation"></div>
-    </div>
-
-    <div class="quiz-card" id="q9">
-        <span class="question">9. 'विजय स्तम्भ' कहाँ स्थित है?</span>
-        <div class="option" onclick="check(this, 'wrong', 'q9')">A. कुम्भलगढ़</div>
-        <div class="option" onclick="check(this, 'correct', 'q9', 'चित्तौड़गढ़ - महाराणा कुम्भा ने मालवा विजय की स्मृति में बनवाया था।')">B. चित्तौड़गढ़</div>
-        <div class="option" onclick="check(this, 'wrong', 'q9')">C. मेहरानगढ़</div>
-        <div class="option" onclick="check(this, 'wrong', 'q9')">D. आमेर</div>
-        <div id="exp-q9" class="explanation"></div>
-    </div>
-
-    <div class="section-header">🖊️ HINDI</div>
-
-    <div class="quiz-card" id="q10">
-        <span class="question">10. 'शुद्ध' शब्द का चयन करें:</span>
-        <div class="option" onclick="check(this, 'wrong', 'q10')">A. उज्वल</div>
-        <div class="option" onclick="check(this, 'correct', 'q10', 'उज्ज्वल (दोनों ज आधे आते हैं)')">B. उज्ज्वल</div>
-        <div class="option" onclick="check(this, 'wrong', 'q10')">C. उजवल</div>
-        <div class="option" onclick="check(this, 'wrong', 'q10')">D. ऊज्जवल</div>
-        <div id="exp-q10" class="explanation"></div>
-    </div>
-
-    <button class="finish-btn" onclick="finishExam()">FINISH & VIEW RESULT</button>
-
-</div>
 
 <script>
-    let score = 0;
-    let correct = 0;
-    let wrong = 0;
-
+    let score = 0; let rCount = 0; let wCount = 0;
     function check(btn, status, qId, msg) {
         let card = document.getElementById(qId);
         if (card.getAttribute('data-answered')) return;
-        
         card.setAttribute('data-answered', 'true');
-        
         if (status === 'correct') {
-            btn.classList.add('correct');
-            score += 3;
-            correct++;
+            btn.classList.add('correct'); score += 3; rCount++;
         } else {
-            btn.classList.add('wrong');
-            score -= 1;
-            wrong++;
+            btn.classList.add('wrong'); score -= 1; wCount++;
         }
-
         let exp = document.getElementById('exp-' + qId);
-        exp.innerHTML = "💡 " + msg;
-        exp.classList.add('active');
-
+        exp.innerHTML = "💡 " + msg; exp.classList.add('active');
         document.getElementById('score').innerText = score;
-        document.getElementById('correct-count').innerText = correct;
-        document.getElementById('wrong-count').innerText = wrong;
-    }
-
-    function finishExam() {
-        alert("Exam Finished!\nTotal Score: " + score + "\nCorrect: " + correct + "\nWrong: " + wrong + "\n\nBest of Luck for April 18!");
+        document.getElementById('right').innerText = rCount;
+        document.getElementById('wrong').innerText = wCount;
     }
 </script>
 
