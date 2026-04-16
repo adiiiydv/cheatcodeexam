@@ -1,159 +1,125 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS 2026 - 50 Question Mega Prep</title>
-    <style>
-        :root { --bg: #0b0d11; --card: #1c2128; --gold: #d4af37; --text: #f0f6fc; --success: #238636; --error: #da3633; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 10px; padding-bottom: 100px; }
-        .header { text-align: center; padding: 15px; border-bottom: 2px solid var(--gold); position: sticky; top: 0; background: var(--bg); z-index: 100; }
-        .score-board { background: var(--gold); color: #000; font-weight: bold; padding: 10px; border-radius: 8px; margin: 10px 0; display: flex; justify-content: space-around; font-size: 0.9rem; }
-        .quiz-card { background: var(--card); border: 1px solid #30363d; border-radius: 12px; padding: 15px; margin-bottom: 15px; border-left: 4px solid var(--gold); }
-        .lang-en { font-style: italic; color: #8b949e; font-size: 0.85rem; display: block; margin-bottom: 5px; }
-        .question { font-size: 1rem; font-weight: bold; margin-bottom: 12px; display: block; line-height: 1.4; color: #fff; }
-        .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .option { background: #2d333b; border: 1px solid #444c56; padding: 10px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
-        .correct { background: var(--success) !important; border-color: #3fb950 !important; }
-        .wrong { background: var(--error) !important; border-color: #f85149 !important; }
-        .explanation { display: none; margin-top: 10px; font-size: 0.85rem; color: #4ade80; border-top: 1px solid #444; padding-top: 5px; font-weight: bold; }
-        .active { display: block !important; }
-        .section-divider { background: #30363d; color: var(--gold); padding: 5px; margin: 20px 0; border-radius: 4px; font-size: 0.9rem; text-align: center; text-transform: uppercase; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AS 2026 - Mega Mock</title>
+
+<style>
+:root { --bg:#0b0d11; --card:#1c2128; --gold:#d4af37; --text:#f0f6fc; --success:#238636; --error:#da3633; }
+body { font-family:'Segoe UI'; background:var(--bg); color:var(--text); margin:0; padding:10px; }
+.header { text-align:center; border-bottom:2px solid var(--gold); padding:10px; }
+.score-board { background:var(--gold); color:#000; padding:10px; display:flex; justify-content:space-around; border-radius:8px; }
+.quiz-card { background:var(--card); padding:15px; margin:10px 0; border-radius:10px; border-left:4px solid var(--gold); }
+.option { background:#2d333b; margin:5px; padding:8px; border-radius:6px; cursor:pointer; }
+.correct { background:var(--success)!important; }
+.wrong { background:var(--error)!important; }
+.explanation { display:none; margin-top:5px; color:#4ade80; }
+.active { display:block; }
+</style>
 </head>
+
 <body>
 
 <div class="header">
-    <h1 style="margin:0; color:var(--gold); font-size: 1rem;">AGRI SUPERVISOR 2026 MOCK</h1>
-    <div class="score-board">
-        <div>Score: <span id="score">0</span></div>
-        <div>Right: <span id="right">0</span></div>
-        <div>Wrong: <span id="wrong">0</span></div>
-    </div>
+<h2>AGRI SUPERVISOR 2026</h2>
+<div class="score-board">
+<span>Score: <span id="score">0</span></span>
+<span>Right: <span id="right">0</span></span>
+<span>Wrong: <span id="wrong">0</span></span>
+</div>
 </div>
 
-<div id="quiz-container" style="max-width: 700px; margin: auto;">
-
-    <div class="section-divider">Agronomy & Soils</div>
-    <div class="quiz-card" id="q1">
-        <span class="lang-en">1. The 'King of Cereals' is:</span>
-        <span class="question">1. अनाजों का राजा किसे कहा जाता है?</span>
-        <div class="options">
-            <div class="option" onclick="check(this, 'correct', 'q1', 'Wheat (गेहूँ)')">A. गेहूँ</div>
-            <div class="option" onclick="check(this, 'wrong', 'q1')">B. मक्का</div>
-            <div class="option" onclick="check(this, 'wrong', 'q1')">C. धान</div>
-            <div class="option" onclick="check(this, 'wrong', 'q1')">D. बाजरा</div>
-        </div>
-        <div id="exp-q1" class="explanation"></div>
-    </div>
-
-    <div class="quiz-card" id="q2">
-        <span class="lang-en">2. Origin of Bajra (Pearl Millet) is:</span>
-        <span class="question">2. बाजरा का उद्गम स्थल (Origin) कहाँ है?</span>
-        <div class="options">
-            <div class="option" onclick="check(this, 'wrong', 'q2')">A. India</div>
-            <div class="option" onclick="check(this, 'correct', 'q2', 'Africa')">B. अफ्रीका</div>
-            <div class="option" onclick="check(this, 'wrong', 'q2')">C. China</div>
-            <div class="option" onclick="check(this, 'wrong', 'q2')">D. Brazil</div>
-        </div>
-        <div id="exp-q2" class="explanation"></div>
-    </div>
-
-    <div class="quiz-card" id="q3">
-        <span class="lang-en">3. Highest Nitrogen percentage is in which fertilizer?</span>
-        <span class="question">3. किस उर्वरक में नाइट्रोजन की मात्रा सर्वाधिक होती है?</span>
-        <div class="options">
-            <div class="option" onclick="check(this, 'wrong', 'q3')">A. Urea (46%)</div>
-            <div class="option" onclick="check(this, 'correct', 'q3', 'Anhydrous Ammonia (82%)')">B. निर्जल अमोनिया</div>
-            <div class="option" onclick="check(this, 'wrong', 'q3')">C. CAN</div>
-            <div class="option" onclick="check(this, 'wrong', 'q3')">D. DAP</div>
-        </div>
-        <div id="exp-q3" class="explanation"></div>
-    </div>
-
-    <div class="quiz-card" id="q4">
-        <span class="lang-en">4. 'White Grubs' is a major pest of:</span>
-        <span class="question">4. सफेद लट (White Grub) किसका प्रमुख शत्रु कीट है?</span>
-        <div class="options">
-            <div class="option" onclick="check(this, 'wrong', 'q4')">A. गेहूँ</div>
-            <div class="option" onclick="check(this, 'correct', 'q4', 'Groundnut (मूंगफली)')">B. मूंगफली</div>
-            <div class="option" onclick="check(this, 'wrong', 'q4')">C. सरसों</div>
-            <div class="option" onclick="check(this, 'wrong', 'q4')">D. कपास</div>
-        </div>
-        <div id="exp-q4" class="explanation"></div>
-    </div>
-
-    <div class="section-divider">Horticulture</div>
-
-    <div class="quiz-card" id="q5">
-        <span class="lang-en">5. 'Sindhu' is a seedless variety of:</span>
-        <span class="question">5. 'सिंधु' किसकी बीज रहित (Seedless) किस्म है?</span>
-        <div class="options">
-            <div class="option" onclick="check(this, 'correct', 'q5', 'Mango (आम)')">A. आम</div>
-            <div class="option" onclick="check(this, 'wrong', 'q5')">B. अनार</div>
-            <div class="option" onclick="check(this, 'wrong', 'q5')">C. पपीता</div>
-            <div class="option" onclick="check(this, 'wrong', 'q5')">D. अमरूद</div>
-        </div>
-        <div id="exp-q5" class="explanation"></div>
-    </div>
-
-    <div class="quiz-card" id="q6">
-        <span class="lang-en">6. Which fruit contains the highest Vitamin C?</span>
-        <span class="question">6. किस फल में विटामिन-C की मात्रा सर्वाधिक होती है?</span>
-        <div class="options">
-            <div class="option" onclick="check(this, 'wrong', 'q6')">A. आंवला</div>
-            <div class="option" onclick="check(this, 'correct', 'q6', 'Barbados Cherry')">B. बारबाडोस चेरी</div>
-            <div class="option" onclick="check(this, 'wrong', 'q6')">C. नींबू</div>
-            <div class="option" onclick="check(this, 'wrong', 'q6')">D. संतरा</div>
-        </div>
-        <div id="exp-q6" class="explanation"></div>
-    </div>
-
-    <div class="section-divider">Animal Husbandry</div>
-
-    <div class="quiz-card" id="q7">
-        <span class="lang-en">7. Gestation period of a Buffalo is:</span>
-        <span class="question">7. भैंस की गर्भावस्था अवधि कितनी होती है?</span>
-        <div class="options">
-            <div class="option" onclick="check(this, 'wrong', 'q7')">A. 282 दिन</div>
-            <div class="option" onclick="check(this, 'correct', 'q7', '310 Days')">B. 310 दिन</div>
-            <div class="option" onclick="check(this, 'wrong', 'q7')">C. 150 दिन</div>
-            <div class="option" onclick="check(this, 'wrong', 'q7')">D. 400 दिन</div>
-        </div>
-        <div id="exp-q7" class="explanation"></div>
-    </div>
-
-    <div class="quiz-card" id="q8">
-        <span class="lang-en">8. Milk fever in animals is caused by deficiency of:</span>
-        <span class="question">8. पशुओं में 'दुग्ध ज्वर' (Milk Fever) किसकी कमी से होता है?</span>
-        <div class="options">
-            <div class="option" onclick="check(this, 'wrong', 'q8')">A. आयरन</div>
-            <div class="option" onclick="check(this, 'correct', 'q8', 'Calcium')">B. कैल्शियम</div>
-            <div class="option" onclick="check(this, 'wrong', 'q8')">C. विटामिन A</div>
-            <div class="option" onclick="check(this, 'wrong', 'q8')">D. फास्फोरस</div>
-        </div>
-        <div id="exp-q8" class="explanation"></div>
-    </div>
-
-    </div>
+<div id="quiz"></div>
 
 <script>
-    let score = 0; let rCount = 0; let wCount = 0;
-    function check(btn, status, qId, msg) {
-        let card = document.getElementById(qId);
-        if (card.getAttribute('data-answered')) return;
-        card.setAttribute('data-answered', 'true');
-        if (status === 'correct') {
-            btn.classList.add('correct'); score += 3; rCount++;
-        } else {
-            btn.classList.add('wrong'); score -= 1; wCount++;
-        }
-        let exp = document.getElementById('exp-' + qId);
-        exp.innerHTML = "💡 " + msg; exp.classList.add('active');
-        document.getElementById('score').innerText = score;
-        document.getElementById('right').innerText = rCount;
-        document.getElementById('wrong').innerText = wCount;
-    }
+
+let score = 0, right = 0, wrong = 0;
+
+// 🔥 QUESTION BANK (ADD UP TO 300 HERE)
+const questions = [
+{
+q:"अनाजों का राजा किसे कहा जाता है?",
+options:["गेहूँ","मक्का","धान","बाजरा"],
+answer:0,
+exp:"गेहूँ को King of cereals कहा जाता है"
+},
+{
+q:"बाजरा का उद्गम कहाँ है?",
+options:["भारत","अफ्रीका","चीन","ब्राज़ील"],
+answer:1,
+exp:"बाजरा का origin Africa है"
+},
+{
+q:"सबसे अधिक नाइट्रोजन किसमें?",
+options:["यूरिया","अमोनिया","DAP","CAN"],
+answer:1,
+exp:"Anhydrous Ammonia में ~82% N होता है"
+},
+{
+q:"Milk fever किसकी कमी से होता है?",
+options:["Iron","Calcium","Vit A","P"],
+answer:1,
+exp:"Calcium deficiency"
+},
+{
+q:"भैंस की गर्भ अवधि?",
+options:["282","310","150","400"],
+answer:1,
+exp:"~310 days"
+}
+];
+
+// 🔥 AUTO GENERATE (YOU CAN SCALE TO 300)
+const quiz = document.getElementById("quiz");
+
+questions.forEach((q, index) => {
+
+let card = document.createElement("div");
+card.className = "quiz-card";
+
+let html = `<b>${index+1}. ${q.q}</b>`;
+
+q.options.forEach((opt,i)=>{
+html += `<div class="option" onclick="check(this,${index},${i})">${opt}</div>`;
+});
+
+html += `<div id="exp${index}" class="explanation"></div>`;
+
+card.innerHTML = html;
+quiz.appendChild(card);
+
+});
+
+function check(el,qIndex,optIndex){
+
+let card = el.parentElement;
+if(card.dataset.done) return;
+card.dataset.done = true;
+
+let q = questions[qIndex];
+
+let options = card.querySelectorAll(".option");
+
+options[q.answer].classList.add("correct");
+
+if(optIndex === q.answer){
+el.classList.add("correct");
+score+=3; right++;
+}else{
+el.classList.add("wrong");
+score-=1; wrong++;
+}
+
+let exp = document.getElementById("exp"+qIndex);
+exp.innerText = "💡 "+q.exp;
+exp.classList.add("active");
+
+document.getElementById("score").innerText = score;
+document.getElementById("right").innerText = right;
+document.getElementById("wrong").innerText = wrong;
+}
+
 </script>
 
 </body>
