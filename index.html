@@ -3,207 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agriculture Supervisor 2026 - Strategy</title>
+    <title>Agri Supervisor 2026 - Active Practice</title>
     <style>
-        :root {
-            --bg-color: #0b0d11;
-            --card-bg: #161b22;
-            --accent-gold: #d4af37;
-            --text-white: #f0f6fc;
-            --text-gray: #8b949e;
-            --danger: #ff4d4d;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-white);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            border-bottom: 2px solid var(--accent-gold);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-
-        h1 {
-            color: var(--accent-gold);
-            font-size: 2rem;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .reality-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid #30363d;
-        }
-
-        .stat-card span {
-            display: block;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--accent-gold);
-        }
-
-        .negative { color: var(--danger) !important; }
-
-        .section-title {
-            background: var(--accent-gold);
-            color: black;
-            padding: 10px 20px;
-            border-radius: 5px;
-            display: inline-block;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .plan-box {
-            background: linear-gradient(145deg, #1c2128, #161b22);
-            padding: 20px;
-            border-left: 5px solid var(--accent-gold);
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-
-        .plan-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #30363d;
-        }
-
-        .topics-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .topic-card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #30363d;
-            transition: transform 0.3s ease;
-        }
-
-        .topic-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-gold);
-        }
-
-        .topic-card h3 {
-            margin-top: 0;
-            color: var(--accent-gold);
-            border-bottom: 1px solid var(--accent-gold);
-            padding-bottom: 10px;
-        }
-
-        ul {
-            padding-left: 20px;
-            color: var(--text-gray);
-        }
-
-        li { margin-bottom: 8px; }
-
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            color: var(--text-gray);
-            font-size: 0.9rem;
-        }
+        :root { --bg: #0b0d11; --card: #161b22; --gold: #d4af37; --white: #f0f6fc; }
+        body { font-family: sans-serif; background: var(--bg); color: var(--white); padding: 15px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        h1 { color: var(--gold); text-align: center; border-bottom: 2px solid var(--gold); }
+        .quiz-card { background: var(--card); padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #333; }
+        .question { font-weight: bold; margin-bottom: 10px; display: block; }
+        .ans-btn { background: #30363d; color: var(--gold); border: 1px solid var(--gold); padding: 8px 15px; border-radius: 5px; cursor: pointer; width: 100%; text-align: left; }
+        .answer-text { display: none; margin-top: 10px; color: #4ade80; font-weight: bold; padding: 10px; background: #052111; border-radius: 5px; }
+        .active { display: block !important; }
+        .check-item { cursor: pointer; padding: 5px; }
+        .check-item:active { background: #d4af3733; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <header>
-        <h1>AGRI SUPERVISOR 2026</h1>
-        <p>Target: 100 MCQs | 300 Marks</p>
-    </header>
+    <h1>AGRI SUPERVISOR 2026</h1>
+    
+    <div class="quiz-card">
+        <h3>🎯 QUICK PRACTICE (Core Topics)</h3>
+        
+        <div style="margin-bottom: 20px;">
+            <span class="question">1. Which soil is best for Agriculture in Rajasthan?</span>
+            <button class="ans-btn" onclick="showAns('a1')">Check Answer</button>
+            <div id="a1" class="answer-text">✅ Alluvial / Sandy Loam (Depending on region)</div>
+        </div>
 
-    <div class="reality-grid">
-        <div class="stat-card">
-            <p>Time</p>
-            <span>2 Hours</span>
+        <div style="margin-bottom: 20px;">
+            <span class="question">2. Best method for Irrigation in sandy soils?</span>
+            <button class="ans-btn" onclick="showAns('a2')">Check Answer</button>
+            <div id="a2" class="answer-text">✅ Drip Irrigation (Boond-Boond)</div>
         </div>
-        <div class="stat-card">
-            <p>Negative</p>
-            <span class="negative">-1/3 Mark</span>
-        </div>
-        <div class="stat-card">
-            <p>Agriculture</p>
-            <span>60 Qs</span>
-        </div>
-        <div class="stat-card">
-            <p>Hindi/GK</p>
-            <span>40 Qs</span>
+
+        <div style="margin-bottom: 20px;">
+            <span class="question">3. Breed of Cow known for highest milk fat?</span>
+            <button class="ans-btn" onclick="showAns('a3')">Check Answer</button>
+            <div id="a3" class="answer-text">✅ Sahiwal / Gir (Focus on Sahiwal for yield)</div>
         </div>
     </div>
 
-    <div class="section-title">1-DAY PASS STRATEGY</div>
-    <div class="plan-box">
-        <p><strong>🧠 Rule:</strong> RATTA + REPEATED TOPICS + MCQ PRACTICE</p>
-        <div class="plan-item"><span>4 Hours</span> <strong>Agriculture (Core)</strong></div>
-        <div class="plan-item"><span>2 Hours</span> <strong>Rajasthan GK</strong></div>
-        <div class="plan-item"><span>1 Hour</span> <strong>Hindi</strong></div>
-        <div class="plan-item"><span>2 Hours</span> <strong>MCQ Revision</strong></div>
-    </div>
-
-    <div class="section-title">MOST REPEATED TOPICS</div>
-    <div class="topics-container">
-        <div class="topic-card">
-            <h3>🌾 Agronomy</h3>
-            <ul>
-                <li>Crop Rotation & Systems</li>
-                <li>Irrigation Methods</li>
-                <li>Fertilizers (NPK usage)</li>
-                <li>Soil Types (Alluvial, Black, Red)</li>
-            </ul>
-        </div>
-
-        <div class="topic-card">
-            <h3>🌱 Horticulture</h3>
-            <ul>
-                <li>Fruit Crops: Mango, Citrus, Guava</li>
-                <li>Propagation: Cutting & Grafting</li>
-                <li>Nursery Management</li>
-            </ul>
-        </div>
-
-        <div class="topic-card">
-            <h3>🐄 Animal Husbandry</h3>
-            <ul>
-                <li>Breeds: Gir, Sahiwal, Buffalo types</li>
-                <li>Milk Production & Composition</li>
-                <li>Diseases: FMD, Mastitis</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="footer">
-        <p>Focus on the high-yield topics. Best of luck for April 18!</p>
+    <div class="quiz-card">
+        <h3>📋 SYLLABUS CHECKLIST</h3>
+        <div class="check-item" onclick="this.style.textDecoration='line-through'">⬜ Agronomy (NPK, Rotation)</div>
+        <div class="check-item" onclick="this.style.textDecoration='line-through'">⬜ Horticulture (Mango, Citrus)</div>
+        <div class="check-item" onclick="this.style.textDecoration='line-through'">⬜ Animal Husbandry (FMD, Breeds)</div>
     </div>
 </div>
+
+<script>
+    function showAns(id) {
+        var x = document.getElementById(id);
+        x.classList.toggle("active");
+    }
+</script>
 
 </body>
 </html>
