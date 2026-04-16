@@ -13,18 +13,18 @@
         .lang-en { font-style: italic; color: #8b949e; font-size: 0.85rem; display: block; margin-bottom: 5px; }
         .question { font-size: 1rem; font-weight: bold; margin-bottom: 12px; display: block; line-height: 1.4; color: #fff; }
         .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .option { background: #2d333b; border: 1px solid #444c56; padding: 10px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
+        .option { background: #2d333b; border: 1px solid #444c56; padding: 10px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
         .correct { background: var(--success) !important; border-color: #3fb950 !important; }
         .wrong { background: var(--error) !important; border-color: #f85149 !important; }
         .explanation { display: none; margin-top: 10px; font-size: 0.85rem; color: #4ade80; border-top: 1px solid #444; padding-top: 5px; font-weight: bold; }
         .active { display: block !important; }
-        .section-divider { background: #30363d; color: var(--gold); padding: 5px 15px; margin: 25px 0 15px; border-radius: 4px; font-size: 0.9rem; font-weight: bold; text-align: center; }
+        .section-divider { background: #30363d; color: var(--gold); padding: 5px; margin: 20px 0; border-radius: 4px; font-size: 0.9rem; text-align: center; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1 style="margin:0; color:var(--gold); font-size: 1.1rem;">AGRI SUPERVISOR 50-Q MOCK</h1>
+    <h1 style="margin:0; color:var(--gold); font-size: 1rem;">AGRI SUPERVISOR 2026 MOCK</h1>
     <div class="score-board">
         <div>Score: <span id="score">0</span></div>
         <div>Right: <span id="right">0</span></div>
@@ -34,10 +34,9 @@
 
 <div id="quiz-container" style="max-width: 700px; margin: auto;">
 
-    <div class="section-divider">AGRICULTURE: AGRONOMY & SOIL</div>
-    
+    <div class="section-divider">Agronomy & Soils</div>
     <div class="quiz-card" id="q1">
-        <span class="lang-en">The 'King of Cereals' is:</span>
+        <span class="lang-en">1. The 'King of Cereals' is:</span>
         <span class="question">1. अनाजों का राजा किसे कहा जाता है?</span>
         <div class="options">
             <div class="option" onclick="check(this, 'correct', 'q1', 'Wheat (गेहूँ)')">A. गेहूँ</div>
@@ -49,71 +48,91 @@
     </div>
 
     <div class="quiz-card" id="q2">
-        <span class="lang-en">In which crop is 'Aman, Aus, Boro' grown?</span>
-        <span class="question">2. अमन, ओस और बोरो किस फसल की किस्में/मौसम हैं?</span>
+        <span class="lang-en">2. Origin of Bajra (Pearl Millet) is:</span>
+        <span class="question">2. बाजरा का उद्गम स्थल (Origin) कहाँ है?</span>
         <div class="options">
-            <div class="option" onclick="check(this, 'wrong', 'q2')">A. मक्का</div>
-            <div class="option" onclick="check(this, 'correct', 'q2', 'Rice (धान)')">B. धान</div>
-            <div class="option" onclick="check(this, 'wrong', 'q2')">C. गेहूँ</div>
-            <div class="option" onclick="check(this, 'wrong', 'q2')">D. गन्ना</div>
+            <div class="option" onclick="check(this, 'wrong', 'q2')">A. India</div>
+            <div class="option" onclick="check(this, 'correct', 'q2', 'Africa')">B. अफ्रीका</div>
+            <div class="option" onclick="check(this, 'wrong', 'q2')">C. China</div>
+            <div class="option" onclick="check(this, 'wrong', 'q2')">D. Brazil</div>
         </div>
         <div id="exp-q2" class="explanation"></div>
     </div>
 
-    <div class="section-divider">AGRICULTURE: HORTICULTURE</div>
-
     <div class="quiz-card" id="q3">
-        <span class="lang-en">'Training' and 'Pruning' is most important in:</span>
-        <span class="question">3. सधाई और कटाई-छंटाई सबसे महत्वपूर्ण किसमें है?</span>
+        <span class="lang-en">3. Highest Nitrogen percentage is in which fertilizer?</span>
+        <span class="question">3. किस उर्वरक में नाइट्रोजन की मात्रा सर्वाधिक होती है?</span>
         <div class="options">
-            <div class="option" onclick="check(this, 'wrong', 'q3')">A. आम</div>
-            <div class="option" onclick="check(this, 'correct', 'q3', 'Grapes (अंगूर)')">B. अंगूर</div>
-            <div class="option" onclick="check(this, 'wrong', 'q3')">C. पपीता</div>
-            <div class="option" onclick="check(this, 'wrong', 'q3')">D. केला</div>
+            <div class="option" onclick="check(this, 'wrong', 'q3')">A. Urea (46%)</div>
+            <div class="option" onclick="check(this, 'correct', 'q3', 'Anhydrous Ammonia (82%)')">B. निर्जल अमोनिया</div>
+            <div class="option" onclick="check(this, 'wrong', 'q3')">C. CAN</div>
+            <div class="option" onclick="check(this, 'wrong', 'q3')">D. DAP</div>
         </div>
         <div id="exp-q3" class="explanation"></div>
     </div>
 
-    <div class="section-divider">AGRICULTURE: ANIMAL HUSBANDRY</div>
-
     <div class="quiz-card" id="q4">
-        <span class="lang-en">Gestation period (गर्भावस्था) of a Cow is:</span>
-        <span class="question">4. गाय की गर्भावस्था अवधि कितनी होती है?</span>
+        <span class="lang-en">4. 'White Grubs' is a major pest of:</span>
+        <span class="question">4. सफेद लट (White Grub) किसका प्रमुख शत्रु कीट है?</span>
         <div class="options">
-            <div class="option" onclick="check(this, 'correct', 'q4', '280-285 Days')">A. 282 दिन</div>
-            <div class="option" onclick="check(this, 'wrong', 'q4')">B. 310 दिन</div>
-            <div class="option" onclick="check(this, 'wrong', 'q4')">C. 150 दिन</div>
-            <div class="option" onclick="check(this, 'wrong', 'q4')">D. 390 दिन</div>
+            <div class="option" onclick="check(this, 'wrong', 'q4')">A. गेहूँ</div>
+            <div class="option" onclick="check(this, 'correct', 'q4', 'Groundnut (मूंगफली)')">B. मूंगफली</div>
+            <div class="option" onclick="check(this, 'wrong', 'q4')">C. सरसों</div>
+            <div class="option" onclick="check(this, 'wrong', 'q4')">D. कपास</div>
         </div>
         <div id="exp-q4" class="explanation"></div>
     </div>
 
-    <div class="section-divider">RAJASTHAN GK & CULTURE</div>
+    <div class="section-divider">Horticulture</div>
 
     <div class="quiz-card" id="q5">
-        <span class="lang-en">Who is the 'Folk God' of Camels?</span>
-        <span class="question">5. ऊँटों के लोकदेवता कौन हैं?</span>
+        <span class="lang-en">5. 'Sindhu' is a seedless variety of:</span>
+        <span class="question">5. 'सिंधु' किसकी बीज रहित (Seedless) किस्म है?</span>
         <div class="options">
-            <div class="option" onclick="check(this, 'wrong', 'q5')">A. गोगाजी</div>
-            <div class="option" onclick="check(this, 'correct', 'q5', 'Pabuji')">B. पाबूजी</div>
-            <div class="option" onclick="check(this, 'wrong', 'q5')">C. तेजाजी</div>
-            <div class="option" onclick="check(this, 'wrong', 'q5')">D. देवनारायणजी</div>
+            <div class="option" onclick="check(this, 'correct', 'q5', 'Mango (आम)')">A. आम</div>
+            <div class="option" onclick="check(this, 'wrong', 'q5')">B. अनार</div>
+            <div class="option" onclick="check(this, 'wrong', 'q5')">C. पपीता</div>
+            <div class="option" onclick="check(this, 'wrong', 'q5')">D. अमरूद</div>
         </div>
         <div id="exp-q5" class="explanation"></div>
     </div>
 
-    <div class="section-divider">GENERAL HINDI</div>
-
     <div class="quiz-card" id="q6">
-        <span class="lang-en">Synonym of 'Prithvi' (Earth) is:</span>
-        <span class="question">6. 'पृथ्वी' का पर्यायवाची शब्द है?</span>
+        <span class="lang-en">6. Which fruit contains the highest Vitamin C?</span>
+        <span class="question">6. किस फल में विटामिन-C की मात्रा सर्वाधिक होती है?</span>
         <div class="options">
-            <div class="option" onclick="check(this, 'correct', 'q6', 'Vasundhara')">A. वसुंधरा</div>
-            <div class="option" onclick="check(this, 'wrong', 'q6')">B. व्योम</div>
-            <div class="option" onclick="check(this, 'wrong', 'q6')">C. पावक</div>
-            <div class="option" onclick="check(this, 'wrong', 'q6')">D. तरणि</div>
+            <div class="option" onclick="check(this, 'wrong', 'q6')">A. आंवला</div>
+            <div class="option" onclick="check(this, 'correct', 'q6', 'Barbados Cherry')">B. बारबाडोस चेरी</div>
+            <div class="option" onclick="check(this, 'wrong', 'q6')">C. नींबू</div>
+            <div class="option" onclick="check(this, 'wrong', 'q6')">D. संतरा</div>
         </div>
         <div id="exp-q6" class="explanation"></div>
+    </div>
+
+    <div class="section-divider">Animal Husbandry</div>
+
+    <div class="quiz-card" id="q7">
+        <span class="lang-en">7. Gestation period of a Buffalo is:</span>
+        <span class="question">7. भैंस की गर्भावस्था अवधि कितनी होती है?</span>
+        <div class="options">
+            <div class="option" onclick="check(this, 'wrong', 'q7')">A. 282 दिन</div>
+            <div class="option" onclick="check(this, 'correct', 'q7', '310 Days')">B. 310 दिन</div>
+            <div class="option" onclick="check(this, 'wrong', 'q7')">C. 150 दिन</div>
+            <div class="option" onclick="check(this, 'wrong', 'q7')">D. 400 दिन</div>
+        </div>
+        <div id="exp-q7" class="explanation"></div>
+    </div>
+
+    <div class="quiz-card" id="q8">
+        <span class="lang-en">8. Milk fever in animals is caused by deficiency of:</span>
+        <span class="question">8. पशुओं में 'दुग्ध ज्वर' (Milk Fever) किसकी कमी से होता है?</span>
+        <div class="options">
+            <div class="option" onclick="check(this, 'wrong', 'q8')">A. आयरन</div>
+            <div class="option" onclick="check(this, 'correct', 'q8', 'Calcium')">B. कैल्शियम</div>
+            <div class="option" onclick="check(this, 'wrong', 'q8')">C. विटामिन A</div>
+            <div class="option" onclick="check(this, 'wrong', 'q8')">D. फास्फोरस</div>
+        </div>
+        <div id="exp-q8" class="explanation"></div>
     </div>
 
     </div>
