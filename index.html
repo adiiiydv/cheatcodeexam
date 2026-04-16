@@ -3,27 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS 2026 - Final 100% Prep</title>
+    <title>AS 2026 - Bilingual Mock Test</title>
     <style>
         :root { --bg: #0b0d11; --card: #1c2128; --gold: #d4af37; --text: #f0f6fc; --success: #238636; --error: #da3633; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 10px; padding-bottom: 100px; }
-        .header { text-align: center; padding: 15px; border-bottom: 2px solid var(--gold); position: sticky; top: 0; background: var(--bg); z-index: 100; }
-        .score-board { background: var(--gold); color: #000; font-weight: bold; padding: 10px; border-radius: 8px; margin: 10px 0; display: flex; justify-content: space-around; font-size: 0.9rem; }
-        .quiz-card { background: var(--card); border: 1px solid #30363d; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-        .section-label { color: var(--gold); font-size: 0.8rem; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; display: block; }
-        .question { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; display: block; }
-        .option { background: #2d333b; border: 1px solid #444c56; padding: 12px; margin: 8px 0; border-radius: 8px; cursor: pointer; }
-        .option:active { background: #353c45; }
+        .header { text-align: center; padding: 15px; border-bottom: 2px solid var(--gold); position: sticky; top: 0; background: var(--bg); z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .score-board { background: var(--gold); color: #000; font-weight: bold; padding: 12px; border-radius: 8px; margin: 10px 0; display: flex; justify-content: space-around; font-size: 0.9rem; }
+        .quiz-card { background: var(--card); border: 1px solid #30363d; border-radius: 12px; padding: 20px; margin-bottom: 20px; border-left: 5px solid var(--gold); }
+        .lang-en { font-style: italic; color: #8b949e; font-size: 0.9rem; display: block; margin-bottom: 5px; }
+        .question { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; display: block; line-height: 1.4; color: #fff; }
+        .option { background: #2d333b; border: 1px solid #444c56; padding: 12px; margin: 8px 0; border-radius: 8px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .option:hover { border-color: var(--gold); background: #353c45; }
         .correct { background: var(--success) !important; border-color: #3fb950 !important; }
         .wrong { background: var(--error) !important; border-color: #f85149 !important; }
-        .explanation { display: none; margin-top: 15px; font-size: 0.9rem; color: #4ade80; border-top: 1px solid #444; padding-top: 10px; }
+        .explanation { display: none; margin-top: 15px; font-size: 0.9rem; color: #4ade80; border-top: 1px solid #444; padding-top: 10px; font-weight: bold; }
         .active { display: block !important; }
+        .section-title { color: var(--gold); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 10px; display: block; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1 style="margin:0; color:var(--gold); font-size: 1.2rem;">AGRICULTURE SUPERVISOR 2026</h1>
+    <h1 style="margin:0; color:var(--gold); font-size: 1.2rem;">AGRICULTURE SUPERVISOR (Mock 2026)</h1>
     <div class="score-board">
         <div>Score: <span id="score">0</span></div>
         <div>Right: <span id="right">0</span></div>
@@ -34,66 +35,61 @@
 <div id="quiz-container" style="max-width: 600px; margin: auto;">
 
     <div class="quiz-card" id="q1">
-        <span class="section-label">Agronomy</span>
-        <span class="question">1. 'मृदा स्वास्थ्य कार्ड' (Soil Health Card) योजना की शुरुआत कब हुई?</span>
-        <div class="option" onclick="check(this, 'correct', 'q1', '19 Feb 2015 - सूरतगढ़ (राजस्थान) से हुई।')">A. 19 फरवरी 2015</div>
-        <div class="option" onclick="check(this, 'wrong', 'q1')">B. 15 अगस्त 2014</div>
-        <div class="option" onclick="check(this, 'wrong', 'q1')">C. 2 अक्टूबर 2015</div>
-        <div class="option" onclick="check(this, 'wrong', 'q1')">D. 1 जनवरी 2016</div>
+        <span class="section-title">Agronomy / शस्य विज्ञान</span>
+        <span class="lang-en">Which nutrient is essential for Nitrogen Fixation in legumes?</span>
+        <span class="question">1. दलहनी फसलों में नाइट्रोजन स्थिरीकरण के लिए कौन सा तत्व आवश्यक है?</span>
+        <div class="option" onclick="check(this, 'wrong', 'q1')">A. Boron (बोरॉन)</div>
+        <div class="option" onclick="check(this, 'correct', 'q1', 'Molybdenum (Mo) is crucial for nitrogenase enzyme.')">B. Molybdenum (मोलिब्डेनम)</div>
+        <div class="option" onclick="check(this, 'wrong', 'q1')">C. Zinc (जस्ता)</div>
+        <div class="option" onclick="check(this, 'wrong', 'q1')">D. Iron (लोहा)</div>
         <div id="exp-q1" class="explanation"></div>
     </div>
 
     <div class="quiz-card" id="q2">
-        <span class="section-label">Animal Husbandry</span>
-        <span class="question">2. पशुओं में 'गलगोटू' (Hemorrhagic Septicemia) रोग का कारण है?</span>
-        <div class="option" onclick="check(this, 'correct', 'q2', 'पाश्चुरेला मल्टीसोडा (जीवाणु/Bacteria)')">A. जीवाणु (Bacteria)</div>
-        <div class="option" onclick="check(this, 'wrong', 'q2')">B. विषाणु (Virus)</div>
-        <div class="option" onclick="check(this, 'wrong', 'q2')">C. कवक</div>
-        <div class="option" onclick="check(this, 'wrong', 'q2')">D. प्रोटोजोआ</div>
+        <span class="section-title">Horticulture / उद्यानिकी</span>
+        <span class="lang-en">The training method 'Bowing' is mostly used in which fruit?</span>
+        <span class="question">2. फल वृक्षों में 'झुकाना' (Bowing) क्रिया मुख्य रूप से किसमें की जाती है?</span>
+        <div class="option" onclick="check(this, 'wrong', 'q2')">A. Mango (आम)</div>
+        <div class="option" onclick="check(this, 'correct', 'q2', 'Guava (अमरूद) - To encourage more flowering/fruiting.')">B. Guava (अमरूद)</div>
+        <div class="option" onclick="check(this, 'wrong', 'q2')">C. Citrus (नींबू)</div>
+        <div class="option" onclick="check(this, 'wrong', 'q2')">D. Grapes (अंगूर)</div>
         <div id="exp-q2" class="explanation"></div>
     </div>
 
     <div class="quiz-card" id="q3">
-        <span class="section-label">Horticulture</span>
-        <span class="question">3. 'पपीते' में पीले रंग का कारण कौन सा पिगमेंट है?</span>
-        <div class="option" onclick="check(this, 'wrong', 'q3')">A. लाइकोपीन</div>
-        <div class="option" onclick="check(this, 'correct', 'q3', 'कैरिकाजैन्थिन (Caricaxanthin)')">B. कैरिकाजैन्थिन</div>
-        <div class="option" onclick="check(this, 'wrong', 'q3')">C. एंथोसायनिन</div>
-        <div class="option" onclick="check(this, 'wrong', 'q3')">D. कैरोटीन</div>
+        <span class="section-title">Animal Husbandry / पशुपालन</span>
+        <span class="lang-en">Which breed of Buffalo has the highest Fat percentage in milk?</span>
+        <span class="question">3. भैंस की किस नस्ल के दूध में वसा (Fat) की मात्रा सर्वाधिक होती है?</span>
+        <div class="option" onclick="check(this, 'wrong', 'q3')">A. Murrah (मुर्रा)</div>
+        <div class="option" onclick="check(this, 'correct', 'q3', 'Bhadawari (भदावरी) - Up to 13% Fat.')">B. Bhadawari (भदावरी)</div>
+        <div class="option" onclick="check(this, 'wrong', 'q3')">C. Surti (सुरती)</div>
+        <div class="option" onclick="check(this, 'wrong', 'q3')">D. Jaffrabadi (जाफराबादी)</div>
         <div id="exp-q3" class="explanation"></div>
     </div>
 
     <div class="quiz-card" id="q4">
-        <span class="section-label">Agronomy</span>
-        <span class="question">4. 'बाजरा' का वानस्पतिक नाम (Botanical Name) क्या है?</span>
-        <div class="option" onclick="check(this, 'correct', 'q4', 'Pennisetum glaucum')">A. पेनिसिटम ग्लॉकम</div>
-        <div class="option" onclick="check(this, 'wrong', 'q4')">B. सोरघम बाइकोलर</div>
-        <div class="option" onclick="check(this, 'wrong', 'q4')">C. ट्रिटिकम एस्टिवम</div>
-        <div class="option" onclick="check(this, 'wrong', 'q4')">D. ज़िया मेज़</div>
+        <span class="section-title">Rajasthan GK / राजस्थान सामान्य ज्ञान</span>
+        <span class="lang-en">In which city is the 'Rana Pratap Sagar Dam' located?</span>
+        <span class="question">4. 'राणा प्रताप सागर बाँध' किस जिले में स्थित है?</span>
+        <div class="option" onclick="check(this, 'wrong', 'q4')">A. Kota (कोटा)</div>
+        <div class="option" onclick="check(this, 'correct', 'q4', 'Rawatbhata, Chittorgarh (रावतभाटा, चित्तौड़गढ़)')">B. Chittorgarh (चित्तौड़गढ़)</div>
+        <div class="option" onclick="check(this, 'wrong', 'q4')">C. Bundi (बूंदी)</div>
+        <div class="option" onclick="check(this, 'wrong', 'q4')">D. Udaipur (उदयपुर)</div>
         <div id="exp-q4" class="explanation"></div>
     </div>
 
     <div class="quiz-card" id="q5">
-        <span class="section-label">Rajasthan GK</span>
-        <span class="question">5. 'कालीबंगा' सभ्यता किस जिले में स्थित है?</span>
-        <div class="option" onclick="check(this, 'wrong', 'q5')">A. बीकानेर</div>
-        <div class="option" onclick="check(this, 'correct', 'q5', 'हनुमानगढ़ - घग्गर नदी के किनारे।')">B. हनुमानगढ़</div>
-        <div class="option" onclick="check(this, 'wrong', 'q5')">C. गंगानगर</div>
-        <div class="option" onclick="check(this, 'wrong', 'q5')">D. सीकर</div>
+        <span class="section-title">Hindi / सामान्य हिन्दी</span>
+        <span class="lang-en">Which of the following is a synonym of 'Akash'?</span>
+        <span class="question">5. निम्न में से 'आकाश' का पर्यायवाची शब्द है?</span>
+        <div class="option" onclick="check(this, 'correct', 'q5', 'Vyom (व्योम) means Sky.')">A. व्योम (Vyom)</div>
+        <div class="option" onclick="check(this, 'wrong', 'q5')">B. सरोज</div>
+        <div class="option" onclick="check(this, 'wrong', 'q5')">C. पावक</div>
+        <div class="option" onclick="check(this, 'wrong', 'q5')">D. वारि</div>
         <div id="exp-q5" class="explanation"></div>
     </div>
 
-    <div class="quiz-card" id="q6">
-        <span class="section-label">Hindi</span>
-        <span class="question">6. 'प्रत्युपकार' शब्द में कौन सा उपसर्ग है?</span>
-        <div class="option" onclick="check(this, 'correct', 'q6', 'प्रति + उपकार = प्रत्युपकार')">A. प्रति</div>
-        <div class="option" onclick="check(this, 'wrong', 'q6')">B. प्र</div>
-        <div class="option" onclick="check(this, 'wrong', 'q6')">C. प्रत्यु</div>
-        <div class="option" onclick="check(this, 'wrong', 'q6')">D. उप</div>
-        <div id="exp-q6" class="explanation"></div>
-    </div>
-
-    </div>
+</div>
 
 <script>
     let score = 0; let rCount = 0; let wCount = 0;
