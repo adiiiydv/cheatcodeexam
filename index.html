@@ -3,72 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS 2026 - Master Mock Test</title>
+    <title>AS 2026 - Mega Mock Test</title>
     <style>
         :root { --bg: #0b0d11; --card: #161b22; --gold: #d4af37; --text: #f0f6fc; --success: #238636; --error: #da3633; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 10px; padding-bottom: 80px; }
-        .header { text-align: center; padding: 20px; border-bottom: 2px solid var(--gold); position: sticky; top: 0; background: var(--bg); z-index: 100; }
-        .score-board { background: var(--gold); color: #000; font-weight: bold; padding: 10px; border-radius: 5px; margin: 10px 0; display: flex; justify-content: space-around; }
-        .section-tag { background: #30363d; color: var(--gold); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; border: 1px solid var(--gold); display: inline-block; margin-bottom: 10px; }
-        .quiz-card { background: var(--card); border: 1px solid #30363d; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-        .question { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; display: block; }
+        .header { text-align: center; padding: 15px; border-bottom: 2px solid var(--gold); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+        .score-board { background: var(--gold); color: #000; font-weight: bold; padding: 10px; border-radius: 5px; margin: 10px 0; display: flex; justify-content: space-around; font-size: 0.9rem; }
+        .section-tag { background: #30363d; color: var(--gold); padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; border: 1px solid var(--gold); display: inline-block; margin-bottom: 10px; text-transform: uppercase; }
+        .quiz-card { background: var(--card); border: 1px solid #30363d; border-radius: 12px; padding: 20px; margin-bottom: 20px; transition: 0.3s; }
+        .question { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; display: block; line-height: 1.4; }
         .option { background: #21262d; border: 1px solid #30363d; padding: 12px; margin: 8px 0; border-radius: 8px; cursor: pointer; transition: 0.2s; }
-        .option:hover { border-color: var(--gold); }
-        .correct { background: var(--success) !important; border-color: #3fb950 !important; }
-        .wrong { background: var(--error) !important; border-color: #f85149 !important; }
-        .explanation { display: none; margin-top: 15px; font-size: 0.9rem; color: #8b949e; border-top: 1px solid #333; padding-top: 10px; }
+        .option:hover { border-color: var(--gold); background: #262c36; }
+        .correct { background: var(--success) !important; border-color: #3fb950 !important; color: white; }
+        .wrong { background: var(--error) !important; border-color: #f85149 !important; color: white; }
+        .explanation { display: none; margin-top: 15px; font-size: 0.9rem; color: #4ade80; border-top: 1px solid #333; padding-top: 10px; font-weight: bold; }
+        .active { display: block !important; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h2 style="margin:0; color:var(--gold);">AS 2026: REALITY TEST</h2>
+    <h2 style="margin:0; color:var(--gold); font-size: 1.3rem;">AGRICULTURE SUPERVISOR 2026</h2>
     <div class="score-board">
-        <div>Score: <span id="score">0</span>/300</div>
-        <div>Attempted: <span id="att">0</span>/10</div>
+        <div>Marks: <span id="score">0</span></div>
+        <div>Accuracy: <span id="acc">0</span>%</div>
     </div>
 </div>
 
 <div id="quiz-container" style="max-width: 600px; margin: auto;">
     
     <div class="quiz-card" id="q1">
-        <div class="section-tag">AGRONOMY</div>
-        <span class="question">1. भारतीय कृषि अनुसंधान परिषद (ICAR) कहाँ स्थित है?</span>
-        <div class="option" onclick="check(this, 'correct', 'q1', 'नई दिल्ली में स्थित है। स्थापना 1929।')">A. नई दिल्ली</div>
-        <div class="option" onclick="check(this, 'wrong', 'q1')">B. जयपुर</div>
-        <div class="option" onclick="check(this, 'wrong', 'q1')">C. लुधियाना</div>
-        <div class="option" onclick="check(this, 'wrong', 'q1')">D. जोधपुर</div>
+        <div class="section-tag">Agronomy</div>
+        <span class="question">1. राजस्थान में सर्वाधिक सिंचाई किस साधन से होती है?</span>
+        <div class="option" onclick="check(this, 'correct', 'q1', 'कुएँ एवं नलकूप (Wells & Tube wells) - लगभग 70%')">A. कुएँ एवं नलकूप</div>
+        <div class="option" onclick="check(this, 'wrong', 'q1')">B. नहरें</div>
+        <div class="option" onclick="check(this, 'wrong', 'q1')">C. तालाब</div>
+        <div class="option" onclick="check(this, 'wrong', 'q1')">D. खड़ीन</div>
         <div class="explanation" id="exp-q1"></div>
     </div>
 
     <div class="quiz-card" id="q2">
-        <div class="section-tag">HORTICULTURE</div>
-        <span class="question">2. 'अमरूद' (Guava) की प्रसिद्ध किस्म कौन सी है?</span>
-        <div class="option" onclick="check(this, 'wrong', 'q2')">A. आम्रपाली</div>
-        <div class="option" onclick="check(this, 'correct', 'q2', 'इलाहाबादी सफेदा और लखनऊ-49 अमरूद की बेस्ट किस्में हैं।')">B. इलाहाबादी सफेदा</div>
-        <div class="option" onclick="check(this, 'wrong', 'q2')">C. दशहरी</div>
-        <div class="option" onclick="check(this, 'wrong', 'q2')">D. सिन्दूरी</div>
+        <div class="section-tag">Agronomy</div>
+        <span class="question">2. 'मक्का' (Maize) की कौन सी किस्म राजस्थान के लिए उपयुक्त है?</span>
+        <div class="option" onclick="check(this, 'wrong', 'q2')">A. माही कंचन</div>
+        <div class="option" onclick="check(this, 'wrong', 'q2')">B. माही धवल</div>
+        <div class="option" onclick="check(this, 'correct', 'q2', 'माही कंचन और माही धवल दोनों मक्का की प्रमुख किस्में हैं।')">C. A और B दोनों</div>
+        <div class="option" onclick="check(this, 'wrong', 'q2')">D. गंगा-1</div>
         <div class="explanation" id="exp-q2"></div>
     </div>
 
     <div class="quiz-card" id="q3">
-        <div class="section-tag">RAJASTHAN GK</div>
-        <span class="question">3. राजस्थान का राज्य पशु (State Animal) कौन सा है?</span>
-        <div class="option" onclick="check(this, 'wrong', 'q3')">A. शेर</div>
-        <div class="option" onclick="check(this, 'correct', 'q3', 'चिंकारा (Wild) और ऊँट (Livestock) दोनों हैं।')">B. चिंकारा</div>
-        <div class="option" onclick="check(this, 'wrong', 'q3')">C. गाय</div>
-        <div class="option" onclick="check(this, 'wrong', 'q3')">D. भालू</div>
+        <div class="section-tag">Animal Husbandry</div>
+        <span class="question">3. 'गीर' (Gir) गाय का मूल स्थान कहाँ माना जाता है?</span>
+        <div class="option" onclick="check(this, 'correct', 'q3', 'काठियावाड़ (गुजरात)। इसे राजस्थान में रेंडी या अजमेरी भी कहते हैं।')">A. काठियावाड़ (गुजरात)</div>
+        <div class="option" onclick="check(this, 'wrong', 'q3')">B. रोहतक (हरियाणा)</div>
+        <div class="option" onclick="check(this, 'wrong', 'q3')">C. माउंट आबू</div>
+        <div class="option" onclick="check(this, 'wrong', 'q3')">D. पंजाब</div>
         <div class="explanation" id="exp-q3"></div>
     </div>
 
     <div class="quiz-card" id="q4">
-        <div class="section-tag">HINDI</div>
-        <span class="question">4. 'अन्वय' शब्द का सही सन्धि-विच्छेद है:</span>
-        <div class="option" onclick="check(this, 'correct', 'q4', 'अनु + अय = अन्वय (यण सन्धि)')">A. अनु + अय</div>
-        <div class="option" onclick="check(this, 'wrong', 'q4')">B. अन + वय</div>
-        <div class="option" onclick="check(this, 'wrong', 'q4')">C. अनु + आय</div>
-        <div class="option" onclick="check(this, 'wrong', 'q4')">D. अन + अय</div>
+        <div class="section-tag">Horticulture</div>
+        <span class="question">4. खजूर (Date Palm) का प्रवर्धन (Propagation) किसके द्वारा होता है?</span>
+        <div class="option" onclick="check(this, 'wrong', 'q4')">A. बीज</div>
+        <div class="option" onclick="check(this, 'correct', 'q4', 'ऑफ-शूट (Off-shoot) - खजूर के लिए यह सबसे उत्तम विधि है।')">B. ऑफ-शूट</div>
+        <div class="option" onclick="check(this, 'wrong', 'q4')">C. ग्राफ्टिंग</div>
+        <div class="option" onclick="check(this, 'wrong', 'q4')">D. कटिंग</div>
         <div class="explanation" id="exp-q4"></div>
+    </div>
+
+    <div class="quiz-card" id="q5">
+        <div class="section-tag">Rajasthan GK</div>
+        <span class="question">5. 'ऊँटों के देवता' के रूप में किसे पूजा जाता है?</span>
+        <div class="option" onclick="check(this, 'correct', 'q5', 'पाबूजी - ऊँट बीमार होने पर इनकी फड़ बांची जाती है।')">A. पाबूजी</div>
+        <div class="option" onclick="check(this, 'wrong', 'q5')">B. तेजाजी</div>
+        <div class="option" onclick="check(this, 'wrong', 'q5')">C. रामदेवजी</div>
+        <div class="option" onclick="check(this, 'wrong', 'q5')">D. गोगाजी</div>
+        <div class="explanation" id="exp-q5"></div>
+    </div>
+
+    <div class="quiz-card" id="q6">
+        <div class="section-tag">Hindi</div>
+        <span class="question">6. 'स्वागत' का सही संधि-विच्छेद क्या होगा?</span>
+        <div class="option" onclick="check(this, 'wrong', 'q6')">A. स्वा + गत</div>
+        <div class="option" onclick="check(this, 'correct', 'q6', 'सु + आगत = स्वागत (यण संधि)')">B. सु + आगत</div>
+        <div class="option" onclick="check(this, 'wrong', 'q6')">C. स्व + आगत</div>
+        <div class="option" onclick="check(this, 'wrong', 'q6')">D. सु + गत</div>
+        <div class="explanation" id="exp-q6"></div>
+    </div>
+
+    <div class="quiz-card" id="q7">
+        <div class="section-tag">Animal Husbandry</div>
+        <span class="question">7. दूध में मिठास का कारण क्या होता है?</span>
+        <div class="option" onclick="check(this, 'correct', 'q7', 'लैक्टोज (Lactose) के कारण दूध मीठा होता है।')">A. लैक्टोज</div>
+        <div class="option" onclick="check(this, 'wrong', 'q7')">B. कैसीन</div>
+        <div class="option" onclick="check(this, 'wrong', 'q7')">C. माल्टोज</div>
+        <div class="option" onclick="check(this, 'wrong', 'q7')">D. वसा</div>
+        <div class="explanation" id="exp-q7"></div>
     </div>
 
 </div>
@@ -76,6 +107,7 @@
 <script>
     let score = 0;
     let attempted = 0;
+    let correctCount = 0;
 
     function check(btn, status, qId, msg) {
         let card = document.getElementById(qId);
@@ -87,6 +119,7 @@
         if (status === 'correct') {
             btn.classList.add('correct');
             score += 3;
+            correctCount++;
         } else {
             btn.classList.add('wrong');
             score -= 1;
@@ -99,7 +132,7 @@
         }
 
         document.getElementById('score').innerText = score;
-        document.getElementById('att').innerText = attempted;
+        document.getElementById('acc').innerText = Math.round((correctCount/attempted)*100);
     }
 </script>
 
