@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS 2026 - Master Question Bank</title>
+    <title>AS 2026 - Randomized Master Bank</title>
     <style>
         :root { --bg: #0b0d11; --card: #1c2128; --gold: #d4af37; --text: #f0f6fc; --success: #238636; --error: #da3633; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 10px; padding-bottom: 100px; }
@@ -36,7 +36,7 @@
 <div class="quiz-container" id="quiz-list"></div>
 
 <script>
-const questions = [
+const rawQuestions = [
     {q:"1. गेहूँ किस मौसम की फसल है? / Wheat is a crop of which season?",options:["Kharif","Rabi","Zaid","Summer"],answer:1,exp:"Wheat = Rabi crop"},
     {q:"2. धान का वैज्ञानिक नाम क्या है? / Scientific name of rice?",options:["Triticum aestivum","Oryza sativa","Zea mays","Hordeum vulgare"],answer:1,exp:"Rice = Oryza sativa"},
     {q:"3. मक्का किस प्रकार की फसल है? / Maize belongs to?",options:["Rabi","Kharif","Zaid","Winter"],answer:1,exp:"Maize = Kharif"},
@@ -159,7 +159,9 @@ const questions = [
     {q:"120. Fertilizer applied to soil? / उर्वरक कहाँ दिया जाता है?",options:["Leaf","Soil","Water","Air"],answer:1,exp:"Soil"},
     {q:"121. Foliar spray means? / पत्तियों पर छिड़काव?",options:["Soil","Leaf","Root","Stem"],answer:1,exp:"Leaf spray"},
     {q:"122. Micronutrient example? / सूक्ष्म पोषक?",options:["Zn","N","P","K"],answer:0,exp:"Zinc"},
-    {q:"123. Macronutrient example? / स्थूल पोषक?",options:["Zn","Fe","N","Cu"],answer:2,exp:"Nitrogen"},
+    {get q() {
+        return "123. Macronutrient example? / स्थूल पोषक?";
+    },options:["Zn","Fe","N","Cu"],answer:2,exp:"Nitrogen"},
     {q:"124. Zinc deficiency symptom? / जिंक कमी?",options:["Yellow leaves","Stunted growth","Big leaves","Red color"],answer:1,exp:"Stunting"},
     {q:"125. Iron deficiency causes? / आयरन कमी?",options:["Chlorosis","Big roots","Dark leaves","None"],answer:0,exp:"Yellowing"},
     {q:"126. Soil testing purpose? / मृदा परीक्षण?",options:["Know nutrients","Water","Air","Heat"],answer:0,exp:"Nutrient status"},
@@ -223,7 +225,9 @@ const questions = [
     {q:"184. GPS used in? / GPS उपयोग?",options:["Precision farming","Cooking","Drying","None"],answer:0,exp:"Farming tech"},
     {q:"185. Drone use? / ड्रोन उपयोग?",options:["Spraying","Cooking","Drying","None"],answer:0,exp:"Spray"},
     {q:"186. Seed bank stores? / बीज बैंक?",options:["Seeds","Water","Soil","Air"],answer:0,exp:"Seeds"},
-    {q:"187. Gene bank? / जीन बैंक?",options:["Genetic material","Water","Soil","Air"],answer:0,exp:"Genes"},
+    {get q() {
+        return "187. Gene bank? / जीन बैंक?";
+    },options:["Genetic material","Water","Soil","Air"],answer:0,exp:"Genes"},
     {q:"188. Biodiversity means? / जैव विविधता?",options:["Variety life","Same","None","Dry"],answer:0,exp:"Variety"},
     {q:"189. Agroforestry? / कृषि वानिकी?",options:["Crop+trees","Only crop","Only tree","None"],answer:0,exp:"Mixed"},
     {q:"190. Alley cropping? / एली क्रॉपिंग?",options:["Rows with trees","Random","None","Dry"],answer:0,exp:"Rows"},
@@ -239,39 +243,84 @@ const questions = [
     {q:"200. Sustainable yield? / स्थायी उपज?",options:["Long term","Short","None","Dry"],answer:0,exp:"Long term"}
 ];
 
+// Formatting to handle string-based answer logic
+const questions = rawQuestions.map(item => {
+    return {
+        ...item,
+        answerText: item.options[item.answer]
+    };
+});
+
 let score = 0; let right = 0; let wrong = 0;
+
+// Fisher-Yates shuffle algorithm
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 
 function loadQuiz() {
     const container = document.getElementById('quiz-list');
+    
+    // Optional: Shuffle the question order so you don't always start with Wheat
+    shuffle(questions);
+
     questions.forEach((data, index) => {
         const card = document.createElement('div');
         card.className = 'quiz-card';
         card.id = `q${index}`;
+
+        // Shuffle the options for this question
+        let currentOptions = [...data.options];
+        shuffle(currentOptions);
+
         let optionsHtml = '';
-        data.options.forEach((opt, oIndex) => {
-            optionsHtml += `<div class="option" onclick="checkAnswer(this, ${oIndex}, ${data.answer}, ${index}, '${data.exp}')">${opt}</div>`;
+        currentOptions.forEach((opt) => {
+            const isCorrect = (opt === data.answerText);
+            optionsHtml += `<div class="option" onclick="checkAnswer(this, ${isCorrect}, ${index}, '${data.exp.replace(/'/g, "\\'")}')">${opt}</div>`;
         });
+
         card.innerHTML = `<span class="question">${data.q}</span><div class="options">${optionsHtml}</div><div id="exp-${index}" class="explanation"></div>`;
         container.appendChild(card);
     });
 }
 
-function checkAnswer(btn, selected, correct, qIndex, exp) {
+function checkAnswer(btn, isCorrect, qIndex, exp) {
     const card = document.getElementById(`q${qIndex}`);
     if (card.getAttribute('data-answered')) return;
     card.setAttribute('data-answered', 'true');
+
     const opts = card.getElementsByClassName('option');
-    if (selected === correct) {
-        btn.classList.add('correct'); score += 3; right++;
+    const correctText = questions[qIndex].answerText;
+
+    if (isCorrect) {
+        btn.classList.add('correct');
+        score += 3;
+        right++;
     } else {
-        btn.classList.add('wrong'); opts[correct].classList.add('correct'); score -= 1; wrong++;
+        btn.classList.add('wrong');
+        // Find and highlight the actual correct answer
+        for(let opt of opts) {
+            if(opt.innerText === correctText) {
+                opt.classList.add('correct');
+            }
+        }
+        score -= 1;
+        wrong++;
     }
+
     const d = document.getElementById(`exp-${qIndex}`);
-    d.innerHTML = "💡 Result: " + exp; d.classList.add('active');
+    d.innerHTML = "💡 Result: " + exp;
+    d.classList.add('active');
+
     document.getElementById('score').innerText = score;
     document.getElementById('right').innerText = right;
     document.getElementById('wrong').innerText = wrong;
 }
+
 window.onload = loadQuiz;
 </script>
 </body>
