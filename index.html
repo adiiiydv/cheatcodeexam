@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AS 2026 - Randomized Master Bank</title>
+    <title>Mega GK & Hindi Quiz - 2026</title>
     <style>
         :root { --bg: #0b0d11; --card: #1c2128; --gold: #d4af37; --text: #f0f6fc; --success: #238636; --error: #da3633; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 10px; padding-bottom: 100px; }
@@ -17,15 +17,13 @@
         .option:hover { border-color: var(--gold); background: #353c45; }
         .correct { background: var(--success) !important; border-color: #3fb950 !important; }
         .wrong { background: var(--error) !important; border-color: #f85149 !important; }
-        .explanation { display: none; margin-top: 15px; font-size: 0.9rem; color: #4ade80; border-top: 1px solid #444; padding-top: 10px; font-weight: bold; }
-        .active { display: block !important; }
         @media (max-width: 600px) { .options { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1 style="margin:0; color:var(--gold); font-size: 1.2rem;">AGRICULTURE SUPERVISOR MEGA BANK</h1>
+    <h1 style="margin:0; color:var(--gold); font-size: 1.2rem;">GK & HINDI PRACTICE BANK</h1>
     <div class="score-board">
         <div>Score: <span id="score">0</span></div>
         <div>Right: <span id="right">0</span></div>
@@ -36,224 +34,91 @@
 <div class="quiz-container" id="quiz-list"></div>
 
 <script>
-const rawQuestions = [
-    {q:"1. गेहूँ किस मौसम की फसल है? / Wheat is a crop of which season?",options:["Kharif","Rabi","Zaid","Summer"],answer:1,exp:"Wheat = Rabi crop"},
-    {q:"2. धान का वैज्ञानिक नाम क्या है? / Scientific name of rice?",options:["Triticum aestivum","Oryza sativa","Zea mays","Hordeum vulgare"],answer:1,exp:"Rice = Oryza sativa"},
-    {q:"3. मक्का किस प्रकार की फसल है? / Maize belongs to?",options:["Rabi","Kharif","Zaid","Winter"],answer:1,exp:"Maize = Kharif"},
-    {q:"4. चना किस वर्ग की फसल है? / Gram is which type of crop?",options:["Cereal","Pulse","Oilseed","Fiber"],answer:1,exp:"Gram = Pulse"},
-    {q:"5. सरसों किस वर्ग में आती है? / Mustard is?",options:["Pulse","Oilseed","Cereal","Fiber"],answer:1,exp:"Mustard = Oilseed"},
-    {q:"6. Soil pH less than 7 indicates? / pH 7 से कम क्या दर्शाता है?",options:["Alkaline","Neutral","Acidic","Saline"],answer:2,exp:"<7 = Acidic"},
-    {q:"7. Soil pH 7 indicates? / pH 7 क्या दर्शाता है?",options:["Acidic","Alkaline","Neutral","Saline"],answer:2,exp:"7 = Neutral"},
-    {q:"8. Urea contains nitrogen? / यूरिया में नाइट्रोजन?",options:["18%","25%","46%","60%"],answer:2,exp:"Urea = 46% N"},
-    {q:"9. DAP contains phosphorus? / DAP में फास्फोरस?",options:["18%","25%","46%","60%"],answer:2,exp:"DAP = 46% P"},
-    {q:"10. Humus is? / ह्यूमस क्या है?",options:["Mineral","Organic matter","Sand","Salt"],answer:1,exp:"Humus = organic matter"},
-    {q:"11. Buffalo gestation period? / भैंस का गर्भकाल?",options:["280","310","150","400"],answer:1,exp:"~310 days"},
-    {q:"12. Cow gestation period? / गाय का गर्भकाल?",options:["150","280","310","400"],answer:1,exp:"~280 days"},
-    {q:"13. Milk fever caused by? / Milk fever किससे होता है?",options:["Iron","Calcium","Vit A","P"],answer:1,exp:"Calcium deficiency"},
-    {q:"14. Highest milk fat in? / सबसे अधिक वसा किसके दूध में?",options:["Cow","Buffalo","Goat","Camel"],answer:1,exp:"Buffalo"},
-    {q:"15. Murrah breed belongs to? / मुर्रा नस्ल कहाँ की है?",options:["Rajasthan","Punjab","Haryana","UP"],answer:2,exp:"Haryana"},
-    {q:"16. Which crop needs maximum water? / किस फसल को सबसे अधिक पानी चाहिए?",options:["Gram","Bajra","Rice","Pea"],answer:2,exp:"Rice"},
-    {q:"17. Drip irrigation advantage? / टपक सिंचाई का लाभ?",options:["Water saving","More cost","Less yield","Soil damage"],answer:0,exp:"Water saving"},
-    {q:"18. Pollination by bees? / मधुमक्खी का कार्य?",options:["Damage","Pollination","Disease","None"],answer:1,exp:"Pollination"},
-    {q:"19. Bajra crop type? / बाजरा किस प्रकार की फसल है?",options:["Rabi","Kharif","Zaid","Winter"],answer:1,exp:"Kharif"},
-    {q:"20. Wheat sowing time? / गेहूँ की बुवाई कब?",options:["June","November","March","April"],answer:1,exp:"Rabi sowing"},
-    {q:"21. Aonla rich in? / आंवला किसका स्रोत है?",options:["Protein","Vitamin C","Fat","Carb"],answer:1,exp:"Vit C"},
-    {q:"22. Cotton is? / कपास क्या है?",options:["Cereal","Pulse","Fiber","Oilseed"],answer:2,exp:"Fiber crop"},
-    {q:"23. Soil erosion control? / मृदा अपरदन रोकना?",options:["Ploughing","Afforestation","Waterlogging","Salt"],answer:1,exp:"Trees"},
-    {q:"24. Legume fixes? / दलहन क्या स्थिर करता है?",options:["P","N","K","Ca"],answer:1,exp:"Nitrogen"},
-    {q:"25. Light soil? / हल्की मिट्टी?",options:["Clay","Loam","Sand","Black"],answer:2,exp:"Sandy soil"},
-    {q:"26. Rice transplanting time? / धान रोपाई कब?",options:["June-July","Nov","March","Jan"],answer:0,exp:"Monsoon"},
-    {q:"27. Mustard sowing? / सरसों बुवाई?",options:["Oct","June","March","Jan"],answer:0,exp:"Rabi"},
-    {q:"28. Gram harvest? / चना कटाई?",options:["March","June","Sep","Jan"],answer:0,exp:"March"},
-    {q:"29. Soil fertility improved by? / उर्वरता बढ़ती है?",options:["Manure","Sand","Salt","Stone"],answer:0,exp:"Manure"},
-    {q:"30. Largest producer country? / सबसे बड़ा उत्पादक देश?",options:["India","China","USA","Russia"],answer:1,exp:"China"},
-    {q:"31. Tomato is? / टमाटर क्या है?",options:["Fruit","Vegetable","Cereal","Pulse"],answer:1,exp:"Vegetable (agri)"},
-    {q:"32. Banana type? / केला किस प्रकार?",options:["Temperate","Tropical","Desert","Cold"],answer:1,exp:"Tropical"},
-    {q:"33. Irrigation method best? / सबसे efficient सिंचाई?",options:["Flood","Drip","Sprinkler","Canal"],answer:1,exp:"Drip"},
-    {q:"34. Soil salinity reduces? / लवणता घटती है?",options:["Leaching","Salt","Drying","Heat"],answer:0,exp:"Leaching"},
-    {q:"35. Barley crop? / जौ किस मौसम की?",options:["Rabi","Kharif","Zaid","All"],answer:0,exp:"Rabi"},
-    {q:"36. Which nutrient promotes root growth? / जड़ वृद्धि हेतु?",options:["N","P","K","Ca"],answer:1,exp:"Phosphorus"},
-    {q:"37. Nitrogen deficiency symptom? / नाइट्रोजन की कमी?",options:["Yellow leaves","Red leaves","Blue leaves","White leaves"],answer:0,exp:"Yellowing"},
-    {q:"38. Potassium helps in? / पोटाश का कार्य?",options:["Root growth","Disease resistance","Flowering","None"],answer:1,exp:"Resistance"},
-    {q:"39. Which crop is oilseed? / तिलहनी फसल?",options:["Wheat","Mustard","Gram","Rice"],answer:1,exp:"Mustard"},
-    {q:"40. Which is cash crop? / नकदी फसल?",options:["Wheat","Rice","Sugarcane","Gram"],answer:2,exp:"Sugarcane"},
-    {q:"41. Sugarcane propagated by? / गन्ना कैसे उगाया जाता है?",options:["Seed","Cutting","Root","Leaf"],answer:1,exp:"Stem cutting"},
-    {q:"42. Groundnut belongs to? / मूंगफली किस वर्ग में?",options:["Pulse","Oilseed","Cereal","Fiber"],answer:1,exp:"Oilseed"},
-    {q:"43. Black soil best for? / काली मिट्टी किसके लिए?",options:["Rice","Cotton","Wheat","Gram"],answer:1,exp:"Cotton"},
-    {q:"44. Loamy soil is? / दोमट मिट्टी कैसी होती है?",options:["Balanced","Only sand","Only clay","Salty"],answer:0,exp:"Balanced"},
-    {q:"45. Which crop is Zaid? / जायद फसल?",options:["Watermelon","Wheat","Rice","Mustard"],answer:0,exp:"Watermelon"},
-    {q:"46. Photosynthesis needs? / प्रकाश संश्लेषण हेतु?",options:["CO2","O2","N2","H2"],answer:0,exp:"CO2"},
-    {q:"47. Chlorophyll color? / क्लोरोफिल का रंग?",options:["Red","Green","Blue","Yellow"],answer:1,exp:"Green"},
-    {q:"48. Transpiration occurs in? / वाष्पोत्सर्जन कहाँ होता है?",options:["Root","Leaf","Stem","Flower"],answer:1,exp:"Leaf"},
-    {q:"49. Pollination means? / परागण क्या है?",options:["Seed formation","Pollen transfer","Water flow","Growth"],answer:1,exp:"Pollen transfer"},
-    {q:"50. Self pollination in? / स्वपरागण किसमें?",options:["Wheat","Maize","Papaya","Sunflower"],answer:0,exp:"Wheat"},
-    {q:"51. Cross pollination in? / परपरागण किसमें?",options:["Wheat","Rice","Maize","Gram"],answer:2,exp:"Maize"},
-    {q:"52. Hybrid seeds advantage? / संकर बीज का लाभ?",options:["Low yield","High yield","No growth","None"],answer:1,exp:"High yield"},
-    {q:"53. Seed germination needs? / अंकुरण हेतु?",options:["Water","Air","Temperature","All"],answer:3,exp:"All needed"},
-    {q:"54. Which is weed? / खरपतवार कौन?",options:["Grass","Wheat","Rice","Gram"],answer:0,exp:"Grass"},
-    {q:"55. Weed control method? / खरपतवार नियंत्रण?",options:["Weeding","Irrigation","Harvesting","Drying"],answer:0,exp:"Weeding"},
-    {q:"56. Fungicide used for? / फफूंदनाशक उपयोग?",options:["Insect","Fungus","Weed","Virus"],answer:1,exp:"Fungus"},
-    {q:"57. Insecticide kills? / कीटनाशक?",options:["Weeds","Fungi","Insects","Bacteria"],answer:2,exp:"Insects"},
-    {q:"58. Herbicide used for? / शाकनाशी?",options:["Insect","Weed","Fungus","Bacteria"],answer:1,exp:"Weeds"},
-    {q:"59. Organic farming uses? / जैविक खेती में?",options:["Chemicals","Natural inputs","Plastic","None"],answer:1,exp:"Natural"},
-    {q:"60. Vermicompost made by? / वर्मी कम्पोस्ट?",options:["Bacteria","Earthworm","Fungi","Virus"],answer:1,exp:"Earthworm"},
-    {q:"61. Poultry means? / कुक्कुट पालन?",options:["Fish","Hen","Goat","Cow"],answer:1,exp:"Hen"},
-    {q:"62. Fish farming called? / मछली पालन?",options:["Apiculture","Sericulture","Pisciculture","Horticulture"],answer:2,exp:"Pisciculture"},
-    {q:"63. Bee keeping called? / मधुमक्खी पालन?",options:["Apiculture","Pisciculture","Sericulture","Floriculture"],answer:0,exp:"Apiculture"},
-    {q:"64. Silk production? / रेशम उत्पादन?",options:["Apiculture","Sericulture","Pisciculture","None"],answer:1,exp:"Sericulture"},
-    {q:"65. Goat rearing? / बकरी पालन?",options:["Poultry","Sheep","Goatery","Fishery"],answer:2,exp:"Goatery"},
-    {q:"66. Rajasthan famous canal? / प्रसिद्ध नहर?",options:["Ganga","Yamuna","Indira Gandhi","Krishna"],answer:2,exp:"IGNP"},
-    {q:"67. Desert soil type? / मरुस्थलीय मिट्टी?",options:["Black","Red","Sandy","Clay"],answer:2,exp:"Sandy"},
-    {q:"68. Most drought crop? / सूखा सहनशील?",options:["Rice","Bajra","Sugarcane","Banana"],answer:1,exp:"Bajra"},
-    {q:"69. Irrigation source? / सिंचाई स्रोत?",options:["Rain","Canal","Well","All"],answer:3,exp:"All"},
-    {q:"70. Rainfed farming depends on? / वर्षा आधारित खेती?",options:["Canal","Rain","Well","Tube"],answer:1,exp:"Rain"},
-    {q:"71. Which is vegetable? / सब्जी?",options:["Wheat","Rice","Potato","Maize"],answer:2,exp:"Potato"},
-    {q:"72. Potato propagated by? / आलू उगता है?",options:["Seed","Tuber","Root","Leaf"],answer:1,exp:"Tuber"},
-    {q:"73. Onion is? / प्याज?",options:["Root","Stem","Bulb","Leaf"],answer:2,exp:"Bulb"},
-    {q:"74. Garlic type? / लहसुन?",options:["Stem","Leaf","Bulb","Flower"],answer:2,exp:"Bulb"},
-    {q:"75. Carrot is? / गाजर?",options:["Root","Stem","Leaf","Flower"],answer:0,exp:"Root"},
-    {q:"76. Nitrogen increases? / नाइट्रोजन बढ़ाता है?",options:["Leaf growth","Root","Flower","Fruit"],answer:0,exp:"Leaf growth"},
-    {q:"77. Phosphorus increases? / फास्फोरस बढ़ाता है?",options:["Leaf","Root","Stem","None"],answer:1,exp:"Root"},
-    {q:"78. Potassium improves? / पोटाश सुधारता है?",options:["Disease resistance","Height","Water","Color"],answer:0,exp:"Resistance"},
-    {q:"79. Compost is? / कम्पोस्ट?",options:["Chemical","Organic","Plastic","Salt"],answer:1,exp:"Organic"},
-    {q:"80. Green manure example? / हरी खाद?",options:["Sunhemp","Wheat","Rice","Cotton"],answer:0,exp:"Sunhemp"},
-    {q:"81. Crop rotation means? / फसल चक्र?",options:["Same crop","Different crops","No crop","Water use"],answer:1,exp:"Different crops"},
-    {q:"82. Mixed cropping? / मिश्रित खेती?",options:["One crop","Two crops","No crop","None"],answer:1,exp:"Multiple crops"},
-    {q:"83. Intercropping? / अंतर फसल?",options:["Single row","Two crops together","None","Watering"],answer:1,exp:"Together"},
-    {q:"84. Harvesting means? / कटाई?",options:["Sowing","Cutting crop","Watering","Fertilizing"],answer:1,exp:"Cutting"},
-    {q:"85. Threshing means? / मड़ाई?",options:["Cutting","Separating grain","Watering","Drying"],answer:1,exp:"Separation"},
-    {q:"86. Storage pest? / भंडारण कीट?",options:["Rat","Cow","Dog","Goat"],answer:0,exp:"Rat"},
-    {q:"87. Seed rate means? / बीज दर?",options:["Seed amount","Water","Soil","Fertilizer"],answer:0,exp:"Seed qty"},
-    {q:"88. Nursery used for? / नर्सरी?",options:["Growing plants","Harvesting","Drying","Storage"],answer:0,exp:"Raising seedlings"},
-    {q:"89. Pruning means? / छंटाई?",options:["Cutting branches","Watering","Planting","Harvest"],answer:0,exp:"Cutting"},
-    {q:"90. Grafting means? / ग्राफ्टिंग?",options:["Joining plants","Cutting","Watering","Drying"],answer:0,exp:"Joining"},
-    {q:"91. Which fruit is citrus? / साइट्रस फल?",options:["Apple","Mango","Orange","Banana"],answer:2,exp:"Orange"},
-    {q:"92. Mango season? / आम का मौसम?",options:["Winter","Summer","Rainy","Spring"],answer:1,exp:"Summer"},
-    {q:"93. Apple climate? / सेब का जलवायु?",options:["Hot","Cold","Desert","Tropical"],answer:1,exp:"Cold"},
-    {q:"94. Banana propagation? / केला कैसे उगता है?",options:["Seed","Sucker","Leaf","Root"],answer:1,exp:"Sucker"},
-    {q:"95. Papaya propagation? / पपीता?",options:["Seed","Root","Leaf","Stem"],answer:0,exp:"Seed"},
-    {q:"96. Which is millets? / मोटा अनाज?",options:["Rice","Wheat","Bajra","Sugar"],answer:2,exp:"Bajra"},
-    {q:"97. Which is cereal? / अनाज?",options:["Gram","Wheat","Mustard","Cotton"],answer:1,exp:"Wheat"},
-    {q:"98. Which is pulse? / दलहन?",options:["Rice","Wheat","Gram","Cotton"],answer:2,exp:"Gram"},
-    {q:"99. Which is fiber crop? / रेशेदार फसल?",options:["Cotton","Rice","Gram","Wheat"],answer:0,exp:"Cotton"},
-    {q:"100. Which is oil crop? / तिलहन?",options:["Mustard","Rice","Wheat","Gram"],answer:0,exp:"Mustard"},
-    {q:"101. Seed treatment prevents? / बीज उपचार रोकता है?",options:["Disease","Water","Sun","Wind"],answer:0,exp:"Disease"},
-    {q:"102. Irrigation frequency depends on? / सिंचाई निर्भर करती है?",options:["Soil","Crop","Climate","All"],answer:3,exp:"All factors"},
-    {q:"103. Farm yard manure is? / गोबर खाद?",options:["Chemical","Organic","Salt","None"],answer:1,exp:"Organic"},
-    {q:"104. Tractor used for? / ट्रैक्टर उपयोग?",options:["Ploughing","Cooking","Drying","Storage"],answer:0,exp:"Ploughing"},
-    {q:"105. Plough used for? / हल का उपयोग?",options:["Sowing","Ploughing","Harvesting","Storage"],answer:1,exp:"Soil tillage"},
-    {q:"106. Photosynthesis produces? / प्रकाश संश्लेषण से क्या बनता है?",options:["CO2","O2","N2","H2"],answer:1,exp:"Oxygen"},
-    {q:"107. Root absorbs? / जड़ क्या अवशोषित करती है?",options:["Water & minerals","Air","Light","Heat"],answer:0,exp:"Water + minerals"},
-    {q:"108. Leaf makes food by? / पत्ती भोजन बनाती है?",options:["Respiration","Photosynthesis","Transpiration","Diffusion"],answer:1,exp:"Photosynthesis"},
-    {q:"109. Stomata found in? / रंध्र कहाँ पाए जाते हैं?",options:["Root","Stem","Leaf","Flower"],answer:2,exp:"Leaf"},
-    {q:"110. Transpiration loss is? / वाष्पोत्सर्जन में क्या निकलता है?",options:["CO2","Water vapor","O2","N2"],answer:1,exp:"Water vapor"},
-    {q:"111. Which crop is fodder? / चारा फसल?",options:["Berseem","Rice","Wheat","Mustard"],answer:0,exp:"Berseem"},
-    {q:"112. Berseem season? / बरसीम किस मौसम की?",options:["Kharif","Rabi","Zaid","All"],answer:1,exp:"Rabi"},
-    {q:"113. Lucerne is? / लूसर्न क्या है?",options:["Pulse","Fodder","Cereal","Oilseed"],answer:1,exp:"Fodder"},
-    {q:"114. Silage is? / साइलेज क्या है?",options:["Dry fodder","Green preserved fodder","Grain","Weed"],answer:1,exp:"Preserved fodder"},
-    {q:"115. Hay is? / सूखी घास क्या कहलाती है?",options:["Silage","Hay","Compost","Manure"],answer:1,exp:"Dry fodder"},
-    {q:"116. Crop yield means? / उपज क्या है?",options:["Growth","Production","Water","Soil"],answer:1,exp:"Production"},
-    {q:"117. Irrigation interval depends on? / सिंचाई अंतराल निर्भर?",options:["Crop","Soil","Climate","All"],answer:3,exp:"All"},
-    {q:"118. Weed competition reduces? / खरपतवार से क्या घटता है?",options:["Yield","Water","Soil","Seed"],answer:0,exp:"Yield"},
-    {q:"119. Best weed removal stage? / खरपतवार हटाने का समय?",options:["Early stage","Late","Harvest","Anytime"],answer:0,exp:"Early"},
-    {q:"120. Fertilizer applied to soil? / उर्वरक कहाँ दिया जाता है?",options:["Leaf","Soil","Water","Air"],answer:1,exp:"Soil"},
-    {q:"121. Foliar spray means? / पत्तियों पर छिड़काव?",options:["Soil","Leaf","Root","Stem"],answer:1,exp:"Leaf spray"},
-    {q:"122. Micronutrient example? / सूक्ष्म पोषक?",options:["Zn","N","P","K"],answer:0,exp:"Zinc"},
-    {get q() {
-        return "123. Macronutrient example? / स्थूल पोषक?";
-    },options:["Zn","Fe","N","Cu"],answer:2,exp:"Nitrogen"},
-    {q:"124. Zinc deficiency symptom? / जिंक कमी?",options:["Yellow leaves","Stunted growth","Big leaves","Red color"],answer:1,exp:"Stunting"},
-    {q:"125. Iron deficiency causes? / आयरन कमी?",options:["Chlorosis","Big roots","Dark leaves","None"],answer:0,exp:"Yellowing"},
-    {q:"126. Soil testing purpose? / मृदा परीक्षण?",options:["Know nutrients","Water","Air","Heat"],answer:0,exp:"Nutrient status"},
-    {q:"127. Tillage means? / जुताई?",options:["Cutting","Ploughing","Watering","Harvest"],answer:1,exp:"Soil prep"},
-    {q:"128. Primary tillage? / प्राथमिक जुताई?",options:["Deep ploughing","Light","None","Spray"],answer:0,exp:"Deep"},
-    {q:"129. Secondary tillage? / द्वितीयक जुताई?",options:["Fine soil","Deep","None","Water"],answer:0,exp:"Fine prep"},
-    {q:"130. Seed drill used for? / सीड ड्रिल?",options:["Sowing","Cutting","Drying","Watering"],answer:0,exp:"Sowing"},
-    {q:"131. Broadcasting means? / छिड़काव विधि?",options:["Random sowing","Line sowing","Planting","Cutting"],answer:0,exp:"Random"},
-    {q:"132. Line sowing advantage? / कतार बुवाई लाभ?",options:["Easy weeding","Hard","Low yield","None"],answer:0,exp:"Easy mgmt"},
-    {q:"133. Crop spacing important for? / दूरी क्यों?",options:["Growth","Water","Air","All"],answer:3,exp:"All factors"},
-    {q:"134. Plant population affects? / पौध संख्या प्रभाव?",options:["Yield","Water","Soil","None"],answer:0,exp:"Yield"},
-    {q:"135. Seed viability means? / बीज जीवंतता?",options:["Alive","Dead","Dry","Wet"],answer:0,exp:"Alive"},
-    {q:"136. Seed dormancy? / बीज सुप्तावस्था?",options:["No germination","Growth","Dry","Dead"],answer:0,exp:"Rest stage"},
-    {q:"137. Germination rate? / अंकुरण दर?",options:["% seeds sprout","Water","Soil","None"],answer:0,exp:"Percentage"},
-    {q:"138. Hybrid vigor? / संकर बल?",options:["High growth","Low","None","Dead"],answer:0,exp:"High yield"},
-    {q:"139. Mutation breeding? / उत्परिवर्तन?",options:["Change genes","Same","None","Dry"],answer:0,exp:"Genetic change"},
-    {q:"140. Biotechnology used in? / जैव प्रौद्योगिकी?",options:["Crop improvement","Cooking","Drying","None"],answer:0,exp:"Improvement"},
-    {q:"141. Green revolution crop? / हरित क्रांति?",options:["Wheat","Cotton","Tea","Coffee"],answer:0,exp:"Wheat"},
-    {q:"142. White revolution? / श्वेत क्रांति?",options:["Milk","Rice","Cotton","Fish"],answer:0,exp:"Milk"},
-    {q:"143. Blue revolution? / नीली क्रांति?",options:["Fish","Milk","Wheat","Cotton"],answer:0,exp:"Fish"},
-    {q:"144. Yellow revolution? / पीली क्रांति?",options:["Oilseeds","Milk","Fish","Rice"],answer:0,exp:"Oilseed"},
-    {q:"145. Brown revolution? / भूरी क्रांति?",options:["Leather","Milk","Fish","Rice"],answer:0,exp:"Leather"},
-    {q:"146. Crop insurance protects? / फसल बीमा?",options:["Loss","Profit","Water","Soil"],answer:0,exp:"Loss cover"},
-    {q:"147. Minimum support price? / MSP क्या है?",options:["Gov price","Market","Low","None"],answer:0,exp:"Gov price"},
-    {q:"148. Storage reduces? / भंडारण से क्या बचता है?",options:["Loss","Water","Air","Heat"],answer:0,exp:"Loss"},
-    {q:"149. Warehouse stores? / गोदाम में?",options:["Grain","Water","Air","Heat"],answer:0,exp:"Grain"},
-    {q:"150. Cold storage used for? / कोल्ड स्टोरेज?",options:["Fruits","Soil","Water","Air"],answer:0,exp:"Perishables"},
-    {q:"151. Orchard means? / बाग?",options:["Fruit farm","Crop","Soil","Water"],answer:0,exp:"Fruit farm"},
-    {q:"152. Floriculture deals with? / पुष्पोत्पादन?",options:["Flowers","Fruits","Grains","Soil"],answer:0,exp:"Flowers"},
-    {q:"153. Horticulture includes? / उद्यानिकी?",options:["Fruits","Vegetables","Flowers","All"],answer:3,exp:"All"},
-    {q:"154. Apiculture product? / मधुमक्खी उत्पाद?",options:["Honey","Milk","Grain","Oil"],answer:0,exp:"Honey"},
-    {q:"155. Sericulture product? / रेशम?",options:["Silk","Milk","Oil","Grain"],answer:0,exp:"Silk"},
-    {q:"156. Poultry bird? / कुक्कुट?",options:["Hen","Cow","Goat","Fish"],answer:0,exp:"Hen"},
-    {q:"157. Broiler used for? / ब्रॉयलर?",options:["Meat","Egg","Milk","Wool"],answer:0,exp:"Meat"},
-    {q:"158. Layer bird? / लेयर?",options:["Egg","Meat","Milk","Wool"],answer:0,exp:"Egg"},
-    {q:"159. Fish pond type? / तालाब?",options:["Freshwater","Saltwater","Both","None"],answer:2,exp:"Both"},
-    {q:"160. Aquaculture means? / जलीय कृषि?",options:["Water farming","Land","Air","None"],answer:0,exp:"Water farming"},
-    {q:"161. Rajasthan rainfall low in? / वर्षा कम कहाँ?",options:["Jaisalmer","Udaipur","Kota","Jaipur"],answer:0,exp:"Desert"},
-    {q:"162. Canal irrigation main? / नहर सिंचाई?",options:["Punjab","Rajasthan","MP","UP"],answer:1,exp:"IGNP"},
-    {q:"163. Desert crop? / मरुस्थलीय फसल?",options:["Bajra","Rice","Sugarcane","Banana"],answer:0,exp:"Bajra"},
-    {q:"164. Arid climate means? / शुष्क जलवायु?",options:["Low rain","High rain","Cold","Wet"],answer:0,exp:"Dry"},
-    {q:"165. Semi-arid? / अर्ध शुष्क?",options:["Moderate rain","High","None","Snow"],answer:0,exp:"Moderate"},
-    {q:"166. Climate affects? / जलवायु प्रभाव?",options:["Crop","Soil","Water","All"],answer:3,exp:"All"},
-    {q:"167. Weather vs climate? / मौसम बनाम जलवायु?",options:["Short vs long","Same","None","Dry"],answer:0,exp:"Time scale"},
-    {q:"168. Drought means? / सूखा?",options:["No rain","Flood","Cold","Wind"],answer:0,exp:"No rain"},
-    {q:"169. Flood affects? / बाढ़ प्रभाव?",options:["Crop loss","Gain","None","Dry"],answer:0,exp:"Loss"},
-    {q:"170. Irrigation prevents? / सिंचाई रोकती है?",options:["Drought","Flood","Wind","Cold"],answer:0,exp:"Drought"},
-    {q:"171. Fertigation means? / फर्टिगेशन?",options:["Fertilizer+irrigation","Water","Soil","Air"],answer:0,exp:"Mix"},
-    {q:"172. Mulching helps? / मल्चिंग लाभ?",options:["Moisture","Heat","Cold","None"],answer:0,exp:"Moisture retain"},
-    {q:"173. Plastic mulch used? / प्लास्टिक मल्च?",options:["Moisture","Air","Water","Heat"],answer:0,exp:"Moisture"},
-    {q:"174. Crop protection means? / फसल सुरक्षा?",options:["Pest control","Water","Soil","None"],answer:0,exp:"Protection"},
-    {q:"175. IPM means? / समेकित कीट प्रबंधन?",options:["Integrated pest mgmt","Water","Soil","None"],answer:0,exp:"IPM"},
-    {q:"176. Biological control? / जैव नियंत्रण?",options:["Natural enemies","Chemicals","Water","None"],answer:0,exp:"Natural"},
-    {q:"177. Chemical control? / रासायनिक नियंत्रण?",options:["Pesticide","Water","Soil","Air"],answer:0,exp:"Chemicals"},
-    {q:"178. Mechanical control? / यांत्रिक?",options:["Hand picking","Chemical","Water","None"],answer:0,exp:"Manual"},
-    {q:"179. Crop residue? / अवशेष?",options:["Leftover plant","Seed","Soil","Water"],answer:0,exp:"Residue"},
-    {q:"180. Burning residue causes? / जलाने से?",options:["Pollution","Fertility","Water","None"],answer:0,exp:"Pollution"},
-    {q:"181. Organic farming avoids? / जैविक खेती क्या नहीं?",options:["Chemicals","Manure","Compost","Bio"],answer:0,exp:"No chemicals"},
-    {q:"182. Sustainable agriculture? / टिकाऊ कृषि?",options:["Long term","Short","None","Dry"],answer:0,exp:"Long term"},
-    {q:"183. Precision farming? / सटीक कृषि?",options:["Technology use","Manual","None","Dry"],answer:0,exp:"Tech use"},
-    {q:"184. GPS used in? / GPS उपयोग?",options:["Precision farming","Cooking","Drying","None"],answer:0,exp:"Farming tech"},
-    {q:"185. Drone use? / ड्रोन उपयोग?",options:["Spraying","Cooking","Drying","None"],answer:0,exp:"Spray"},
-    {q:"186. Seed bank stores? / बीज बैंक?",options:["Seeds","Water","Soil","Air"],answer:0,exp:"Seeds"},
-    {get q() {
-        return "187. Gene bank? / जीन बैंक?";
-    },options:["Genetic material","Water","Soil","Air"],answer:0,exp:"Genes"},
-    {q:"188. Biodiversity means? / जैव विविधता?",options:["Variety life","Same","None","Dry"],answer:0,exp:"Variety"},
-    {q:"189. Agroforestry? / कृषि वानिकी?",options:["Crop+trees","Only crop","Only tree","None"],answer:0,exp:"Mixed"},
-    {q:"190. Alley cropping? / एली क्रॉपिंग?",options:["Rows with trees","Random","None","Dry"],answer:0,exp:"Rows"},
-    {q:"191. Soil conservation? / मृदा संरक्षण?",options:["Prevent erosion","Water","Air","Heat"],answer:0,exp:"Erosion control"},
-    {q:"192. Contour farming? / समोच्च खेती?",options:["Slope farming","Flat","None","Dry"],answer:0,exp:"Slope"},
-    {q:"193. Terrace farming? / सीढ़ीदार?",options:["Hill","Plain","None","Dry"],answer:0,exp:"Hills"},
-    {q:"194. Strip cropping? / पट्टी खेती?",options:["Alternate strips","Random","None","Dry"],answer:0,exp:"Strips"},
-    {q:"195. Windbreak? / पवन अवरोध?",options:["Trees","Water","Soil","Air"],answer:0,exp:"Trees"},
-    {q:"196. Shelterbelt? / शेल्टर बेल्ट?",options:["Tree rows","Water","Soil","Air"],answer:0,exp:"Trees"},
-    {q:"197. Rainwater harvesting? / वर्षा जल संचयन?",options:["Store rain","Waste","None","Dry"],answer:0,exp:"Store"},
-    {q:"198. Groundwater recharge? / भूजल पुनर्भरण?",options:["Increase water","Decrease","None","Dry"],answer:0,exp:"Recharge"},
-    {q:"199. Micro irrigation? / सूक्ष्म सिंचाई?",options:["Drip","Flood","None","Dry"],answer:0,exp:"Drip"},
-    {q:"200. Sustainable yield? / स्थायी उपज?",options:["Long term","Short","None","Dry"],answer:0,exp:"Long term"}
+const rawData = [
+    // --- LIST 1 & 2 MERGED & CLEANED ---
+    {q:"राजस्थान की राजधानी क्या है?", options:["जोधपुर","जयपुर","उदयपुर","कोटा"], answer:1},
+    {q:"थार मरुस्थल कहाँ स्थित है?", options:["पंजाब","राजस्थान","गुजरात","मध्यप्रदेश"], answer:1},
+    {q:"राजस्थान का सबसे बड़ा जिला कौन सा है?", options:["जयपुर","जैमलमेर","उदयपुर","बीकानेर"], answer:1},
+    {q:"इंदिरा गांधी नहर किस राज्य में है?", options:["हरियाणा","पंजाब","राजस्थान","गुजरात"], answer:2},
+    {q:"राजस्थान का राज्य पशु क्या है?", options:["ऊँट","गाय","घोड़ा","हाथी"], answer:0},
+    {q:"भारत की राजधानी क्या है?", options:["मुंबई","दिल्ली","कोलकाता","चेन्नई"], answer:1},
+    {q:"राजस्थान का प्रसिद्ध त्योहार?", options:["पोंगल","गणेश चतुर्थी","गणगौर","ओणम"], answer:2},
+    {q:"पुष्कर मेला कहाँ लगता है?", options:["अजमेर","जयपुर","जोधपुर","बीकानेर"], answer:0},
+    {q:"राजस्थान का राज्य वृक्ष?", options:["नीम","खेजड़ी","पीपल","बरगद"], answer:1},
+    {q:"राजस्थान का राज्य पक्षी?", options:["मोर","गोडावण","तोता","कबूतर"], answer:1},
+    {q:"जयपुर को किस नाम से जाना जाता है?", options:["नीला शहर","गुलाबी शहर","झीलों का शहर","रेगिस्तान शहर"], answer:1},
+    {q:"उदयपुर को कहा जाता है?", options:["नीला शहर","गुलाबी शहर","झीलों का शहर","रेगिस्तान शहर"], answer:2},
+    {q:"अजमेर किस धर्मस्थल के लिए प्रसिद्ध है?", options:["मंदिर","दरगाह","गुरुद्वारा","चर्च"], answer:1},
+    {q:"भारत का राष्ट्रीय गीत?", options:["जन गण मन","वंदे मातरम्","सारे जहां से अच्छा","जय हिंद"], answer:1},
+    {q:"सांभर झील किस लिए प्रसिद्ध है?", options:["मीठा पानी","नमक","मछली","कृषि"], answer:1},
+    {q:"अरावली पर्वतमाला कहाँ है?", options:["राजस्थान","पंजाब","गुजरात","MP"], answer:0},
+    {q:"राजस्थान का सबसे ऊँचा पर्वत?", options:["गुरु शिखर","अरावली","माउंट आबू","धौलाधार"], answer:0},
+    {q:"माउंट आबू किस जिले में है?", options:["उदयपुर","सिरोही","पाली","जोधपुर"], answer:1},
+    {q:"अलवर किसके लिए प्रसिद्ध है?", options:["दूध","पानी","फल","किला"], answer:3},
+    
+    // --- LIST 3 (301-360) INTEGRATED ---
+    {q:"301. राजस्थान का राज्य गीत कौन सा है?", options:["वंदे मातरम्","केसरिया बालम","राजस्थान गीत","जन गण मन"], answer:1},
+    {q:"302. राजस्थान में सबसे अधिक खनिज कौन सा पाया जाता है?", options:["सोना","तांबा","जिप्सम","लोहा"], answer:2},
+    {q:"303. चित्तौड़गढ़ दुर्ग का निर्माण किस वंश ने किया?", options:["मौर्य","गुहिल","मुगल","चालुक्य"], answer:1},
+    {q:"304. अजमेर में स्थित प्रसिद्ध दरगाह किसकी है?", options:["ख्वाजा मोइनुद्दीन चिश्ती","निजामुद्दीन औलिया","बाबा फरीद","सलीम चिश्ती"], answer:0},
+    {q:"305. राजस्थान का पहला अखबार कौन सा था?", options:["राजस्थान पत्रिका","राजपूताना गजट","दैनिक भास्कर","मरुधर समाचार"], answer:1},
+    {q:"306. ‘निर्भय’ का विलोम?", options:["डरपोक","साहसी","मजबूत","वीर"], answer:0},
+    {q:"307. ‘कठोर’ का पर्यायवाची?", options:["नरम","सख्त","धीमा","कम"], answer:1},
+    {q:"308. ‘अंधकार’ का पर्यायवाची?", options:["प्रकाश","तम","दिन","सुबह"], answer:1},
+    {q:"309. ‘शक्ति’ का विलोम?", options:["बल","कमजोरी","ऊर्जा","ताकत"], answer:1},
+    {q:"310. ‘आदर’ का पर्यायवाची?", options:["अपमान","सम्मान","घृणा","क्रोध"], answer:1},
+    {q:"311. भारत में पंचायती राज की शुरुआत किस राज्य से हुई?", options:["राजस्थान","पंजाब","UP","MP"], answer:0},
+    {q:"312. पंचायती राज प्रणाली लागू वर्ष?", options:["1950","1959","1965","1972"], answer:1},
+    {q:"313. भारत का चुनाव आयोग किस प्रकार की संस्था है?", options:["संवैधानिक","गैर-संवैधानिक","निजी","राज्य"], answer:0},
+    {q:"314. भारत के नियंत्रक एवं महालेखा परीक्षक (CAG) किसके द्वारा नियुक्त होते हैं?", options:["प्रधानमंत्री","राष्ट्रपति","मुख्यमंत्री","राज्यपाल"], answer:1},
+    {q:"315. भारत में सर्वोच्च न्यायालय की स्थापना कब हुई?", options:["1947","1950","1952","1949"], answer:1},
+    {q:"316. ‘वृक्ष’ का पर्यायवाची?", options:["पेड़","फूल","पौधा","बीज"], answer:0},
+    {q:"317. ‘जल्दी’ का विलोम?", options:["शीघ्र","धीरे","तेज","ऊँचा"], answer:1},
+    {q:"318. ‘साहस’ का पर्यायवाची?", options:["डर","हिम्मत","कमजोरी","भय"], answer:1},
+    {q:"319. ‘हार’ का विलोम?", options:["जीत","पराजय","खेल","रण"], answer:0},
+    {q:"320. ‘आरंभ’ का विलोम?", options:["शुरू","अंत","प्रारंभ","आदि"], answer:1},
+    {q:"321. राजस्थान में कुम्भलगढ़ किला किस जिले में है?", options:["उदयपुर","राजसमंद","चित्तौड़","पाली"], answer:1},
+    {q:"322. कुम्भलगढ़ किले की दीवार किस नाम से प्रसिद्ध है?", options:["भारत की दीवार","ग्रेट वॉल ऑफ इंडिया","राजपूताना वॉल","अरावली दीवार"], answer:1},
+    {q:"323. हल्दीघाटी युद्ध का वर्ष?", options:["1526","1576","1600","1707"], answer:1},
+    {q:"324. महाराणा प्रताप के घोड़े का नाम?", options:["चेतक","रणवीर","वीर","अश्वराज"], answer:0},
+    {q:"325. मेवाड़ की राजधानी कौन थी?", options:["जयपुर","चित्तौड़गढ़","उदयपुर","जोधपुर"], answer:1},
+    {q:"326. ‘दुखी’ का पर्यायवाची?", options:["खुश","उदास","आनंद","हर्ष"], answer:1},
+    {q:"327. ‘प्रकाश’ का विलोम?", options:["रोशनी","अंधकार","दिन","सूर्य"], answer:1},
+    {q:"328. ‘मूर्ख’ का विलोम?", options:["बुद्धिमान","अज्ञानी","कमजोर","धीमा"], answer:0},
+    {q:"329. ‘स्वच्छ’ का विलोम?", options:["साफ","गंदा","शुद्ध","सुंदर"], answer:1},
+    {q:"330. ‘तेजस्वी’ का पर्यायवाची?", options:["मंद","प्रखर","कम","धीमा"], answer:1},
+    {q:"331. भारत का पहला उपग्रह?", options:["आर्यभट्ट","भास्कर","रोहिणी","INSAT"], answer:0},
+    {q:"332. ISRO की स्थापना कब हुई?", options:["1962","1969","1975","1980"], answer:1},
+    {q:"333. भारत का पहला परमाणु परीक्षण?", options:["1974","1965","1984","1998"], answer:0},
+    {q:"334. हरित क्रांति के जनक (भारत)?", options:["MS स्वामीनाथन","नॉर्मन बोरलॉग","वरघीज कुरियन","APJ अब्दुल कलाम"], answer:0},
+    {q:"335. श्वेत क्रांति के जनक?", options:["MS स्वामीनाथन","नॉर्मन बोरलॉग","वरघीज कुरियन","नेहरू"], answer:2},
+    {q:"336. ‘भय’ का पर्यायवाची?", options:["डर","साहस","बल","शक्ति"], answer:0},
+    {q:"337. ‘शत्रु’ का पर्यायवाची?", options:["मित्र","दुश्मन","सखा","बंधु"], answer:1},
+    {q:"338. ‘उज्ज्वल’ का विलोम?", options:["अंधकार","मंद","धुंधला","सभी"], answer:3},
+    {q:"339. ‘लाभ’ का विलोम?", options:["हानि","फायदा","लाभ","कम"], answer:0},
+    {q:"340. ‘शांति’ का विलोम?", options:["अशांति","सुख","धैर्य","आराम"], answer:0},
+    {q:"341. राजस्थान में नमक उत्पादन की प्रमुख झील?", options:["पुष्कर","सांभर","आना सागर","पिछोला"], answer:1},
+    {q:"342. सांभर झील किन जिलों में फैली है?", options:["जयपुर-अजमेर","उदयपुर-पाली","कोटा-बूंदी","जोधपुर-बीकानेर"], answer:0},
+    {q:"343. राजस्थान में तांबा किस क्षेत्र में मिलता है?", options:["खेतड़ी","जैसलमेर","बीकानेर","कोटा"], answer:0},
+    {q:"344. खेतड़ी किस खनिज के लिए प्रसिद्ध है?", options:["लोहा","तांबा","सोना","चांदी"], answer:1},
+    {q:"345. राजस्थान का प्रमुख तेल क्षेत्र?", options:["बाड़मेर","जयपुर","कोटा","अलवर"], answer:0},
+    {q:"346. ‘विजय’ का पर्यायवाची?", options:["हार","जीत","पराजय","अंत"], answer:1},
+    {q:"347. ‘प्रश्न’ का पर्यायवाची?", options:["उत्तर","सवाल","जवाब","विचार"], answer:1},
+    {q:"348. ‘उत्तर’ का विलोम?", options:["दक्षिण","पूर्व","पश्चिम","उत्तर"], answer:0},
+    {q:"349. ‘पूर्व’ का विलोम?", options:["पश्चिम","उत्तर","दक्षिण","सभी"], answer:3},
+    {q:"350. ‘दक्षिण’ का विलोम?", options:["उत्तर","पूर्व","पश्चिम","सभी"], answer:0},
+    {q:"351. भारत की पहली महिला प्रधानमंत्री?", options:["सरोजिनी नायडू","इंदिरा गांधी","प्रतिभा पाटिल","सुषमा स्वराज"], answer:1},
+    {q:"352. भारत के पहले गृहमंत्री?", options:["नेहरू","पटेल","गांधी","राजेंद्र प्रसाद"], answer:1},
+    {q:"353. भारत के पहले रक्षा मंत्री?", options:["पटेल","नेहरू","बलदेव सिंह","राजेंद्र प्रसाद"], answer:2},
+    {q:"354. भारत के पहले वित्त मंत्री?", options:["नेहरू","आरके शन्मुखम चेट्टी","पटेल","राजेंद्र प्रसाद"], answer:1},
+    {q:"355. योजना आयोग का गठन कब हुआ?", options:["1947","1950","1952","1955"], answer:1},
+    {q:"356. ‘दूर’ का विलोम?", options:["पास","आगे","पीछे","ऊँचा"], answer:0},
+    {q:"357. ‘पास’ का विलोम?", options:["दूर","पास","निकट","समीप"], answer:0},
+    {q:"358. ‘निकट’ का पर्यायवाची?", options:["दूर","पास","ऊँचा","नीचा"], answer:1},
+    {q:"359. ‘ऊर्जा’ का पर्यायवाची?", options:["शक्ति","कमजोरी","धीमा","रुक"], answer:0},
+    {q:"360. ‘कमजोर’ का विलोम?", options:["मजबूत","धीमा","कम","नीचा"], answer:0}
 ];
 
-// Formatting to handle string-based answer logic
-const questions = rawQuestions.map(item => {
-    return {
-        ...item,
-        answerText: item.options[item.answer]
-    };
-});
-
-let score = 0; let right = 0; let wrong = 0;
-
-// Fisher-Yates shuffle algorithm
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -262,59 +127,53 @@ function shuffle(array) {
     return array;
 }
 
+const questions = rawData.map(item => ({
+    q: item.q,
+    options: item.options,
+    correctText: item.options[item.answer]
+}));
+
+let score = 0, right = 0, wrong = 0;
+
 function loadQuiz() {
     const container = document.getElementById('quiz-list');
-    
-    // Optional: Shuffle the question order so you don't always start with Wheat
-    shuffle(questions);
+    shuffle(questions); 
 
     questions.forEach((data, index) => {
         const card = document.createElement('div');
         card.className = 'quiz-card';
         card.id = `q${index}`;
 
-        // Shuffle the options for this question
-        let currentOptions = [...data.options];
-        shuffle(currentOptions);
+        let shuffledOptions = [...data.options];
+        shuffle(shuffledOptions); 
 
         let optionsHtml = '';
-        currentOptions.forEach((opt) => {
-            const isCorrect = (opt === data.answerText);
-            optionsHtml += `<div class="option" onclick="checkAnswer(this, ${isCorrect}, ${index}, '${data.exp.replace(/'/g, "\\'")}')">${opt}</div>`;
+        shuffledOptions.forEach(opt => {
+            const isCorrect = (opt === data.correctText);
+            optionsHtml += `<div class="option" onclick="checkAnswer(this, ${isCorrect}, ${index})">${opt}</div>`;
         });
 
-        card.innerHTML = `<span class="question">${data.q}</span><div class="options">${optionsHtml}</div><div id="exp-${index}" class="explanation"></div>`;
+        card.innerHTML = `<span class="question">${data.q}</span><div class="options">${optionsHtml}</div>`;
         container.appendChild(card);
     });
 }
 
-function checkAnswer(btn, isCorrect, qIndex, exp) {
+function checkAnswer(btn, isCorrect, qIndex) {
     const card = document.getElementById(`q${qIndex}`);
     if (card.getAttribute('data-answered')) return;
     card.setAttribute('data-answered', 'true');
 
-    const opts = card.getElementsByClassName('option');
-    const correctText = questions[qIndex].answerText;
-
     if (isCorrect) {
         btn.classList.add('correct');
-        score += 3;
-        right++;
+        score += 3; right++;
     } else {
         btn.classList.add('wrong');
-        // Find and highlight the actual correct answer
+        const opts = card.getElementsByClassName('option');
         for(let opt of opts) {
-            if(opt.innerText === correctText) {
-                opt.classList.add('correct');
-            }
+            if(opt.innerText === questions[qIndex].correctText) opt.classList.add('correct');
         }
-        score -= 1;
-        wrong++;
+        score -= 1; wrong++;
     }
-
-    const d = document.getElementById(`exp-${qIndex}`);
-    d.innerHTML = "💡 Result: " + exp;
-    d.classList.add('active');
 
     document.getElementById('score').innerText = score;
     document.getElementById('right').innerText = right;
