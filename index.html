@@ -1,238 +1,251 @@
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rajasthan GK Master Quiz</title>
-    <style>
-        :root { --bg: #0b0d11; --card: #1c2128; --gold: #d4af37; --text: #f0f6fc; --success: #238636; --error: #da3633; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 10px; padding-bottom: 100px; }
-        .header { text-align: center; padding: 15px; border-bottom: 2px solid var(--gold); position: sticky; top: 0; background: var(--bg); z-index: 100; }
-        .score-board { background: var(--gold); color: #000; font-weight: bold; padding: 12px; border-radius: 8px; margin: 10px 0; display: flex; justify-content: space-around; font-size: 0.9rem; }
-        .quiz-container { max-width: 800px; margin: auto; }
-        .quiz-card { background: var(--card); border: 1px solid #30363d; border-radius: 12px; padding: 20px; margin-bottom: 20px; border-left: 5px solid var(--gold); }
-        .question { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; display: block; line-height: 1.4; color: #fff; }
-        .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .option { background: #2d333b; border: 1px solid #444c56; padding: 12px; border-radius: 8px; cursor: pointer; text-align: left; font-size: 0.9rem; transition: 0.2s; }
-        .option:hover { border-color: var(--gold); background: #353c45; }
-        .correct { background: var(--success) !important; border-color: #3fb950 !important; }
-        .wrong { background: var(--error) !important; border-color: #f85149 !important; }
-        @media (max-width: 600px) { .options { grid-template-columns: 1fr; } }
-    </style>
-</head>
-<body>
+/* Agriculture Master Question Bank 
+  Contains: Horticulture, Animal Husbandry, Agronomy (Basic to Elite Levels)
+  Total Questions: 120+
+*/
 
-<div class="header">
-    <h1 style="margin:0; color:var(--gold); font-size: 1.2rem;">RAJAESTHAN GK & HINDI MASTER</h1>
-    <div class="score-board">
-        <div>Total: <span id="total-q">0</span></div>
-        <div>Score: <span id="score">0</span></div>
-        <div>Correct: <span id="right">0</span></div>
-    </div>
-</div>
+const agricultureQuestions = [
+  // ===== HORTICULTURE BASIC =====
+  { q: "1. भारत में ‘फल उत्पादन का राजा’ किसे कहते हैं?", options: ["सेब", "केला", "आम", "अंगूर"], answer: 2 },
+  { q: "2. ‘टिशू कल्चर’ किससे संबंधित है?", options: ["बीज", "ऊतक", "जड़", "फूल"], answer: 1 },
+  { q: "3. आम की प्रमुख किस्म ‘अल्फांसो’ कहाँ की है?", options: ["UP", "महाराष्ट्र", "बिहार", "राजस्थान"], answer: 1 },
+  { q: "4. ‘कटिंग’ द्वारा प्रवर्धन किस फसल में होता है?", options: ["गेहूं", "आलू", "गन्ना", "धान"], answer: 2 },
+  { q: "5. ‘एथिलीन’ किस प्रकार का हार्मोन है?", options: ["वृद्धि", "परिपक्वता", "निष्क्रिय", "रक्षा"], answer: 1 },
+  { q: "6. फल पकाने में कौन सी गैस उपयोगी है?", options: ["ऑक्सीजन", "कार्बन डाइऑक्साइड", "एथिलीन", "नाइट्रोजन"], answer: 2 },
+  { q: "7. ‘ग्राफ्टिंग’ में कौन सा भाग जुड़ता है?", options: ["जड़", "तना", "कलिका", "दो पौधे"], answer: 3 },
+  { q: "8. केला किस प्रकार का फल है?", options: ["ड्रूप", "बेरी", "पोम", "नट"], answer: 1 },
+  { q: "9. ‘फोटोपीरियडिज्म’ किससे संबंधित है?", options: ["जल", "प्रकाश अवधि", "मिट्टी", "ताप"], answer: 1 },
+  { q: "10. ‘एपिकल डॉमिनेंस’ किस हार्मोन से नियंत्रित होता है?", options: ["ऑक्सिन", "जिबरेलिन", "सायटोकिनिन", "एब्सिसिक"], answer: 0 },
 
-<div class="quiz-container" id="quiz-list"></div>
+  // ===== ANIMAL HUSBANDRY BASIC =====
+  { q: "101. दूध में सबसे अधिक प्रोटीन किसका होता है?", options: ["गाय", "भैंस", "बकरी", "ऊँट"], answer: 1 },
+  { q: "102. ‘व्हाइट रेवोल्यूशन’ किससे संबंधित है?", options: ["दूध", "अनाज", "मछली", "अंडा"], answer: 0 },
+  { q: "103. ‘मुर्रा’ किस पशु की नस्ल है?", options: ["गाय", "भैंस", "बकरी", "भेड़"], answer: 1 },
+  { q: "104. ‘रानीखेत रोग’ किसमें होता है?", options: ["गाय", "मुर्गी", "बकरी", "भेड़"], answer: 1 },
+  { q: "105. ‘AI’ (Artificial Insemination) का उद्देश्य?", options: ["दूध बढ़ाना", "प्रजनन सुधार", "रोग नियंत्रण", "खाद"], answer: 1 },
+  { q: "106. ‘गिर’ नस्ल किसकी है?", options: ["भैंस", "गाय", "बकरी", "भेड़"], answer: 1 },
+  { q: "107. ‘फुट एंड माउथ’ रोग किसमें होता है?", options: ["पशु", "पक्षी", "मछली", "कीट"], answer: 0 },
+  { q: "108. ‘कोलोस्ट्रम’ क्या है?", options: ["पहला दूध", "अंतिम दूध", "बीच का दूध", "पानी"], answer: 0 },
+  { q: "109. ‘पोल्ट्री’ किससे संबंधित है?", options: ["गाय", "मुर्गी", "मछली", "भेड़"], answer: 1 },
+  { q: "110. ‘डेयरी फार्मिंग’ का मुख्य उद्देश्य?", options: ["मांस", "दूध", "ऊन", "अंडा"], answer: 1 },
 
-<script>
-// Combined Data - No deletions, No modifications to Question Text
-const rawData = [
-    // Set 1
-    {q:"10110 राजस्थान में ‘खेतड़ी’ क्षेत्र किस खनिज के लिए प्रसिद्ध है?", options:["लोहा","तांबा","जस्ता","सोना"], answer:1},
-    {q:"0388882. राजस्थान का ‘अन्न भंडार’ किसे कहा जाता है?", options:["कोटा","गंगानगर","जयपुर","अलवर"], answer:1},
-    {q:"866663. ‘मांड’ किससे संबंधित है?", options:["नृत्य","संगीत","चित्रकला","भोजन"], answer:1},
-    {q:"9994. ‘झुंझुनू’ किस क्षेत्र का हिस्सा है?", options:["मेवाड़","मारवाड़","शेखावाटी","हाड़ौती"], answer:2},
-    {q:"99995. ‘चंद्रभागा मेला’ कहाँ लगता है?", options:["कोटा","झालावाड़","बूंदी","अजमेर"], answer:1},
-    {q:"999996. ‘अल्प’ का विलोम?", options:["कम","अधिक","थोड़ा","न्यून"], answer:1},
-    {q:"999997. ‘न्याय’ का विलोम?", options:["सत्य","अन्याय","धर्म","सही"], answer:1},
-    {q:"9998. ‘दुर्लभ’ का पर्यायवाची?", options:["आसान","कठिन","दुश्प्राप्य","सुलभ"], answer:2},
-    {q:"99999. ‘विनाश’ का विलोम?", options:["नाश","उत्पत्ति","क्षय","हानि"], answer:1},
-    {q:"99910. ‘शुभ’ का विलोम?", options:["अशुभ","सही","अच्छा","शांत"], answer:0},
-    {q:"99911. ‘राजस्थान का लौह पुरुष’ किसे कहा जाता है?", options:["मोहनलाल सुखाड़िया","भैरों सिंह शेखावत","माणिक्यलाल वर्मा","हरिदेव जोशी"], answer:1},
-    {q:"99912. ‘कालीबंगा’ किस सभ्यता से संबंधित है?", options:["वैदिक","सिंधु घाटी","मौर्य","गुप्त"], answer:1},
-    {q:"99913. ‘घग्गर नदी’ को किस नाम से जाना जाता है?", options:["सरस्वती","गंगा","यमुना","लूणी"], answer:0},
-    {q:"9914. ‘भील’ जनजाति मुख्यतः कहाँ पाई जाती है?", options:["मरुस्थल","अरावली क्षेत्र","मैदान","तटीय क्षेत्र"], answer:1},
-    {q:"999915. ‘बाड़मेर’ किसके लिए प्रसिद्ध है?", options:["तेल","कोयला","सोना","लोहा"], answer:0},
-    {q:"99916. ‘अधिकार’ का पर्यायवाची?", options:["कर्तव्य","हक","दायित्व","नियम"], answer:1},
-    {q:"99917. ‘कर्तव्य’ का विलोम?", options:["काम","अधिकार","कर्तव्य","नियम"], answer:1},
-    {q:"9918. ‘स्नेह’ का पर्यायवाची?", options:["घृणा","प्रेम","क्रोध","द्वेष"], answer:1},
-    {q:"9919. ‘क्रोध’ का विलोम?", options:["गुस्सा","शांत","रोष","द्वेष"], answer:1},
-    {q:"9920. ‘दया’ का विलोम?", options:["करुणा","निर्दयता","प्रेम","सहानुभूति"], answer:1},
-    {q:"999921. राजस्थान का ‘मरु महोत्सव’ कहाँ मनाया जाता है?", options:["बीकानेर","जैसलमेर","जोधपुर","कोटा"], answer:1},
-    {q:"22. ‘नाथद्वारा’ किसके लिए प्रसिद्ध है?", options:["शिव मंदिर","कृष्ण मंदिर","जैन मंदिर","गुरुद्वारा"], answer:1},
-    {q:"23. ‘राजसमंद झील’ का निर्माण किसने करवाया?", options:["अकबर","राज सिंह","प्रताप","मान सिंह"], answer:1},
-    {q:"999924. ‘कोटा स्टोन’ किस प्रकार का पत्थर है?", options:["ग्रेनाइट","चूना पत्थर","संगमरमर","बालू पत्थर"], answer:1},
-    {q:"9925. ‘जालौर’ किसके लिए प्रसिद्ध है?", options:["मिर्च","चावल","गेहूं","चना"], answer:0},
-    {q:"96. ‘उपकार’ का विलोम?", options:["अहसान","अपकार","सहायता","सेवा"], answer:1},
-    {q:"97. ‘सेवा’ का पर्यायवाची?", options:["मदद","घृणा","द्वेष","क्रोध"], answer:0},
-    {q:"98. ‘धैर्य’ का विलोम?", options:["साहस","अधैर्य","बल","शक्ति"], answer:1},
-    {q:"99. ‘बल’ का पर्यायवाची?", options:["कमजोरी","शक्ति","धीमा","कम"], answer:1},
-    {q:"100. ‘कमजोरी’ का विलोम?", options:["बल","शक्ति","मजबूती","सभी"], answer:3},
-    
-    // Set 2
-    {q:"101. ‘कुम्भलगढ़’ किला किस शासक ने बनवाया?", options:["प्रताप","कुम्भा","अकबर","मान सिंह"], answer:1},
-    {q:"102. ‘मेवाड़’ का संस्थापक?", options:["बप्पा रावल","प्रताप","कुम्भा","मान सिंह"], answer:0},
-    {q:"103. ‘डिंगल’ भाषा किस क्षेत्र में बोली जाती है?", options:["मारवाड़","मेवाड़","हाड़ौती","ढूंढाड़"], answer:0},
-    {q:"104. ‘हाड़ौती’ क्षेत्र में कौन से जिले आते हैं?", options:["कोटा-बूंदी","जयपुर-अलवर","उदयपुर-पाली","जोधपुर-जैसलमेर"], answer:0},
-    {q:"105. ‘पन्ना धाय’ किसके लिए प्रसिद्ध है?", options:["युद्ध","बलिदान","कविता","संगीत"], answer:1},
-    {q:"106. ‘अल्पज्ञ’ का अर्थ?", options:["कम जानने वाला","अधिक जानने वाला","ज्ञानी","अज्ञानी"], answer:0},
-    {q:"107. ‘दूरदर्शी’ का अर्थ?", options:["निकट देखने वाला","भविष्य देखने वाला","अंधा","कम देखने वाला"], answer:1},
-    {q:"108. ‘निराश’ का विलोम?", options:["आशावान","दुखी","कमजोर","धीमा"], answer:0},
-    {q:"200. ‘साहसी’ का विलोम?", options:["डरपोक","वीर","मजबूत","तेज"], answer:0},
+  // ===== AGRONOMY BASIC =====
+  { q: "201. ‘कृषि का जनक’ किसे कहा जाता है?", options: ["मेंडेल", "लिबिग", "वाविलोव", "नॉर्मन बोरलॉग"], answer: 2 },
+  { q: "202. ‘हरित क्रांति’ किससे संबंधित है?", options: ["फल", "अनाज", "दूध", "मछली"], answer: 1 },
+  { q: "203. ‘Rabi’ फसल का उदाहरण?", options: ["धान", "गेहूं", "मक्का", "ज्वार"], answer: 1 },
+  { q: "204. ‘Kharif’ फसल बोई जाती है?", options: ["सर्दी", "गर्मी", "बरसात", "पतझड़"], answer: 2 },
+  { q: "205. ‘Zaid’ फसल कब होती है?", options: ["रबी-करीफ के बीच", "सर्दी", "बरसात", "शरद"], answer: 0 },
+  { q: "206. ‘नाइट्रोजन’ का मुख्य स्रोत?", options: ["DAP", "Urea", "MOP", "Gypsum"], answer: 1 },
+  { q: "207. ‘मृदा अपरदन’ किससे होता है?", options: ["पानी", "हवा", "मानव", "सभी"], answer: 3 },
+  { q: "208. ‘फसल चक्र’ का उद्देश्य?", options: ["उत्पादन घटाना", "मिट्टी सुधार", "रोग बढ़ाना", "कुछ नहीं"], answer: 1 },
+  { q: "209. ‘जुताई’ का मुख्य उद्देश्य?", options: ["बीज", "मिट्टी ढीली करना", "पानी", "खाद"], answer: 1 },
+  { q: "210. ‘जल निकास’ क्यों जरूरी है?", options: ["जल रोकना", "जल निकालना", "उपज बढ़ाना", "दोनों"], answer: 3 },
 
-    // Set 3
-    {q:"201. ‘भामाशाह’ किसके सहयोगी थे?", options:["अकबर","प्रताप","कुम्भा","मान सिंह"], answer:1},
-    {q:"202. ‘जौहर’ प्रथा किससे संबंधित है?", options:["युद्ध","कृषि","व्यापार","धर्म"], answer:0},
-    {q:"203. ‘राजस्थान’ शब्द का अर्थ?", options:["राजाओं का स्थान","रेगिस्तान","पर्वत","नदी"], answer:0},
-    {q:"204. ‘निरंतर’ का पर्यायवाची?", options:["लगातार","रुक-रुक कर","धीमा","कम"], answer:0},
-    {q:"205. ‘क्षणभंगुर’ का अर्थ?", options:["स्थायी","क्षणिक","मजबूत","धीमा"], answer:1},
-    {q:"300. ‘विस्तार’ का विलोम?", options:["संक्षेप","फैलाव","बढ़ाव","लंबाई"], answer:0},
+  // ===== HORTICULTURE INTERMEDIATE (300s) =====
+  { q: "301. ‘Parthenocarpy’ किससे संबंधित है?", options: ["बीज रहित फल", "जड़ वृद्धि", "पत्तियों का झड़ना", "फूल गिरना"], answer: 0 },
+  { q: "302. अंगूर में ‘गिबरेलिक एसिड’ का उपयोग किस लिए होता है?", options: ["रंग बढ़ाना", "फल आकार बढ़ाना", "बीज बनाना", "पत्ते गिराना"], answer: 1 },
+  { q: "303. ‘ब्लाइट’ रोग मुख्यतः किससे होता है?", options: ["फंगस", "बैक्टीरिया", "वायरस", "कीट"], answer: 0 },
+  { q: "304. टमाटर का वैज्ञानिक नाम क्या है?", options: ["Solanum tuberosum", "Solanum lycopersicum", "Capsicum annuum", "Allium cepa"], answer: 1 },
+  { q: "305. ‘क्लोरोसिस’ किसकी कमी से होता है?", options: ["नाइट्रोजन", "लोहा", "फास्फोरस", "पोटाश"], answer: 1 },
+  { q: "306. ‘रनर’ द्वारा प्रवर्धन किसमें होता है?", options: ["आम", "स्ट्रॉबेरी", "नींबू", "आलू"], answer: 1 },
+  { q: "307. प्याज का खाने योग्य भाग क्या है?", options: ["जड़", "तना", "बल्ब", "पत्ती"], answer: 2 },
+  { q: "308. ‘हार्डवुड कटिंग’ किस फसल में सामान्य है?", options: ["अंगूर", "आम", "नींबू", "केला"], answer: 0 },
+  { q: "309. ‘एपिनैस्टी’ किससे संबंधित है?", options: ["पत्ती झुकना", "जड़ वृद्धि", "फूल गिरना", "बीज अंकुरण"], answer: 0 },
+  { q: "310. ‘साइटोकाइनिन’ का मुख्य कार्य?", options: ["जड़ वृद्धि", "कोशिका विभाजन", "फल पकना", "पत्ती गिरना"], answer: 1 },
 
-    // Set 4
-    {q:"1. ‘कालीबंगा’ स्थल राजस्थान के किस जिले में है?", options:["हनुमानगढ़","गंगानगर","बीकानेर","चूरू"], answer:0},
-    {q:"2. ‘सांभर झील’ का जल किस प्रकार का है?", options:["मीठा","खारा","खनिजयुक्त","शुद्ध"], answer:1},
-    {q:"3. ‘लूणी नदी’ का उद्गम स्थल?", options:["अरावली","विंध्य","सतपुड़ा","हिमालय"], answer:0},
-    {q:"4. ‘मेवाड़ प्रजामंडल’ के संस्थापक?", options:["मानिक्यलाल वर्मा","भैरों सिंह","मोहनलाल","सुखाड़िया"], answer:0},
-    {q:"5. ‘डिंगल’ साहित्य किस भाषा से संबंधित है?", options:["राजस्थानी","हिंदी","संस्कृत","उर्दू"], answer:0},
-    {q:"6. ‘निष्ठुर’ का विलोम?", options:["दयालु","कठोर","क्रूर","निर्दयी"], answer:0},
-    {q:"7. ‘सुदृढ़’ का पर्यायवाची?", options:["कमजोर","मजबूत","धीमा","कम"], answer:1},
-    {q:"8. ‘आलस्य’ का विलोम?", options:["परिश्रम","धीमा","रुक","कम"], answer:0},
-    {q:"9. ‘विनम्र’ का पर्यायवाची?", options:["अभिमानी","नम्र","कठोर","घमंडी"], answer:1},
-    {q:"10. ‘घमंड’ का विलोम?", options:["अहंकार","विनम्रता","क्रोध","द्वेष"], answer:1},
-    {q:"11. ‘जावर खदान’ किस खनिज के लिए प्रसिद्ध है?", options:["तांबा","जस्ता","लोहा","सोना"], answer:1},
-    {q:"12. ‘कुम्भलगढ़ दुर्ग’ किसने बनवाया?", options:["राणा प्रताप","राणा कुम्भा","अकबर","मान सिंह"], answer:1},
-    {q:"13. ‘अरावली’ पर्वतमाला की दिशा?", options:["उत्तर-दक्षिण","पूर्व-पश्चिम","उत्तर-पूर्व","दक्षिण-पश्चिम"], answer:0},
-    {q:"14. ‘बाड़मेर बेसिन’ किसके लिए प्रसिद्ध है?", options:["कोयला","तेल","गैस","सोना"], answer:1},
-    {q:"15. ‘थार मरुस्थल’ का विस्तार किन राज्यों में है?", options:["राजस्थान-गुजरात","राजस्थान-पंजाब","राजस्थान-Haryana","सभी"], answer:3},
-    {q:"16. ‘अकर्मण्य’ का अर्थ?", options:["मेहनती","काम न करने वाला","तेज","मजबूत"], answer:1},
-    {q:"17. ‘दुश्चिंता’ का अर्थ?", options:["अच्छी सोच","बुरी चिंता","कम सोच","धीमा विचार"], answer:1},
-    {q:"18. ‘उपेक्षा’ का पर्यायवाची?", options:["सम्मान","अनदेखी","प्रेम","दया"], answer:1},
-    {q:"19. ‘अनुशासन’ का विलोम?", options:["व्यवस्था","अराजकता","नियम","संयम"], answer:1},
-    {q:"20. ‘संकोच’ का विलोम?", options:["हिचक","साहस","डर","लज्जा"], answer:1},
-    {q:"21. ‘पंचायती राज’ की तीन-स्तरीय प्रणाली में मध्य स्तर?", options:["ग्राम पंचायत","पंचायत समिति","जिला परिषद","नगरपालिका"], answer:1},
-    {q:"22. ‘राजस्थान उच्च न्यायालय’ कहाँ स्थित है?", options:["जयपुर","जोधपुर","उदयपुर","कोटा"], answer:1},
-    {q:"23. ‘राजस्थान विधानसभा’ में कुल सीटें?", options:["200","230","250","180"], answer:0},
-    {q:"24. ‘मरुभूमि अनुसंधान संस्थान’ कहाँ है?", options:["बीकानेर","जोधपुर","जयपुर","कोटा"], answer:1},
-    {q:"25. ‘इंदिरा गांधी नहर’ का स्रोत?", options:["सतलज","रावी","बीस","यमुना"], answer:0},
-    {q:"96. ‘विस्तार’ का विलोम?", options:["फैलाव","संक्षेप","बढ़ाव","वृद्धि"], answer:1},
-    {q:"97. ‘शिथिल’ का विलोम?", options:["ढीला","कठोर","कमजोर","धीमा"], answer:1},
-    {q:"98. ‘संकल्प’ का पर्यायवाची?", options:["निर्णय","संशय","डर","कम"], answer:0},
-    {q:"99. ‘प्रबल’ का विलोम?", options:["कमजोर","मजबूत","तेज","उच्च"], answer:0},
-    {q:"100. ‘स्थिर’ का विलोम?", options:["चल","अचल","मजबूत","धीमा"], answer:0},
+  // ===== ANIMAL HUSBANDRY INTERMEDIATE (300s) =====
+  { q: "311. ‘Lactation period’ का अर्थ?", options: ["दूध देने की अवधि", "गर्भावस्था", "बीमारी समय", "प्रजनन"], answer: 0 },
+  { q: "312. ‘Dry period’ किससे संबंधित है?", options: ["दूध रुकने का समय", "बीमारी", "खाना", "आराम"], answer: 0 },
+  { q: "313. ‘Mastitis’ रोग किसमें होता है?", options: ["त्वचा", "थन", "आंख", "खुर"], answer: 1 },
+  { q: "314. ‘Roughage’ क्या है?", options: ["कठोर चारा", "अनाज", "दूध", "मांस"], answer: 0 },
+  { q: "315. ‘Silage’ किससे बनता है?", options: ["सूखा चारा", "हरी फसल", "दूध", "अनाज"], answer: 1 },
+  { q: "316. ‘Ruminant’ पशु कौन है?", options: ["घोड़ा", "गाय", "कुत्ता", "सूअर"], answer: 1 },
+  { q: "317. ‘Gestation period’ का अर्थ?", options: ["प्रजनन", "गर्भकाल", "दूध समय", "खाना"], answer: 1 },
+  { q: "318. ‘Cross breeding’ का उद्देश्य?", options: ["उत्पादन घटाना", "नस्ल सुधार", "रोग बढ़ाना", "कमजोरी"], answer: 1 },
+  { q: "319. ‘Dehorning’ क्या है?", options: ["सींग हटाना", "दांत हटाना", "बाल काटना", "खुर काटना"], answer: 0 },
+  { q: "320. ‘Culling’ का अर्थ?", options: ["चयन", "अयोग्य हटाना", "खाना", "दूध निकालना"], answer: 1 },
 
-    // Set 5
-    {q:"101. ‘भामाशाह’ ने किसकी सहायता की?", options:["अकबर","राणा प्रताप","मान सिंह","कुम्भा"], answer:1},
-    {q:"102. ‘हाड़ौती’ क्षेत्र में कौन सा शहर शामिल नहीं है?", options:["कोटा","बूंदी","झालावाड़","अजमेर"], answer:3},
-    {q:"103. ‘चंबल परियोजना’ किन राज्यों से संबंधित है?", options:["राजस्थान-MP","राजस्थान-UP","MP-UP","सभी"], answer:0},
-    {q:"104. ‘डेजर्ट नेशनल पार्क’ कहाँ है?", options:["जैसलमेर","बीकानेर","जोधपुर","पाली"], answer:0},
-    {q:"105. ‘खेतड़ी’ किस जिले में है?", options:["झुंझुनू","सीकर","अलवर","जयपुर"], answer:0},
-    {q:"106. ‘परिश्रमी’ का अर्थ?", options:["कामचोर","मेहनती","धीमा","कमजोर"], answer:1},
-    {q:"107. ‘अल्पायु’ का अर्थ?", options:["लंबी आयु","कम आयु","अधिक आयु","स्थिर"], answer:1},
-    {q:"108. ‘दुर्दशा’ का पर्यायवाची?", options:["अच्छी स्थिति","बुरी दशा","सुख","आराम"], answer:1},
-    {q:"200. ‘प्रसन्न’ का विलोम?", options:["खुश","दुखी","आनंद","हर्ष"], answer:1},
+  // ===== AGRONOMY INTERMEDIATE (300s) =====
+  { q: "321. ‘Soil pH’ क्या दर्शाता है?", options: ["उर्वरता", "अम्लीय/क्षारीयता", "नमी", "ताप"], answer: 1 },
+  { q: "322. ‘Zero tillage’ क्या है?", options: ["बिना जुताई खेती", "गहरी जुताई", "बार-बार जुताई", "सिंचाई"], answer: 0 },
+  { q: "323. ‘Mulching’ का उद्देश्य?", options: ["नमी बनाए रखना", "उर्वरता घटाना", "कीट बढ़ाना", "सूखाना"], answer: 0 },
+  { q: "324. ‘Broadcasting’ किससे संबंधित है?", options: ["बुवाई विधि", "सिंचाई", "कटाई", "भंडारण"], answer: 0 },
+  { q: "325. ‘Weed’ क्या है?", options: ["उपयोगी पौधा", "अनचाहा पौधा", "फसल", "बीज"], answer: 1 },
+  { q: "326. ‘Herbicide’ का उपयोग?", options: ["कीट मारना", "खरपतवार नियंत्रण", "रोग नियंत्रण", "बीज उपचार"], answer: 1 },
+  { q: "327. ‘Crop rotation’ का लाभ?", options: ["उपज घटाना", "मिट्टी सुधार", "रोग बढ़ाना", "खर्च बढ़ाना"], answer: 1 },
+  { q: "328. ‘Irrigation scheduling’ क्या है?", options: ["पानी देना योजना", "बीज योजना", "खाद योजना", "कटाई"], answer: 0 },
+  { q: "329. ‘Field capacity’ क्या है?", options: ["अधिकतम जल धारण", "कम जल", "सूखा", "नमी"], answer: 0 },
+  { q: "330. ‘Permanent wilting point’ क्या है?", options: ["पौधा मरना", "जल अधिक", "मिट्टी सूखी", "दोनों"], answer: 0 },
 
-    // Set 6
-    {q:"201. ‘मेवाड़’ की राजधानी उदयपुर किसने बसाई?", options:["राणा कुम्भा","राणा उदयसिंह","प्रताप","मान सिंह"], answer:1},
-    {q:"202. ‘चित्तौड़गढ़’ का जौहर किस घटना से जुड़ा है?", options:["अकबर आक्रमण","बाबर युद्ध","शेरशाह","मुगल शासन"], answer:0},
-    {q:"203. ‘राजस्थान’ का गठन कब हुआ?", options:["1947","1948","1949","1950"], answer:2},
-    {q:"204. ‘क्षणिक’ का अर्थ?", options:["स्थायी","क्षण भर का","लंबा","धीमा"], answer:1},
-    {q:"205. ‘विपत्ति’ का विलोम?", options:["सुख","दुख","कष्ट","समस्या"], answer:0},
-    {q:"300. ‘निष्क्रिय’ का विलोम?", options:["सक्रिय","धीमा","कम","रुक"], answer:0},
+  // ===== MIXED HARD (300-400s) =====
+  { q: "331. ‘Photosynthesis’ में कौन सा पिगमेंट मुख्य है?", options: ["क्लोरोफिल", "कैरोटीन", "जैंथोफिल", "एंथोसायनिन"], answer: 0 },
+  { q: "332. ‘Respiration’ कहाँ होता है?", options: ["माइटोकॉन्ड्रिया", "न्यूक्लियस", "राइबोसोम", "गोल्जी"], answer: 0 },
+  { q: "333. ‘Transpiration’ क्या है?", options: ["जल हानि", "जल अवशोषण", "खाद", "वृद्धि"], answer: 0 },
+  { q: "334. ‘NPK’ में K क्या है?", options: ["नाइट्रोजन", "फास्फोरस", "पोटाश", "कैल्शियम"], answer: 2 },
+  { q: "335. ‘DAP’ में P प्रतिशत लगभग?", options: ["18%", "46%", "60%", "25%"], answer: 1 },
+  { q: "401. ‘Double fertilization’ किसमें होता है?", options: ["Gymnosperm", "Angiosperm", "Pteridophyte", "Bryophyte"], answer: 1 },
+  { q: "402. ‘Apomixis’ का अर्थ?", options: ["यौन प्रजनन", "अलैंगिक बीज निर्माण", "फूल गिरना", "जड़ वृद्धि"], answer: 1 },
+  { q: "403. ‘Vernalization’ किससे संबंधित है?", options: ["ताप", "ठंड उपचार", "प्रकाश", "जल"], answer: 1 },
+  { q: "404. ‘Phototropism’ किस दिशा में वृद्धि है?", options: ["जल", "प्रकाश", "मिट्टी", "गुरुत्व"], answer: 1 },
+  { q: "405. ‘Geotropism’ किससे संबंधित है?", options: ["प्रकाश", "गुरुत्वाकर्षण", "जल", "ताप"], answer: 1 },
+  { q: "406. ‘Turgor pressure’ किसमें होता है?", options: ["कोशिका", "जड़", "पत्ती", "फूल"], answer: 0 },
+  { q: "407. ‘Cambium’ का कार्य?", options: ["जड़ बनाना", "द्वितीयक वृद्धि", "फूल बनाना", "बीज बनाना"], answer: 1 },
+  { q: "408. ‘Xylem’ क्या करता है?", options: ["भोजन परिवहन", "जल परिवहन", "वायु", "ऊर्जा"], answer: 1 },
+  { q: "409. ‘Phloem’ क्या करता है?", options: ["जल", "भोजन", "वायु", "खनिज"], answer: 1 },
+  { q: "410. ‘Stomata’ का कार्य?", options: ["श्वसन", "जल हानि", "दोनों", "कोई नहीं"], answer: 2 },
 
-    // Set 7
-    {q:"301. ‘बैराठ’ प्राचीन स्थल किस जिले में है?", options:["जयपुर","अलवर","झुंझुनू","सीकर"], answer:0},
-    {q:"302. ‘नागौर मेला’ किस पशु के लिए प्रसिद्ध है?", options:["घोड़ा","ऊँट","गाय","भेड़"], answer:0},
-    {q:"303. ‘किशनगढ़ चित्र शैली’ किसके लिए प्रसिद्ध है?", options:["राधा चित्रण","कृष्ण युद्ध","राजा चित्र","वन दृश्य"], answer:0},
-    {q:"304. ‘तालछापर अभयारण्य’ किस जिले में है?", options:["चूरू","बीकानेर","सीकर","नागौर"], answer:0},
-    {q:"305. ‘जसवंत थड़ा’ कहाँ स्थित है?", options:["जयपुर","जोधपुर","उदयपुर","कोटा"], answer:1},
-    {q:"306. ‘निरर्थक’ का विलोम?", options:["अर्थपूर्ण","बेकार","कम","धीमा"], answer:0},
-    {q:"307. ‘उदार’ का विलोम?", options:["कंजूस","दयालु","सहायक","मित्र"], answer:0},
-    {q:"308. ‘विवेक’ का पर्यायवाची?", options:["बुद्धि","अज्ञान","कमजोरी","रुक"], answer:0},
-    {q:"309. ‘अज्ञान’ का विलोम?", options:["ज्ञान","मूर्खता","कम","धीमा"], answer:0},
-    {q:"310. ‘विनाशकारी’ का अर्थ?", options:["सृजन करने वाला","नष्ट करने वाला","कम","धीमा"], answer:1},
+  // ===== ANIMAL & AGRO ADVANCED (400s) =====
+  { q: "411. ‘Colostrum’ में क्या अधिक होता है?", options: ["वसा", "प्रोटीन", "एंटीबॉडी", "लैक्टोज"], answer: 2 },
+  { q: "412. ‘Estrus cycle’ किससे संबंधित है?", options: ["पाचन", "प्रजनन", "दूध", "रोग"], answer: 1 },
+  { q: "413. ‘Weaning’ का अर्थ?", options: ["दूध देना", "दूध छुड़ाना", "खाना", "सोना"], answer: 1 },
+  { q: "414. ‘Balanced ration’ क्या है?", options: ["संतुलित आहार", "असंतुलित", "सूखा चारा", "हरा चारा"], answer: 0 },
+  { q: "415. ‘Mineral mixture’ का उद्देश्य?", options: ["ऊर्जा", "खनिज पूर्ति", "प्रोटीन", "वसा"], answer: 1 },
+  { q: "416. ‘Vaccination’ किसके लिए?", options: ["उपचार", "रोकथाम", "खुराक", "दूध"], answer: 1 },
+  { q: "417. ‘Zoonotic disease’ क्या है?", options: ["मानव रोग", "पशु रोग", "दोनों में फैलने वाला", "कीट"], answer: 2 },
+  { q: "418. ‘Brooding’ किसमें होता है?", options: ["गाय", "मुर्गी", "भेड़", "बकरी"], answer: 1 },
+  { q: "419. ‘Layer’ किसे कहते हैं?", options: ["मांस पक्षी", "अंडा देने वाली मुर्गी", "भेड़", "बकरी"], answer: 1 },
+  { q: "420. ‘Fodder’ क्या है?", options: ["चारा", "दूध", "मांस", "अंडा"], answer: 0 },
+  { q: "421. ‘Soil texture’ किस पर आधारित है?", options: ["रंग", "कण आकार", "नमी", "pH"], answer: 1 },
+  { q: "422. ‘Loamy soil’ क्या है?", options: ["रेतीली", "चिकनी", "मिश्रित", "कठोर"], answer: 2 },
+  { q: "423. ‘Capillary water’ क्या है?", options: ["गहरा जल", "पौधे द्वारा उपयोगी", "सूखा", "वर्षा"], answer: 1 },
+  { q: "424. ‘Gravitational water’ क्या है?", options: ["रुका हुआ", "बहने वाला", "जमीन में स्थिर", "वाष्प"], answer: 1 },
+  { q: "425. ‘Infiltration’ क्या है?", options: ["जल प्रवेश", "जल निकास", "जल वाष्प", "जल हानि"], answer: 0 },
+  { q: "426. ‘Percolation’ क्या है?", options: ["जल नीचे जाना", "ऊपर आना", "वाष्प", "सूखना"], answer: 0 },
+  { q: "427. ‘Green manure’ क्या है?", options: ["सूखी खाद", "हरी फसल मिलाना", "रासायनिक खाद", "गोबर"], answer: 1 },
+  { q: "428. ‘Compost’ क्या है?", options: ["जैविक खाद", "रासायनिक", "खनिज", "जल"], answer: 0 },
+  { q: "429. ‘Integrated farming’ क्या है?", options: ["एक फसल", "बहु प्रणाली", "कम उत्पादन", "सूखा"], answer: 1 },
+  { q: "430. ‘Precision farming’ क्या है?", options: ["सटीक कृषि", "सामान्य", "कम उत्पादन", "पुरानी"], answer: 0 },
 
-    // Set 8
-    {q:"401. ‘डीडवाना’ किसके लिए प्रसिद्ध है?", options:["नमक","तेल","कोयला","सोना"], answer:0},
-    {q:"402. ‘रामगढ़ विषधारी अभयारण्य’ कहाँ है?", options:["बूंदी","कोटा","जयपुर","पाली"], answer:0},
-    {q:"403. ‘सीता माता अभयारण्य’ किस जिले में है?", options:["प्रतापगढ़","उदयपुर","डूंगरपुर","बांसवाड़ा"], answer:0},
-    {q:"404. ‘झालावाड़’ किस फसल के लिए प्रसिद्ध है?", options:["चावल","गेहूं","मक्का","सरसों"], answer:0},
-    {q:"405. ‘गजनेर झील’ कहाँ है?", options:["बीकानेर","जोधपुर","जयपुर","अलवर"], answer:0},
-    {q:"406. ‘निराशा’ का विलोम?", options:["आशा","दुख","कम","धीमा"], answer:0},
-    {q:"407. ‘शक्तिहीन’ का पर्यायवाची?", options:["कमजोर","मजबूत","तेज","ऊँचा"], answer:0},
-    {q:"408. ‘विस्तृत’ का विलोम?", options:["संकीर्ण","फैलाव","बढ़ाव","लंबा"], answer:0},
+  // ===== BIO & HARD MIX (400s) =====
+  { q: "431. ‘ATP’ क्या है?", options: ["ऊर्जा अणु", "प्रोटीन", "विटामिन", "हार्मोन"], answer: 0 },
+  { q: "432. ‘Enzyme’ क्या है?", options: ["उत्प्रेरक", "हार्मोन", "विटामिन", "खनिज"], answer: 0 },
+  { q: "433. ‘DNA’ कहाँ होता है?", options: ["न्यूक्लियस", "माइटोकॉन्ड्रिया", "राइबोसोम", "दोनों A और B"], answer: 3 },
+  { q: "434. ‘RNA’ का कार्य?", options: ["ऊर्जा", "प्रोटीन संश्लेषण", "जल", "वायु"], answer: 1 },
+  { q: "435. ‘Chromosome’ क्या है?", options: ["कोशिका", "जीन वाहक", "ऊर्जा", "जल"], answer: 1 },
 
-    // Set 9
-    {q:"501. ‘बांसवाड़ा’ को किस नाम से जाना जाता है?", options:["झीलों का शहर","सौ द्वीपों का शहर","नीला शहर","गुलाबी शहर"], answer:1},
-    {q:"502. ‘डूंगरपुर’ किस जनजाति के लिए प्रसिद्ध है?", options:["भील","मीणा","गरासिया","सभी"], answer:3},
-    {q:"503. ‘मेवात’ क्षेत्र में कौन सा जिला आता है?", options:["अलवर","जयपुर","कोटा","पाली"], answer:0},
-    {q:"504. ‘राजस्थान का मिनी कश्मीर’ किसे कहते हैं?", options:["माउंट आबू","उदयपुर","कोटा","अलवर"], answer:0},
-    {q:"505. ‘कुशल’ का विलोम?", options:["अकुशल","सक्षम","तेज","ऊँचा"], answer:0},
-    {q:"506. ‘सक्षम’ का पर्यायवाची?", options:["योग्य","कमजोर","धीमा","कम"], answer:0},
+  // ===== HORTICULTURE ADVANCED (600s) =====
+  { q: "601. ‘Florigen’ क्या है?", options: ["हार्मोन", "प्रकाश", "ताप", "एंजाइम"], answer: 0 },
+  { q: "602. ‘Photoperiodism’ को किसने खोजा?", options: ["Garner & Allard", "Darwin", "Mendel", "Linnaeus"], answer: 0 },
+  { q: "603. ‘C3 plants’ का पहला उत्पाद?", options: ["Oxaloacetic acid", "3-PGA", "Malic acid", "Pyruvic acid"], answer: 1 },
+  { q: "604. ‘C4 plants’ में CO₂ fixation कहाँ होता है?", options: ["Mesophyll", "Bundle sheath", "Root", "Stem"], answer: 0 },
+  { q: "605. ‘CAM plants’ कब CO₂ absorb करते हैं?", options: ["दिन", "रात", "सुबह", "शाम"], answer: 1 },
+  { q: "606. ‘Phytochrome’ किससे संबंधित है?", options: ["ताप", "प्रकाश", "जल", "मिट्टी"], answer: 1 },
+  { q: "607. ‘Translocation’ किसके द्वारा होता है?", options: ["Xylem", "Phloem", "Cambium", "Root"], answer: 1 },
+  { q: "608. ‘Sink’ का अर्थ?", options: ["Source", "उपभोग स्थान", "जड़", "पत्ती"], answer: 1 },
+  { q: "609. ‘Source’ क्या है?", options: ["उपभोग", "उत्पादन", "जड़", "फूल"], answer: 1 },
+  { q: "610. ‘Respiratory quotient’ क्या है?", options: ["CO₂/O₂", "O₂/CO₂", "CO₂×O₂", "None"], answer: 0 },
 
-    // Set 10
-    {q:"601. ‘राजस्थान का स्कॉटलैंड’ किसे कहते हैं?", options:["माउंट आबू","उदयपुर","जोधपुर","अलवर"], answer:0},
-    {q:"602. ‘लूणी बेसिन’ किस क्षेत्र में है?", options:["पश्चिमी राजस्थान","पूर्वी","दक्षिणी","उत्तरी"], answer:0},
-    {q:"603. ‘पश्चिमी मरुस्थल’ का दूसरा नाम?", options:["थार","सहारा","गोबी","कालाहारी"], answer:0},
-    {q:"604. ‘शुभ्र’ का पर्यायवाची?", options:["सफेद","काला","लाल","नीला"], answer:0},
-    {q:"605. ‘काला’ का विलोम?", options:["सफेद","नीला","लाल","हरा"], answer:0},
+  // ===== ANIMAL HUSBANDRY ADVANCED (600s) =====
+  { q: "611. ‘Prolactin’ हार्मोन का कार्य?", options: ["दूध उत्पादन", "प्रजनन", "पाचन", "श्वसन"], answer: 0 },
+  { q: "612. ‘Oxytocin’ क्या करता है?", options: ["दूध स्राव", "दूध निष्कासन", "प्रजनन", "भोजन"], answer: 1 },
+  { q: "613. ‘FSH’ हार्मोन?", options: ["गर्भ", "अंडाशय विकास", "दूध", "पाचन"], answer: 1 },
+  { q: "614. ‘LH’ हार्मोन?", options: ["Ovulation", "Digestion", "Milk", "Respiration"], answer: 0 },
+  { q: "615. ‘Rumen’ किसका भाग है?", options: ["Monogastric", "Ruminant stomach", "Heart", "Liver"], answer: 1 },
+  { q: "616. ‘Reticulum’ का कार्य?", options: ["Digestion", "Mixing", "Absorption", "Storage"], answer: 1 },
+  { q: "617. ‘Omasum’ का कार्य?", options: ["Water absorption", "Digestion", "Storage", "Movement"], answer: 0 },
+  { q: "618. ‘Abomasum’ क्या है?", options: ["True stomach", "False stomach", "Intestine", "Heart"], answer: 0 },
+  { q: "619. ‘Metabolizable energy’ क्या है?", options: ["Total energy", "Digestible energy", "Usable energy", "Lost energy"], answer: 2 },
+  { q: "620. ‘Feed conversion ratio’ क्या दर्शाता है?", options: ["खपत", "उत्पादन दक्षता", "रोग", "प्रजनन"], answer: 1 },
 
-    // Set 11
-    {q:"701. ‘राजस्थान का मैनचेस्टर’ किसे कहा जाता है?", options:["भीलवाड़ा","कोटा","जयपुर","अजमेर"], answer:0},
-    {q:"702. ‘भीलवाड़ा’ किस उद्योग के लिए प्रसिद्ध है?", options:["टेक्सटाइल","खनन","कृषि","आईटी"], answer:0},
-    {q:"703. ‘कोटा बैराज’ किस नदी पर है?", options:["चंबल","लूणी","बनास","माही"], answer:0},
-    {q:"704. ‘मधुर’ का विलोम?", options:["कड़वा","मीठा","अच्छा","सुंदर"], answer:0},
-    {q:"705. ‘तीव्र’ का पर्यायवाची?", options:["तेज","धीमा","कम","रुक"], answer:0}
+  // ===== AGRONOMY ADVANCED (600s) =====
+  { q: "621. ‘Evapotranspiration’ क्या है?", options: ["Evaporation+Transpiration", "Only evaporation", "Only transpiration", "None"], answer: 0 },
+  { q: "622. ‘Crop coefficient’ किससे संबंधित है?", options: ["Water need", "Fertilizer", "Soil", "Seed"], answer: 0 },
+  { q: "623. ‘Wilting coefficient’ क्या है?", options: ["Max water", "Min usable water", "Total water", "None"], answer: 1 },
+  { q: "624. ‘Bulk density’ किसका अनुपात?", options: ["Mass/Volume", "Volume/Mass", "Weight/Area", "Area/Volume"], answer: 0 },
+  { q: "625. ‘Porosity’ क्या दर्शाता है?", options: ["Solid space", "Pore space", "Water", "Air"], answer: 1 },
+  { q: "626. ‘CEC’ क्या है?", options: ["Cation exchange capacity", "Crop energy", "Soil pH", "None"], answer: 0 },
+  { q: "627. ‘Soil structure’ क्या है?", options: ["Particle size", "Arrangement", "Color", "Moisture"], answer: 1 },
+  { q: "628. ‘Hydraulic conductivity’ क्या है?", options: ["Water flow", "Air flow", "Heat", "Nutrients"], answer: 0 },
+  { q: "629. ‘Leaching’ क्या है?", options: ["Nutrient loss", "Water gain", "Root growth", "Photosynthesis"], answer: 0 },
+  { q: "630. ‘Volatilization’ क्या है?", options: ["Gas loss", "Water loss", "Heat", "Soil"], answer: 0 },
+
+  // ===== HIGH TRAP MIX (600s) =====
+  { q: "631. ‘Nitrogen fixation’ कौन करता है?", options: ["Rhizobium", "Azotobacter", "Both", "None"], answer: 2 },
+  { q: "632. ‘Legume’ फसल का लाभ?", options: ["N fixation", "Water", "Heat", "None"], answer: 0 },
+  { q: "633. ‘Micronutrient’ कौन सा है?", options: ["N", "P", "Zn", "K"], answer: 2 },
+  { q: "634. ‘Macronutrient’ कौन सा है?", options: ["Fe", "Zn", "N", "Cu"], answer: 2 },
+  { q: "635. ‘Chlorophyll’ में कौन सा तत्व है?", options: ["Mg", "Fe", "N", "K"], answer: 0 },
+  { q: "636. ‘Photosystem II’ क्या करता है?", options: ["O₂ release", "CO₂ fixation", "ATP", "None"], answer: 0 },
+  { q: "637. ‘Dark reaction’ कहाँ होती है?", options: ["Stroma", "Grana", "Root", "Stem"], answer: 0 },
+  { q: "638. ‘Light reaction’ कहाँ होती है?", options: ["Grana", "Stroma", "Root", "Stem"], answer: 0 },
+  { q: "639. ‘Rubisco’ क्या है?", options: ["Enzyme", "Hormone", "Vitamin", "Mineral"], answer: 0 },
+  { q: "640. ‘Photorespiration’ क्या है?", options: ["O₂ use", "CO₂ release", "Both", "None"], answer: 2 },
+  { q: "641. ‘Zinc deficiency’ symptom?", options: ["Chlorosis", "Necrosis", "Wilting", "None"], answer: 0 },
+  { q: "642. ‘Potassium deficiency’?", options: ["Leaf burn", "Yellowing", "Root rot", "None"], answer: 0 },
+  { q: "643. ‘Phosphorus deficiency’?", options: ["Purple leaves", "Yellow", "Dry", "None"], answer: 0 },
+  { q: "644. ‘Nitrogen deficiency’?", options: ["Yellowing", "Purple", "Burn", "None"], answer: 0 },
+  { q: "645. ‘Iron deficiency’?", options: ["Interveinal chlorosis", "Necrosis", "Burn", "None"], answer: 0 },
+  { q: "646. ‘Crop yield’ depends on?", options: ["Genotype", "Environment", "Management", "All"], answer: 3 },
+  { q: "647. ‘Harvest index’ क्या है?", options: ["Yield ratio", "Water ratio", "Seed ratio", "None"], answer: 0 },
+  { q: "648. ‘Biological yield’ क्या है?", options: ["Total biomass", "Grain", "Root", "Leaf"], answer: 0 },
+  { q: "649. ‘Economic yield’ क्या है?", options: ["Useful part", "Total", "Root", "Leaf"], answer: 0 },
+  { q: "650. ‘Transpiration ratio’ क्या है?", options: ["Water used", "CO₂ used", "O₂ used", "None"], answer: 0 },
+
+  // ===== ULTRA LEVEL (800s) =====
+  { q: "801. C4 pathway का पहला स्थायी उत्पाद क्या है?", options: ["3-PGA", "OAA", "PEP", "Malate"], answer: 1 },
+  { q: "802. Photorespiration किस organelle में होता है?", options: ["Chloroplast", "Mitochondria", "Peroxisome", "All"], answer: 3 },
+  { q: "803. CAM पौधों में stomata कब खुलते हैं?", options: ["Day", "Night", "Morning", "Evening"], answer: 1 },
+  { q: "804. ‘Black heart’ disorder किसमें होता है?", options: ["Potato", "Apple", "Mango", "Banana"], answer: 0 },
+  { q: "805. ‘Bitter pit’ किससे जुड़ा है?", options: ["Calcium deficiency", "Nitrogen", "Potash", "Zinc"], answer: 0 },
+  { q: "806. Auxin का मुख्य कार्य?", options: ["Cell elongation", "Division", "Death", "Dormancy"], answer: 0 },
+  { q: "807. Gibberellin का प्रभाव?", options: ["Dwarfing", "Elongation", "Dormancy", "Leaf fall"], answer: 1 },
+  { q: "808. Cytokinin का कार्य?", options: ["Cell division", "Leaf fall", "Dormancy", "Fruit drop"], answer: 0 },
+  { q: "809. ABA का कार्य?", options: ["Growth", "Dormancy", "Elongation", "Division"], answer: 1 },
+  { q: "810. Ethylene का प्रभाव?", options: ["Ripening", "Dormancy", "Growth", "Division"], answer: 0 },
+  { q: "811. ‘Biological value’ of protein क्या है?", options: ["Absorption", "Utilization", "Digestion", "Storage"], answer: 1 },
+  { q: "812. ‘Net energy’ क्या है?", options: ["Total energy", "Usable after losses", "Digestible", "Metabolic"], answer: 1 },
+  { q: "813. ‘TDN’ क्या दर्शाता है?", options: ["Protein", "Energy", "Mineral", "Vitamin"], answer: 1 },
+  { q: "814. ‘Maintenance ration’ क्या है?", options: ["Growth", "Weight maintain", "Milk", "Reproduction"], answer: 1 },
+  { q: "815. ‘Production ration’ किसके लिए?", options: ["Maintenance", "Growth/milk", "Rest", "Sleep"], answer: 1 },
+  { q: "816. ‘Ketosis’ किससे संबंधित है?", options: ["Energy deficiency", "Protein", "Mineral", "Vitamin"], answer: 0 },
+  { q: "817. ‘Milk fever’ किसकी कमी से?", options: ["Ca", "P", "Mg", "Na"], answer: 0 },
+  { q: "818. ‘Bloat’ किससे होता है?", options: ["Gas accumulation", "Water", "Protein", "Vitamin"], answer: 0 },
+  { q: "819. ‘Rickets’ किसकी कमी से?", options: ["Vit D", "Vit A", "Vit B", "Vit C"], answer: 0 },
+  { q: "820. ‘Anemia’ किसकी कमी से?", options: ["Iron", "Calcium", "Potassium", "Magnesium"], answer: 0 },
+  { q: "821. ‘Law of minimum’ किसने दिया?", options: ["Liebig", "Mendel", "Darwin", "Vavilov"], answer: 0 },
+  { q: "822. ‘Law of diminishing returns’ किससे जुड़ा है?", options: ["Economics", "Soil", "Water", "Plant"], answer: 0 },
+  { q: "823. ‘Critical stage irrigation’ का अर्थ?", options: ["Any stage", "Most sensitive stage", "Dry stage", "Wet stage"], answer: 1 },
+  { q: "824. ‘Duty of water’ क्या है?", options: ["Area irrigated", "Water used", "Time", "Depth"], answer: 0 },
+  { q: "825. ‘Delta’ क्या है?", options: ["Total water depth", "Area", "Time", "None"], answer: 0 },
+  { q: "826. ‘Consumptive use’ क्या है?", options: ["Water used by crop", "Water lost", "Rain", "None"], answer: 0 },
+  { q: "827. ‘Water use efficiency’ क्या है?", options: ["Yield/water", "Water/yield", "Time", "None"], answer: 0 },
+  { q: "828. ‘Cropping intensity’ क्या है?", options: ["Area ratio", "Yield", "Water", "Time"], answer: 0 },
+  { q: "829. ‘Relay cropping’ क्या है?", options: ["Sequential overlap", "Single", "Double", "None"], answer: 0 },
+  { q: "830. ‘Intercropping’ क्या है?", options: ["Two crops together", "One crop", "None", "Sequential"], answer: 0 },
+  { q: "831. कौन सा सही है? 1. Xylem water transport करता है 2. Phloem food transport करता है", options: ["Only 1", "Only 2", "Both", "None"], answer: 2 },
+  { q: "832. कौन सा सही है? 1. Nitrogen leaf growth 2. Potassium disease resistance", options: ["Only 1", "Only 2", "Both", "None"], answer: 2 },
+  { q: "833. कौन सा गलत है? 1. Zn micronutrient 2. N micronutrient", options: ["Only 1", "Only 2", "Both", "None"], answer: 1 },
+  { q: "834. ‘Harvest index’ formula?", options: ["Grain/Total", "Total/Grain", "Water/Yield", "Yield/Water"], answer: 0 },
+  { q: "835. ‘Biomass’ क्या है?", options: ["Total dry matter", "Water", "Yield", "Root"], answer: 0 },
+  { q: "836. ‘Evaporation’ क्या है?", options: ["Water loss surface", "Plant loss", "Root", "None"], answer: 0 },
+  { q: "837. ‘Transpiration’ क्या है?", options: ["Leaf water loss", "Root", "Soil", "None"], answer: 0 },
+  { q: "838. ‘Percolation’ क्या है?", options: ["Downward water", "Upward", "Side", "None"], answer: 0 },
+  { q: "839. ‘Seed dormancy’ किससे टूटती है?", options: ["Stratification", "Scarification", "Both", "None"], answer: 2 },
+  { q: "840. ‘Vernalization’ किसमें उपयोगी है?", options: ["Wheat", "Rice", "Maize", "Sugarcane"], answer: 0 },
+  { q: "841. ‘Hybrid vigor’ क्या है?", options: ["Heterosis", "Mutation", "Selection", "None"], answer: 0 },
+  { q: "842. ‘Mutation’ क्या है?", options: ["Genetic change", "Growth", "Water", "None"], answer: 0 },
+  { q: "843. ‘Selection’ क्या है?", options: ["Choosing best", "Random", "Growth", "None"], answer: 0 },
+
+  // ===== ELITE LEVEL (1100s) =====
+  { q: "1101. ‘Warburg effect’ किससे संबंधित है?", options: ["Photosynthesis inhibition by O₂", "Respiration increase", "Water loss", "Heat"], answer: 0 },
+  { q: "1102. ‘Hill reaction’ कहाँ होती है?", options: ["Stroma", "Grana", "Cytoplasm", "Root"], answer: 1 },
+  { q: "1103. ‘Quantum yield’ किससे संबंधित है?", options: ["Light efficiency", "Water", "Soil", "Heat"], answer: 0 },
+  { q: "1104. ‘Photoinhibition’ क्या है?", options: ["Light damage", "Water loss", "Heat", "None"], answer: 0 },
+  { q: "1105. ‘Sink strength’ किस पर निर्भर है?", options: ["Demand", "Supply", "Both", "None"], answer: 0 },
+  { q: "1106. ‘Basal metabolism’ क्या है?", options: ["Minimum energy", "Maximum", "Growth", "Milk"], answer: 0 },
+  { q: "1107. ‘Heat increment’ क्या है?", options: ["Energy loss heat", "Gain", "Water", "None"], answer: 0 },
+  { q: "1108. ‘Digestibility coefficient’ क्या है?", options: ["Absorbed/Intake", "Intake/Absorbed", "Water", "None"], answer: 0 },
+  { q: "1109. ‘Rumen pH’ ideal?", options: ["6-7", "4-5", "8-9", "2-3"], answer: 0 },
+  { q: "1110. ‘Methane production’ कहाँ होता है?", options: ["Rumen", "Liver", "Kidney", "Heart"], answer: 0 },
+  { q: "1111. ‘Soil colloids’ क्या हैं?", options: ["Fine particles", "Water", "Air", "None"], answer: 0 },
+  { q: "1112. ‘Flocculation’ क्या है?", options: ["Aggregation", "Dispersion", "Water loss", "None"], answer: 0 },
+  { q: "1113. ‘Dispersion’ क्या है?", options: ["Separation", "Aggregation", "Water", "None"], answer: 0 },
+  { q: "1114. ‘Soil salinity’ किससे बढ़ती है?", options: ["Salt accumulation", "Water", "Air", "None"], answer: 0 },
+  { q: "1115. ‘Alkaline soil pH’?", options: [">7", "<7", "=7", "None"], answer: 0 },
+  { q: "1116. सही कथन चुनें: 1. Auxin elongation करता है 2. Cytokinin division करता है", options: ["1", "2", "Both", "None"], answer: 2 },
+  { q: "1117. गलत कथन: 1. Xylem food transport 2. Phloem water transport", options: ["1", "2", "Both", "None"], answer: 2 },
+  { q: "1118. सही: 1. Nitrogen leaf growth 2. Phosphorus root growth", options: ["1", "2", "Both", "None"], answer: 2 },
+  { q: "1119. ‘WUE’ formula?", options: ["Yield/Water", "Water/Yield", "Time", "None"], answer: 0 },
+  { q: "1120. ‘HI’ formula?", options: ["Economic/Biological", "Bio/Eco", "Water/Yield", "None"], answer: 0 }
 ];
 
-// Verify each question points to its correct option string
-const questions = rawData.map(item => ({
-    q: item.q,
-    options: item.options,
-    correctText: item.options[item.answer]
-}));
-
-let score = 0, rightCount = 0;
-
-function loadQuiz() {
-    const list = document.getElementById('quiz-list');
-    document.getElementById('total-q').innerText = questions.length;
-    
-    questions.forEach((data, index) => {
-        const card = document.createElement('div');
-        card.className = 'quiz-card';
-        card.id = `q${index}`;
-
-        let optionsHtml = '';
-        data.options.forEach(opt => {
-            const isCorrect = (opt === data.correctText);
-            optionsHtml += `<div class="option" onclick="handleSelect(this, ${isCorrect}, ${index})">${opt}</div>`;
-        });
-
-        card.innerHTML = `<span class="question">${data.q}</span><div class="options">${optionsHtml}</div>`;
-        list.appendChild(card);
-    });
-}
-
-function handleSelect(btn, isCorrect, qIdx) {
-    const card = document.getElementById(`q${qIdx}`);
-    if (card.getAttribute('data-done')) return;
-    card.setAttribute('data-done', 'true');
-
-    if (isCorrect) {
-        btn.classList.add('correct');
-        score += 3; rightCount++;
-    } else {
-        btn.classList.add('wrong');
-        const opts = card.getElementsByClassName('option');
-        for (let o of opts) {
-            if (o.innerText === questions[qIdx].correctText) o.classList.add('correct');
-        }
-        score -= 1;
-    }
-    document.getElementById('score').innerText = score;
-    document.getElementById('right').innerText = rightCount;
-}
-
-window.onload = loadQuiz;
-</script>
-</body>
-</html>
+console.log("Agriculture Question Bank Loaded. Total Questions:", agricultureQuestions.length);
